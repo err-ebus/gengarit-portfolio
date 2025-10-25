@@ -30,7 +30,7 @@ export const Home = () => {
                     </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center mt-10 md:mt-0">
-                    <img src="/public/pictures/weweqwfqfqw.png" alt="Profile" className="w-80 max-w-xs md:max-w-md object-contain shadow-lg scale-x-[-1]" />
+                    <img src="/pictures/weweqwfqfqw.png" alt="Profile" className="w-80 max-w-xs md:max-w-md object-contain shadow-lg scale-x-[-1]" />
                 </div>
             </div>
             </RevealOnScroll>
