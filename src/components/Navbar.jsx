@@ -10,7 +10,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             <div className="max-w-5xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     <a href="#home" className="flex items-center font-mono text-xl font-bold text-blue-800 gap-2">
-                        <img src="pictures\GENGAR_PNG.png" alt="Logo" className="w-8 h-8 object-contain" />
+                        <img src="/pictures/GENGAR_PNG.png" alt="Logo" className="w-8 h-8 object-contain" />
                         Gengarit<span className="text-purple-600"> Portfolio</span>
                     </a>
 
