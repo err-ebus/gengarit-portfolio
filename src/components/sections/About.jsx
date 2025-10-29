@@ -33,7 +33,7 @@ export const About = () => {
                 About Me
             </h2>
 
-            <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
+            <div className="rounded-xl p-8 border-white/10 border hover:border-blue-500/30 hover:-translate-y-1 transition-all">
                 <p className="text-gray-300 text-lg mb-6 leading-relaxed">
                     I'm a passionate software developer with a knack for creating dynamic and responsive web applications. With a strong foundation in JavaScript, React, and Node.js, I enjoy bringing ideas to life in the digital world.
                 </p>
@@ -69,7 +69,7 @@ export const About = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
+                <div className="p-6 rounded-xl border-white/10 border hover:border-blue-500/30 hover:-translate-y-1 transition-all">
                     <h3 className="text-xl font-bold mb-4"> 🎓 Education</h3>
                     <ul className="list-disc list-inside text-gray-300 space-y-2">
                         <li>
@@ -77,7 +77,7 @@ export const About = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
+                <div className="p-6 rounded-xl border-white/10 border hover:border-blue-500/30 hover:-translate-y-1 transition-all">
                     <h3 className="text-xl font-bold mb-4"> 💼 Work Experience</h3>
                     <div className="list-disc list-inside text-gray-300 space-y-2">
                         <h4 className="font-semibold">

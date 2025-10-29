@@ -21,10 +21,10 @@ export const Contact = () => {
 
         emailjs
         .sendForm(
-            import.meta.env.VITE_SERVICE_ID, 
-            import.meta.env.VITE_TEMPLATE_ID, 
-            e.target, 
-            import.meta.env.VITE_PUBLIC_KEY
+            SERVICE_ID,
+            TEMPLATE_ID,
+            e.target,
+            PUBLIC_KEY
         )
         .then(result => {
             alert ("Message sent successfully!");
@@ -78,7 +78,7 @@ export const Contact = () => {
                         </div>
 
                         <button type="submit"
-                        className="w-full bg-blue-500 text-white py-3 px-6 rounded font-medium transition relative overflow-hideen hover:translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
+                        className="w-full bg-gradient-to-r from-blue-900 to-purple-900 text-white py-3 px-6 rounded font-medium transition relative overflow-hidden hover:translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
                         >
                             Send Message
                         </button>
