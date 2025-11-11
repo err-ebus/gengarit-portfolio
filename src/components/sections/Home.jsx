@@ -8,10 +8,10 @@ export const Home = () => {
             <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-5xl px-4">
                 <div className="flex-1 text-left z-10">
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-                        Hi, I'm Gengarit
+                        Hi, I'm Xenon
                     </h1>
                     <p className="text-gray-400 text-lg mb-8 max-w-lg">
-                        I am a passionate <span className="text-blue-400 font-semibold">Full-Stack Developer</span>
+                        I am a passionate <span className="text-blue-400 font-semibold">Full-Stack Developer </span>
                         specializing in creating dynamic and responsive web applications. Welcome to my portfolio!
                     </p>
                     <div className="flex space-x-4">

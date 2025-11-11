@@ -1,3 +1,8 @@
+/* Navbar slide-up effect */
+.nav-slide span {
+  display: block;
+  will-change: transform;
+}
 @import "tailwindcss";
 
 @keyframes blink {
@@ -14,9 +19,25 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: "Space Grotesk", sans-serif;
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #181024 80%, #3a2e5f 95%, #470468 100%);
   color: #f3f4f6;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
+ 
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
 
 
 
