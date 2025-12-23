@@ -11,7 +11,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                 <div className="flex justify-between items-center h-16">
                     <a href="#home" className="flex items-center font-mono text-xl font-bold text-blue-800 gap-2">
                         <img src="/pictures/GENGAR_PNG.png" alt="Logo" className="w-8 h-8 object-contain" />
-                        Xenon<span className="text-purple-600"> Portfolio</span>
+                        Gengarit<span className="text-purple-600"> Portfolio</span>
                     </a>
 
                     <div className="w-7 h-5 relative cursor-pointer z-40 md:hidden" 
