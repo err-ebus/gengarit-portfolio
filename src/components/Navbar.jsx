@@ -3,7 +3,20 @@ import { useEffect } from "react";
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
     useEffect(() => {
-        document.body.style.overflow = menuOpen ? "hidden" : "";   
+        // Disable page scroll when mobile menu is open; restore when closed
+        if (menuOpen) {
+            document.body.style.overflowY = "hidden";
+            document.documentElement.style.overflowY = "hidden";
+        } else {
+            document.body.style.overflowY = "auto";
+            document.documentElement.style.overflowY = "auto";
+        }
+        
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflowY = "auto";
+            document.documentElement.style.overflowY = "auto";
+        };
     }, [menuOpen]);
     return (
         <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">

@@ -22,7 +22,7 @@ const ChatbotModal = ({ open, onClose, onSend, messages, loading }) => {
         <button onClick={onClose} className="text-gray-400 hover:text-white text-xl font-bold transition">×</button>
       </div>
       {/* Messages */}
-      <div className="chatbot-messages flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-black/20\" style={{maxHeight: '300px'}}>
+      <div className="chatbot-messages flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-black/20" style={{maxHeight: '300px'}}>
         {messages.length === 0 && (
           <div className="text-gray-500 text-sm text-center py-4">Start a conversation...</div>
         )}

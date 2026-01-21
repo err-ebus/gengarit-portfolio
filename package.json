@@ -1,5 +1,5 @@
 {
-  "name": "porfolio-1",
+  "name": "porfolio-perd",
   "homepage": "https://gengarit.github.io/gengarit-portfolio/",
   "private": true,
   "version": "0.0.0",
@@ -20,6 +20,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-tsparticles": "^2.12.2",
+    "reactbits": "^2.0.0",
     "tailwindcss": "^4.1.16",
     "tsparticles-engine": "^2.12.0"
   },

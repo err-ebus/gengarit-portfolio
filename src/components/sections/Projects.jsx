@@ -1,87 +1,136 @@
 import {RevealOnScroll} from "../RevealOnScroll";
-import ProjectFolder from "../ProjectFolder";
+import { SpotlightCard } from "../SpotlightCard";
+
+const PROJECTS = [
+  {
+    id: 1,
+    title: "SENTINELS",
+    subtitle: "2D Educational RPG Game",
+    description: "A cybersecurity-focused educational RPG with admin dashboard and multi-role system.",
+    image: "/pictures/SENTINELS_SS.png",
+    tags: ["Python", "Django", "React", "Firebase", "PostgreSQL"],
+    color: "indigo",
+    size: "large",
+    features: ["Multi-role system", "Interactive gameplay", "Admin dashboard"]
+  },
+  {
+    id: 2,
+    title: "MorphRift",
+    subtitle: "2D Puzzle Game",
+    description: "A challenging puzzle game built with Unity featuring size-morphing mechanics.",
+    image: "/pictures/MORPHRIFT_SS.png",
+    tags: ["Unity", "C#", "Game Design"],
+    color: "green",
+    size: "medium",
+    features: ["Puzzle mechanics", "Level progression", "Enemy AI"]
+  },
+  {
+    id: 3,
+    title: "Mabels POS",
+    subtitle: "Bar & Restaurant System",
+    description: "Custom Point of Sale system with inventory and order management.",
+    image: "/pictures/MABELS_SS.png",
+    tags: ["JavaScript", "Firebase", "Responsive"],
+    color: "pink",
+    size: "medium",
+    features: ["Inventory mgmt", "Order processing", "Real-time updates"]
+  },
+  {
+    id: 4,
+    title: "POS Analytics",
+    subtitle: "POS + System Analysis",
+    description: "Robust POS system with integrated analytics and comprehensive reporting.",
+    image: "/pictures/POS_SS.png",
+    tags: ["Python", "Django", "PostgreSQL", "Tailwind"],
+    color: "blue",
+    size: "large",
+    features: ["Secure login", "Analytics", "Receipt printing"]
+  }
+];
 
 export const Projects = () => {
-    const projects = [
-        {
-            title: "SENTINELS - 2D Educational RPG Game",
-            color: "indigo",
-            image: "/pictures/SENTINELS_SS.png",
-            description:
-                "SENTINELS is a 2D educational RPG game inspired by classic Pokémon GBA style, designed for the Cybersecurity Fundamentals course. The game teaches cybersecurity concepts through interactive gameplay and quests. It also features a companion website for administration.",
-            bullets: [
-                "Superadmin: manages accounts, unlocks levels",
-                "Admin (faculty): monitors student progress",
-                "Student: plays the RPG game and learns cybersecurity",
-                "Multiple levels and quests based on cybersecurity topics",
-                "Classic 2D RPG gameplay and graphics",
-                "Integrated website for admin/superadmin controls",
-            ],
-            techs: ["Python", "Django", "React", "Tailwind CSS", "HTML", "CSS", "JavaScript", "Firebase", "PostgreSQL", "C#", "Unity"],
-        },
-        {
-            title: "MorphRift - 2D Puzzle Game",
-            color: "green",
-            image: "/pictures/MORPHRIFT_SS.png",
-            description:
-                "MorphRift is a 2D puzzle game built with Unity. You play as a slime that can change its size to solve puzzles and clear each level.",
-            bullets: [
-                "Slime character that morphs size to overcome obstacles",
-                "Challenging monsters that chase the player",
-                "Various obstacles and puzzle mechanics",
-                "Multiple levels with increasing difficulty",
-            ],
-            techs: ["Unity", "C#", "2D Game", "Puzzle", "Design"],
-        },
-        {
-            title: "Mabels Bar & Restaurant POS",
-            color: "pink",
-            image: "/pictures/MABELS_SS.png",
-            description: "A custom Point of Sale system designed for Mabels Bar & Restaurant.",
-            bullets: ["Inventory management", "Order processing", "Category-based menu navigation", "Responsive design for tablets and desktops"],
-            techs: ["JavaScript", "HTML", "CSS", "Firebase"],
-        },
-        {
-            title: "Point of Sale System with System Analysis",
-            color: "blue",
-            image: "/pictures/POS_SS.png",
-            description: "A robust Point of Sale system featuring integrated system analysis tools.",
-            bullets: [
-                "Cashier accounts with secure login",
-                "Desktop-first design, fully responsive for phones",
-                "Add products with category management",
-                "Order calculation and receipt printing",
-                "Inventory management",
-                "Order processing",
-                "System analysis dashboard",
-            ],
-            techs: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Python", "Django", "PostgreSQL", "MySQL"],
-        },
-    ];
+  return (
+    <section id="projects" className="relative py-32 px-4 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
 
-    return (
-        <section id="projects" className="min-h-screen flex items-center justify-center py-20">
-            <RevealOnScroll>
-                <div className="max-w-5xl mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent text-center">
-                        Featured Projects
-                    </h2>
+      <RevealOnScroll>
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="mb-20 space-y-4">
+            <div className="inline-block">
+              <span className="text-sm uppercase tracking-widest text-blue-400 font-medium">
+                Featured Work
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold text-white">
+              Curated Projects
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl">
+              A selection of recent work showcasing design, engineering, and creative problem-solving.
+            </p>
+          </div>
 
-                    <div className="grid gap-8 md:grid-cols-2">
-                        {projects.map((p, idx) => (
-                            <ProjectFolder
-                                key={idx}
-                                title={p.title}
-                                color={p.color}
-                                image={p.image}
-                                description={p.description}
-                                bullets={p.bullets}
-                                techs={p.techs}
-                            />
-                        ))}
-                    </div>
+          {/* Bento Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {PROJECTS.map((project) => (
+              <SpotlightCard
+                key={project.id}
+                className="p-8 flex flex-col justify-between overflow-hidden min-h-[400px]"
+              >
+                {/* Project Image Background */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                 </div>
-            </RevealOnScroll>
-        </section>
-    );
+
+                {/* Content */}
+                <div className="relative z-20 space-y-3">
+                  <div className="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                    <span className={`text-xs font-medium text-${project.color}-300`}>
+                      {project.color.toUpperCase()}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">{project.title}</h3>
+                    <p className="text-sm text-gray-400 mt-1">{project.subtitle}</p>
+                  </div>
+                </div>
+
+                {/* Bottom section */}
+                <div className="relative z-20 space-y-4">
+                  <p className="text-gray-300 text-sm line-clamp-2">{project.description}</p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-3 py-1 rounded-full bg-white/10 text-gray-300 border border-white/10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <button className="text-sm font-semibold text-blue-400 hover:text-blue-300 transition flex items-center gap-2 mt-4 group/btn">
+                    View Project
+                    <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                  </button>
+                </div>
+              </SpotlightCard>
+            ))}
+          </div>
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
 };
