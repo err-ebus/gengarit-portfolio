@@ -9,7 +9,6 @@ const PROJECTS = [
     description: "A cybersecurity-focused educational RPG with admin dashboard and multi-role system.",
     image: "/pictures/SENTINELS_SS.png",
     tags: ["Python", "Django", "React", "Firebase", "PostgreSQL"],
-    color: "indigo",
     size: "large",
     features: ["Multi-role system", "Interactive gameplay", "Admin dashboard"]
   },
@@ -20,7 +19,6 @@ const PROJECTS = [
     description: "A challenging puzzle game built with Unity featuring size-morphing mechanics.",
     image: "/pictures/MORPHRIFT_SS.png",
     tags: ["Unity", "C#", "Game Design"],
-    color: "green",
     size: "medium",
     features: ["Puzzle mechanics", "Level progression", "Enemy AI"]
   },
@@ -31,7 +29,6 @@ const PROJECTS = [
     description: "Custom Point of Sale system with inventory and order management.",
     image: "/pictures/MABELS_SS.png",
     tags: ["JavaScript", "Firebase", "Responsive"],
-    color: "pink",
     size: "medium",
     features: ["Inventory mgmt", "Order processing", "Real-time updates"]
   },
@@ -42,7 +39,6 @@ const PROJECTS = [
     description: "Robust POS system with integrated analytics and comprehensive reporting.",
     image: "/pictures/POS_SS.png",
     tags: ["Python", "Django", "PostgreSQL", "Tailwind"],
-    color: "blue",
     size: "large",
     features: ["Secure login", "Analytics", "Receipt printing"]
   }
@@ -86,18 +82,13 @@ export const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transform transition-transform duration-300 group-hover:translate-y-6"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                 </div>
 
                 {/* Content */}
                 <div className="relative z-20 space-y-3">
-                  <div className="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                    <span className={`text-xs font-medium text-${project.color}-300`}>
-                      {project.color.toUpperCase()}
-                    </span>
-                  </div>
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold text-white">{project.title}</h3>
                     <p className="text-sm text-gray-400 mt-1">{project.subtitle}</p>
