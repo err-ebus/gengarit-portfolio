@@ -82,7 +82,7 @@ export const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transform transition-transform duration-300 group-hover:translate-y-6"
+                    className="w-full h-full object-cover transform transition-transform duration-300 group-hover:translate-y-10"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                 </div>
