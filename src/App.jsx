@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatbotButton from './components/ChatbotButton';
 import ChatbotModal from './components/ChatbotModal';
 import './App.css';
@@ -11,49 +11,50 @@ import { Home } from './components/sections/Home';
 import { About } from './components/sections/About';
 import { Projects } from './components/sections/Projects';
 import { Contact } from './components/sections/Contact';
+import { ScrollIndicator } from './components/ScrollIndicator';
 import "./index.css";
 
-// FAQ-based chatbot responses
+// FAQ-based chatbot responses - Upgraded to match the err-ebus system aesthetic
 const FAQ_RESPONSES = [
   {
     keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'],
-    response: "Hey there! 👋 I'm Gengarit's portfolio assistant. How can I help you today? You can ask about skills, projects, education, or how to get in touch!"
+    response: "System initialized. ⚡ I'm the err-ebus automated assistant. How can I help you navigate the system? You can query about skills, projects, education, or contact info!"
   },
   {
-    keywords: ['who', 'about', 'gengarit', 'yourself', 'introduce'],
-    response: "Gengarit is a passionate Full-Stack Developer from Bacolod City, Negros Occidental, Philippines. Currently a graduating 4th year Computer Science student at STI West Negros University, specializing in creating dynamic and responsive web applications! 🚀"
-  },
+    keywords: ['who', 'about', 'err-ebus', 'wenard', 'yourself', 'introduce'],
+    response: "err-ebus (Wenard) is a Full-Stack Software Engineer from Bacolod City, Philippines. Currently a graduating Computer Science student at STI West Negros University, specializing in resilient backend architectures and seamless UX! 🚀"
+  },  
   {
     keywords: ['skill', 'technology', 'tech', 'stack', 'programming', 'language', 'know'],
-    response: "Gengarit has experience with: 💻 C++, C#, Python, Java, PHP, JavaScript, React, and modern web technologies. Always eager to learn new frameworks and tools!"
+    response: "err-ebus engineers systems using: 💻 React, Vue, and TypeScript for client-side interfaces, powered by Django, PostgreSQL, and SQLite on the server-side. Always expanding the stack!"
   },
   {
-    keywords: ['project', 'work', 'portfolio', 'built', 'create'],
-    response: "Check out the Projects section above! 👆 Gengarit has worked on various web applications showcasing skills in frontend and backend development. Scroll up or click 'Projects' in the navbar!"
+    keywords: ['project', 'work', 'portfolio', 'built', 'create', 'system'],
+    response: "Check out the Systems section above! 👆 err-ebus has engineered robust platforms ranging from regional government registries (DHSUD) to complex educational RPG systems."
   },
   {
     keywords: ['contact', 'email', 'reach', 'hire', 'message', 'talk'],
-    response: "Want to get in touch? 📧 Scroll down to the Contact section at the bottom of this page, or click 'Contact' in the navbar. Fill out the form and Gengarit will receive your message via email!"
+    response: "Want to initiate contact? 📧 Scroll down to the Contact section, execute the form, and your transmission will be sent directly to err-ebus!"
   },
   {
     keywords: ['education', 'school', 'university', 'study', 'student', 'degree'],
-    response: "Gengarit is a graduating 4th year student at STI West Negros University 🎓, pursuing a degree in Computer Science. Almost there!"
+    response: "err-ebus is a graduating Computer Science student at STI West Negros University 🎓. System training almost complete!"
   },
   {
     keywords: ['location', 'where', 'live', 'from', 'city', 'country'],
-    response: "Gengarit is based in Bacolod City, Negros Occidental, Philippines 🇵🇭 - the City of Smiles!"
+    response: "err-ebus operates out of Bacolod City, Negros Occidental, Philippines 🇵🇭 - the City of Smiles!"
   },
   {
     keywords: ['thank', 'thanks', 'appreciate'],
-    response: "You're welcome! 😊 Feel free to ask anything else or check out the portfolio sections above!"
+    response: "Acknowledge. 😊 Feel free to input any other queries or explore the engineered systems above!"
   },
   {
     keywords: ['bye', 'goodbye', 'see you', 'later'],
-    response: "Goodbye! 👋 Thanks for visiting Gengarit's portfolio. Don't forget to check out the projects and feel free to get in touch!"
+    response: "Connection terminated. 👋 Thanks for accessing the err-ebus.sys terminal. Feel free to initialize contact later!"
   }
 ];
 
-const DEFAULT_RESPONSE = "I'm here to help you learn about Gengarit! 🤔 Try asking about: skills, projects, education, location, or how to get in contact!";
+const DEFAULT_RESPONSE = "Invalid query parameter. 🤔 Try asking about: skills, projects, education, location, or how to get in contact with err-ebus!";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -61,6 +62,18 @@ function App() {
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  
+  // State for tracking mouse position for the ambient background glow
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Effect to update mouse position globally
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Simple FAQ-based chatbot
   const handleSendMessage = async (text) => {
@@ -87,8 +100,23 @@ function App() {
     <>
       <FollowCursor />
       <ParticleEffect />
+      
+      {/* The Ambient Mouse-Tracking Glow */}
+      <div 
+        className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(0, 255, 255, 0.05), transparent 80%)`
+        }}
+      />
+
       {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
-      <div className={`w-full transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"} text-gray-100`} >
+      
+      {/* Ensure main content sits above the new glow by adding relative z-10 */}
+      <div className={`relative z-10 w-full transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"} text-gray-100`} >
+        
+        {/* The Scroll Indicator is now safely inside the render tree! */}
+        <ScrollIndicator />
+
         <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <Home />

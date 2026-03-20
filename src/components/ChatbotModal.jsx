@@ -15,49 +15,65 @@ const ChatbotModal = ({ open, onClose, onSend, messages, loading }) => {
   if (!open) return null;
 
   return (
-    <div className="fixed bottom-0 right-0 z-50 w-full max-w-sm m-4 sm:m-6 bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 flex flex-col">
+    <div className="fixed bottom-0 right-0 z-50 w-full max-w-sm m-4 sm:m-6 bg-slate-950/95 backdrop-blur-xl rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-800 flex flex-col overflow-hidden font-mono">
       {/* Header */}
-      <div className="flex justify-between items-center px-4 py-3 border-b border-white/10">
-        <span className="font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">Gengarit Chatbot</span>
-        <button onClick={onClose} className="text-gray-400 hover:text-white text-xl font-bold transition">×</button>
+      <div className="flex justify-between items-center px-5 py-4 border-b border-slate-800 bg-slate-900/50">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
+          <span className="font-bold text-cyan-400 tracking-wider text-sm">err-ebus.sys</span>
+        </div>
+        <button onClick={onClose} className="text-slate-500 hover:text-red-400 text-2xl leading-none font-light transition-colors duration-200">
+          &times;
+        </button>
       </div>
+
       {/* Messages */}
-      <div className="chatbot-messages flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-black/20" style={{maxHeight: '300px'}}>
+      <div className="chatbot-messages flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-slate-950/50" style={{maxHeight: '350px'}}>
         {messages.length === 0 && (
-          <div className="text-gray-500 text-sm text-center py-4">Start a conversation...</div>
+          <div className="text-slate-500 text-xs text-center py-6 tracking-widest uppercase">
+            Awaiting input...
+          </div>
         )}
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`px-3 py-2 rounded-xl text-sm max-w-[80%] break-words ${
+            <div className={`px-4 py-2.5 rounded-lg text-sm max-w-[85%] break-words leading-relaxed ${
               msg.role === 'user' 
-                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' 
-                : 'bg-white/10 text-gray-200 border border-white/10'
-            }`}>{msg.content}</div>
+                ? 'bg-cyan-500 text-slate-950 font-medium rounded-tr-sm shadow-[0_0_15px_rgba(6,182,212,0.2)]' 
+                : 'bg-slate-900 text-cyan-50 border border-slate-800 rounded-tl-sm'
+            }`}>
+              {msg.content}
+            </div>
           </div>
-        ))}
+        ))} 
         {loading && (
           <div className="flex justify-start">
-            <div className="px-3 py-2 rounded-xl text-sm bg-white/10 text-gray-400 border border-white/10">
-              <span className="animate-pulse">Thinking...</span>
+            <div className="px-4 py-2.5 rounded-lg text-sm bg-slate-900 text-cyan-500 border border-slate-800 rounded-tl-sm flex items-center gap-1">
+              <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce"></span>
+              <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
+              <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
             </div>
           </div>
         )}
       </div>
+
       {/* Input */}
-      <div className="flex items-center px-4 py-3 border-t border-white/10">
+      <div className="flex items-center px-4 py-3 border-t border-slate-800 bg-slate-900/50">
+        <span className="text-cyan-500 mr-2 font-bold">{'>'}</span>
         <input
           ref={inputRef}
           type="text"
-          className="flex-1 px-4 py-2 rounded-xl border border-white/10 bg-white/5 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-          placeholder="Type your message..."
+          className="flex-1 bg-transparent text-slate-100 placeholder-slate-600 focus:outline-none text-sm"
+          placeholder="Execute query..."
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleSend()}
         />
         <button
           onClick={handleSend}
-          className="ml-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 transition-all"
-        >Send</button>
+          className="ml-3 px-4 py-2 rounded-lg bg-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wider hover:bg-cyan-500 hover:text-slate-950 transition-colors duration-300"
+        >
+          Run
+        </button>
       </div>
     </div>
   );

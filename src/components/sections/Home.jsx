@@ -1,86 +1,164 @@
-import { useEffect, useState } from "react";
-import { RevealOnScroll } from "../RevealOnScroll";
+import { motion } from "framer-motion";
+import { RevealOnScroll } from "../RevealOnScroll"; 
 
 export const Home = () => {
-  const [displayText, setDisplayText] = useState("");
-  const fullText = "Full Stack Developer";
-  
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index <= fullText.length) {
-        setDisplayText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
+  const terminalText = "Full Stack Engineer";
+
+  // Framer Motion Variants for the Boot Sequence
+  const bootContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+    }
+  };
+
+  const fadeUpAnim = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  // Typewriter Variants - Mechanically types out the title
+  const typewriterContainer = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.8 }
+    }
+  };
+
+  const letterAnim = {
+    hidden: { opacity: 0, display: "none" },
+    visible: { opacity: 1, display: "inline-block" }
+  };
+
+  // Hard Glitch effect that repeats randomly
+  const glitchAnim = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    glitch: {
+      x: [0, -4, 4, -2, 2, 0],
+      textShadow: [
+        "none",
+        "3px 0px 0px rgba(239,68,68,0.8), -3px 0px 0px rgba(6,182,212,0.8)", // Sharp Red/Cyan split
+        "none"
+      ],
+      transition: { duration: 0.15, repeat: Infinity, repeatDelay: 5, ease: "linear" }
+    }
+  };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-4">
-      {/* Minimal gradient background */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-4 z-10">
+      {/* Sleek Cyan/Indigo ambient blurs */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]" />
       </div>
 
       <RevealOnScroll>
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <motion.div 
+          variants={bootContainer}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl mx-auto text-center space-y-8"
+        >
           {/* Main Statement */}
           <div className="space-y-6">
-            <div className="inline-block">
-              <span className="text-sm uppercase tracking-widest text-blue-400 font-medium">
-                Welcome to my portfolio
+            <motion.div variants={fadeUpAnim} className="inline-block">
+              <span className="text-xs md:text-sm uppercase tracking-[0.3em] text-cyan-400 font-semibold bg-cyan-500/10 px-4 py-2 rounded-full border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                System Architecture & UI Design
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-              <span className="block text-white">Hi, I'm</span>
-              <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Gengarit
-              </span>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
+              <motion.span variants={fadeUpAnim} className="block text-slate-100 mb-2">
+                Hi, I'm
+              </motion.span>
+              
+              {/* Upgraded err-ebus Glitch Text */}
+              <motion.span 
+                variants={glitchAnim}
+                initial="hidden"
+                animate={["visible", "glitch"]}
+                className="block text-red-500 pb-2 drop-shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+              >
+                err-ebus
+              </motion.span>
             </h1>
 
-            {/* Typing effect subtitle */}
-            <div className="h-12 flex items-center justify-center">
-              <h2 className="text-2xl md:text-3xl text-gray-300">
-                {displayText}
-                <span className="animate-blink">|</span>
-              </h2>
+            {/* Framer Motion Typewriter Subtitle with Red Terminal Cursor */}
+            <div className="h-12 flex items-center justify-center font-mono">
+              <motion.h2 
+                variants={typewriterContainer}
+                className="text-xl md:text-2xl text-slate-300 font-medium tracking-wide flex items-center"
+              >
+                <span className="text-cyan-500 mr-3">{'>'}</span>
+                {terminalText.split("").map((char, index) => (
+                  <motion.span key={index} variants={letterAnim}>
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+                
+                {/* Sharp Blinking Red Block Cursor */}
+                <motion.span 
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
+                  className="text-red-500 ml-1.5 text-2xl md:text-3xl"
+                >
+                  █
+                </motion.span>
+              </motion.h2>
             </div>
 
             {/* Description */}
-            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              I craft beautiful, functional web experiences. Specializing in React, modern design patterns, and creating seamless user interactions.
-            </p>
+            <motion.p variants={fadeUpAnim} className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed pt-2">
+              I engineer robust web systems from the database to the interface. Specializing in <span className="text-cyan-300 font-medium">React, Vue, and TypeScript</span> for seamless UX, powered by scalable <span className="text-indigo-300 font-medium">Django</span> backends.
+            </motion.p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          {/* CTA Buttons - Now with Extract CV */}
+          <motion.div variants={fadeUpAnim} className="flex flex-col sm:flex-row flex-wrap gap-5 justify-center items-center pt-8">
             <a
               href="#projects"
-              className="group px-8 py-4 rounded-xl bg-white text-black font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(255,255,255,0.2)]"
+              className="group relative px-8 py-4 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] w-full sm:w-auto overflow-hidden"
             >
-              View My Work
-              <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              <span className="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:animate-[sweep_0.5s_ease-in-out]" />
+              <span className="relative">View My Systems</span>
+              <span className="relative inline-block ml-2 group-hover:translate-x-1 transition-transform font-mono">→</span>
             </a>
+            
             <a
               href="#contact"
-              className="px-8 py-4 rounded-xl border border-white/20 text-white font-semibold hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+              className="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 font-mono text-sm uppercase tracking-widest hover:border-red-500/80 hover:bg-red-500/10 hover:text-red-400 transition-all duration-300 hover:shadow-[inset_0_0_20px_rgba(239,68,68,0.2)] w-full sm:w-auto group"
             >
-              Get In Touch
+              Initialize Contact
             </a>
-          </div>
+
+            {/* NEW: Data Extraction (Resume) Button */}
+            <a
+              href="/Bayer_Resume.pdf"
+              download="Bayer_Resume.pdf"
+              className="px-8 py-4 rounded-xl border border-slate-700 text-slate-300 font-mono text-sm uppercase tracking-widest hover:border-indigo-500/80 hover:bg-indigo-500/10 hover:text-indigo-300 transition-all duration-300 hover:shadow-[inset_0_0_20px_rgba(99,102,241,0.2)] w-full sm:w-auto flex items-center justify-center gap-3 group"
+            >
+              <svg className="w-5 h-5 text-slate-500 group-hover:text-indigo-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Extract CV.pdf
+            </a>
+          </motion.div>
 
           {/* Scroll indicator */}
-          <div className="pt-12 animate-bounce">
-            <svg className="w-6 h-6 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <motion.div 
+            variants={fadeUpAnim} 
+            animate={{ opacity: [0.3, 1, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="pt-16"
+          >
+            <svg className="w-6 h-6 mx-auto text-cyan-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </RevealOnScroll>
     </section>
   );

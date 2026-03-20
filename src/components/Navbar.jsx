@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
-
     useEffect(() => {
         // Disable page scroll when mobile menu is open; restore when closed
         if (menuOpen) {
@@ -18,38 +18,90 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             document.documentElement.style.overflowY = "auto";
         };
     }, [menuOpen]);
+
+    // Glitch animation for the SVG logo
+    const svgGlitch = {
+        rest: { x: 0, y: 0 },
+        glitch: {
+            x: [0, -2, 2, -1, 1, 0],
+            y: [0, 1, -1, 0, 0, 0],
+            transition: { 
+                duration: 0.2, 
+                repeat: Infinity, 
+                repeatDelay: 4, // Glitches every 4 seconds
+                ease: "linear" 
+            }
+        }
+    };
+
     return (
-        <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
-            <div className="max-w-5xl mx-auto px-4">
+        <nav className="fixed top-0 w-full z-40 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800 shadow-lg transition-all duration-300">
+            <div className="max-w-6xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
-                    <a href="#home" className="flex items-center font-mono text-xl font-bold text-blue-800 gap-2">
-                        <img src="/pictures/GENGAR_PNG.png" alt="Logo" className="w-8 h-8 object-contain" />
-                        Gengarit<span className="text-purple-600"> Portfolio</span>
+                    {/* Logo - Automated Glitch */}
+                    <a href="#home" className="flex items-center font-mono text-xl font-bold text-slate-100 gap-3 group hover:opacity-90 transition-opacity">
+                        
+                        {/* Custom Error Node SVG Logo */}
+                        <div className="relative flex items-center justify-center w-8 h-8">
+                            {/* Ambient Red Glow */}
+                            <div className="absolute inset-0 bg-red-500/20 blur-md rounded-full group-hover:bg-red-500/40 transition-colors duration-300" />
+                            
+                            <motion.svg 
+                                variants={svgGlitch}
+                                animate="glitch"
+                                viewBox="0 0 32 32" 
+                                fill="none" 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                className="relative z-10 w-full h-full text-red-500 drop-shadow-[0_0_5px_rgba(239,68,68,0.8)]"
+                            >
+                                {/* Top Half of Glitch Diamond */}
+                                <path 
+                                    d="M16 2L30 14H2V14L16 2Z" 
+                                    fill="currentColor" 
+                                />
+                                {/* Bottom Half of Glitch Diamond (Offset) */}
+                                <path 
+                                    d="M16 30L2 18H30V18L16 30Z" 
+                                    fill="currentColor" 
+                                />
+                                {/* The "Error" Slash */}
+                                <path 
+                                    d="M6 16H26" 
+                                    stroke="#0f172a" 
+                                    strokeWidth="3" 
+                                />
+                            </motion.svg>
+                        </div>
+
+                        {/* Brand Name */}
+                        <span className="tracking-tight">
+                            err-ebus<span className="text-red-500">.sys</span>
+                        </span>
                     </a>
 
-                    <div className="w-7 h-5 relative cursor-pointer z-40 md:hidden" 
-                    onClick={() => setMenuOpen((prev) => !prev)}>
+                    {/* Mobile Menu Toggle */}
+                    <div 
+                        className="w-7 h-5 relative cursor-pointer z-40 md:hidden text-slate-300 hover:text-red-400 transition-colors" 
+                        onClick={() => setMenuOpen((prev) => !prev)}
+                    >
                         &#9776;
                     </div>
 
-                                                            <div className="hidden md:flex items-center space-x-8">
-                                                                    <a href="#home"
-                                                                        className="nav-slide group text-gray-300 hover:text-blue-400 transition-all duration-200 relative">
-                                                                            <span className="block group-hover:-translate-y-1 transition-transform duration-300">Home</span>
-                                                                    </a>
-                                                                    <a href="#about"
-                                                                        className="nav-slide group text-gray-300 hover:text-purple-400 transition-all duration-200 relative">
-                                                                            <span className="block group-hover:-translate-y-1 transition-transform duration-300">About</span>
-                                                                    </a>
-                                                                    <a href="#projects"
-                                                                        className="nav-slide group text-gray-300 hover:text-blue-400 transition-all duration-200 relative">
-                                                                            <span className="block group-hover:-translate-y-1 transition-transform duration-300">Projects</span>
-                                                                    </a>
-                                                                    <a href="#contact"
-                                                                        className="nav-slide group text-gray-300 hover:text-purple-400 transition-all duration-200 relative">
-                                                                            <span className="block group-hover:-translate-y-1 transition-transform duration-300">Contact</span>
-                                                                    </a>
-                                                            </div>
+                    {/* Desktop Navigation Links */}
+                    <div className="hidden md:flex items-center space-x-8 font-mono text-sm">
+                        <a href="#home" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Home</span>
+                        </a>
+                        <a href="#about" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Architecture</span>
+                        </a>
+                        <a href="#projects" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Systems</span>
+                        </a>
+                        <a href="#contact" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Contact</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
