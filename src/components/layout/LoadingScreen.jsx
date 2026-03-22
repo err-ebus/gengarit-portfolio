@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export const LoadingScreen = ({ onComplete }) => {
   const [text, setText] = useState("");
   const [progress, setProgress] = useState(0);
-  const fullText = "INITIALIZING_ENGINE_PARAMETERS...";
+  const fullText = "INITIALIZING_SYSTEM...";
 
   useEffect(() => {
     let index = 0;
@@ -13,64 +13,71 @@ export const LoadingScreen = ({ onComplete }) => {
       index++;
       if (index > fullText.length) {
         clearInterval(interval);
-        setTimeout(() => {
-          onComplete();
-        }, 1000);
       }
-    }, 50);
+    }, 80);
 
     return () => clearInterval(interval);
-  }, [onComplete]);
-
-  useEffect(() => {
-    const progressInterval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-            clearInterval(progressInterval);
-            return 100;
-        }
-        return prev + 1;
-      });
-    }, 20);
-    return () => clearInterval(progressInterval);
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(onComplete, 800);
+          return 100;
+        }
+        return prev + Math.random() * 8;
+      });
+    }, 150);
+
+    return () => clearInterval(timer);
+  }, [onComplete]);
+
   return (
-    <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center px-4">
-      <div className="mb-10 relative">
-         <div className="absolute inset-0 bg-red-600/20 blur-2xl rounded-full" />
-         <motion.div 
-            animate={{ 
-                rotate: 360,
-                scale: [1, 1.1, 1]
-            }}
-            transition={{ 
-                rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                scale: { duration: 1, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="w-16 h-16 border-4 border-t-red-600 border-r-transparent border-b-zinc-900 border-l-transparent rounded-full"
-         />
+    <div className="fixed inset-0 z-50 bg-zinc-950 text-zinc-100 flex flex-col items-center justify-center font-mono overflow-hidden">
+      {/* Background HUD Decor */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.15)_0%,transparent_70%)]" />
+        <div className="h-full w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
       </div>
 
-      <div className="w-full max-w-md">
-        <div className="flex justify-between items-end mb-2">
-            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">{text}</span>
-            <span className="text-[10px] font-mono text-red-500 font-bold">{progress}%</span>
+      <div className="relative z-10 w-[280px] md:w-[400px]">
+        {/* Status Header */}
+        <div className="flex justify-between items-end mb-2 text-[10px] tracking-widest text-red-500 font-black">
+          <span className="animate-pulse">{text}</span>
+          <span>{Math.floor(progress)}%</span>
         </div>
-        <div className="h-1 w-full bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
-            <motion.div 
-                className="h-full bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.8)]"
-                initial={{ width: "0%" }}
-                animate={{ width: `${progress}%` }}
-            />
+
+        {/* Themed Progress Bar Container */}
+        <div className="h-[2px] w-full bg-zinc-900 relative overflow-hidden border border-zinc-800/50">
+          {/* Active Progress Fill */}
+          <motion.div 
+            className="h-full bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.8)]"
+            style={{ width: `${progress}%` }}
+            initial={{ width: "0%" }}
+            animate={{ width: `${progress}%` }}
+          />
+          
+          {/* Scanning Effect Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-20 animate-[sweep_1.5s_infinite]" />
+        </div>
+
+        {/* Bottom Technical Metadata */}
+        <div className="mt-4 flex flex-col gap-1 opacity-40 text-[8px] md:text-[10px] uppercase tracking-[0.2em]">
+          <div className="flex justify-between">
+            <span>Core_Engine: v2.6.0</span>
+            <span>Auth: Verified</span>
+          </div>
+          <div className="flex justify-between text-zinc-500">
+            <span>Load_Sequence: {progress > 40 ? "ACTIVE" : "PENDING"}</span>
+            <span>Security: encrypted</span>
+          </div>
         </div>
       </div>
 
-      <div className="mt-10 font-mono text-[8px] text-zinc-700 space-y-1 text-center">
-        <p>VTEC_SYSTEM: READY</p>
-        <p>ECU_MAPPING: OPTIMIZED</p>
-        <p>CORE_LOGIC: STABLE</p>
-      </div>
+      {/* Extreme Low-Opacity Technical Grid Overlay */}
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5 pointer-events-none" />
     </div>
   );
 };
