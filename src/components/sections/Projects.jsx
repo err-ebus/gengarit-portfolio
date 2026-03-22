@@ -139,15 +139,6 @@ export const Projects = () => {
                                   ))}
                                 </div>
                               </div>
-
-                              <div className="pt-8">
-                                <a 
-                                  href={project.link}
-                                  className="inline-flex items-center gap-4 bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xs font-black uppercase italic tracking-widest text-sm transition-all shadow-[0_0_25px_rgba(220,38,38,0.3)] hover:translate-x-2"
-                                >
-                                  INITIALIZE_DEPLOYMENT →
-                                </a>
-                              </div>
                             </div>
                           </div>
                         </motion.div>
