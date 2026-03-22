@@ -19,17 +19,17 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         };
     }, [menuOpen]);
 
-    // Glitch animation for the SVG logo
-    const svgGlitch = {
-        rest: { x: 0, y: 0 },
+    // Glitch animation for the logo
+    const logoGlitch = {
+        rest: { x: 0, y: 0, opacity: 1 },
         glitch: {
-            x: [0, -2, 2, -1, 1, 0],
-            y: [0, 1, -1, 0, 0, 0],
+            x: [0, -1, 1, -0.5, 0.5, 0],
+            opacity: [1, 0.9, 1, 0.8, 1, 1],
             transition: { 
-                duration: 0.2, 
+                duration: 0.3, 
                 repeat: Infinity, 
-                repeatDelay: 4, // Glitches every 4 seconds
-                ease: "linear" 
+                repeatDelay: 5, 
+                ease: "easeInOut" 
             }
         }
     };
@@ -41,40 +41,22 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                     {/* Logo - Automated Glitch */}
                     <a href="#home" className="flex items-center font-mono text-xl font-bold text-zinc-100 gap-3 group hover:opacity-90 transition-opacity uppercase italic">
                         
-                        {/* Custom Error Node SVG Logo */}
-                        <div className="relative flex items-center justify-center w-8 h-8">
+                        {/* Custom Logo Image */}
+                        <div className="relative flex items-center justify-center w-10 h-10">
                             {/* Ambient Red Glow */}
-                            <div className="absolute inset-0 bg-red-600/20 blur-md rounded-full group-hover:bg-red-600/40 transition-colors duration-300" />
+                            <div className="absolute inset-0 bg-red-600/10 blur-md rounded-full group-hover:bg-red-600/30 transition-colors duration-300" />
                             
-                            <motion.svg 
-                                variants={svgGlitch}
+                            <motion.img 
+                                variants={logoGlitch}
                                 animate="glitch"
-                                viewBox="0 0 32 32" 
-                                fill="none" 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                className="relative z-10 w-full h-full text-red-600 drop-shadow-[0_0_5px_rgba(220,38,38,0.8)]"
-                            >
-                                {/* Top Half of Glitch Diamond */}
-                                <path 
-                                    d="M16 2L30 14H2V14L16 2Z" 
-                                    fill="currentColor" 
-                                />
-                                {/* Bottom Half of Glitch Diamond (Offset) */}
-                                <path 
-                                    d="M16 30L2 18H30V18L16 30Z" 
-                                    fill="currentColor" 
-                                />
-                                {/* The "Error" Slash */}
-                                <path 
-                                    d="M6 16H26" 
-                                    stroke="#09090b" 
-                                    strokeWidth="3" 
-                                />
-                            </motion.svg>
+                                src="/pictures/ERR-EBUS_LOGO.png"
+                                alt="ERR-EBUS Logo"
+                                className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]"
+                            />
                         </div>
 
                         {/* Brand Name */}
-                        <span className="tracking-tighter">
+                        <span className="tracking-tighter hidden sm:inline-block">
                             err<span className="text-red-600">-ebus</span>
                         </span>
                     </a>
