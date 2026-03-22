@@ -20,7 +20,7 @@ export const ChatbotModal = ({ open, onClose, onSend, messages, loading }) => {
       <div className="flex justify-between items-center px-5 py-4 border-b border-zinc-800 bg-zinc-900/50">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-          <span className="font-bold text-red-500 tracking-wider text-sm">WENARD_BAYER.sys</span>
+          <span className="font-bold text-red-500 tracking-wider text-sm">ERR-EBUS.sys</span>
         </div>
         <button onClick={onClose} className="text-zinc-500 hover:text-red-500 text-2xl leading-none font-light transition-colors duration-200">
           &times;
