@@ -39,19 +39,19 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             <div className="max-w-6xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo - Automated Glitch */}
-                    <a href="#home" className="flex items-center font-mono text-xl font-bold text-zinc-100 gap-3 group hover:opacity-90 transition-opacity uppercase italic">
+                    <a href="#home" className="flex items-center font-mono text-xl font-bold text-zinc-100 gap-4 group hover:opacity-90 transition-opacity uppercase italic">
                         
                         {/* Custom Logo Image */}
-                        <div className="relative flex items-center justify-center w-10 h-10">
-                            {/* Ambient Red Glow */}
-                            <div className="absolute inset-0 bg-red-600/10 blur-md rounded-full group-hover:bg-red-600/30 transition-colors duration-300" />
+                        <div className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14">
+                            {/* Ambient Red Glow - Intensified */}
+                            <div className="absolute inset-0 bg-red-600/25 blur-xl rounded-full group-hover:bg-red-600/40 transition-colors duration-300" />
                             
                             <motion.img 
                                 variants={logoGlitch}
                                 animate="glitch"
                                 src="/pictures/ERR-EBUS_LOGO.png"
                                 alt="ERR-EBUS Logo"
-                                className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]"
+                                className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.8)]"
                             />
                         </div>
 
