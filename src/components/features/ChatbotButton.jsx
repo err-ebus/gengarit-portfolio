@@ -9,20 +9,24 @@ export const ChatbotButton = ({ onClick }) => (
     {/* Ambient Glow Pulse */}
     <div className="absolute inset-0 bg-red-600/10 blur-xl group-hover:bg-red-600/30 transition-colors animate-pulse" />
     
-    {/* High-Contrast Terminal Icon */}
+    {/* High-Tech Cyber-Node Icon */}
     <svg 
       width="28" 
       height="28" 
       viewBox="0 0 24 24" 
       fill="none" 
       stroke="currentColor" 
-      strokeWidth="2.5" 
+      strokeWidth="2" 
       strokeLinecap="round" 
       strokeLinejoin="round"
-      className="relative z-10 transform group-hover:translate-x-0.5 transition-transform"
+      className="relative z-10 drop-shadow-[0_0_8px_rgba(220,38,38,0.8)]"
     >
-      <polyline points="4 17 10 11 4 5"></polyline>
-      <line x1="12" y1="19" x2="20" y2="19" className="animate-pulse"></line>
+      {/* Central Node */}
+      <circle cx="12" cy="12" r="3" fill="currentColor" className="animate-pulse" />
+      {/* Outer Technical Hex/Circuit Structure */}
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+      <path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+      <circle cx="12" cy="12" r="9" strokeOpacity="0.3" />
     </svg>
 
     {/* HUD Decorative Ticks */}
