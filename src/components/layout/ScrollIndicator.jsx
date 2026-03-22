@@ -21,10 +21,10 @@ export const ScrollIndicator = () => {
 
   return (
     <div className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center h-[40vh] w-8">
-      {/* Top Technical Label */}
-      <div className="mb-4 flex flex-col items-center opacity-40">
-        <span className="text-[7px] font-mono text-red-500 tracking-[0.4em] uppercase mb-1">IN_PORT</span>
-        <div className="w-4 h-px bg-zinc-800" />
+      {/* Top Technical Label - High Visibility */}
+      <div className="mb-6 flex flex-col items-center">
+        <span className="text-[8px] font-black font-mono text-red-600 tracking-[0.5em] uppercase mb-2 drop-shadow-[0_0_5px_rgba(220,38,38,0.5)]">IN_PORT</span>
+        <div className="w-6 h-px bg-zinc-700" />
       </div>
 
       {/* The Data Track Container */}
@@ -68,10 +68,10 @@ export const ScrollIndicator = () => {
         </motion.div>
       </div>
 
-      {/* Bottom Technical Label */}
-      <div className="mt-4 flex flex-col items-center opacity-40">
-        <div className="w-4 h-px bg-zinc-800 mb-1" />
-        <span className="text-[7px] font-mono text-zinc-600 tracking-[0.4em] uppercase">OUT_PORT</span>
+      {/* Bottom Technical Label - High Visibility */}
+      <div className="mt-6 flex flex-col items-center">
+        <div className="w-6 h-px bg-zinc-700 mb-2" />
+        <span className="text-[8px] font-black font-mono text-zinc-500 tracking-[0.5em] uppercase drop-shadow-[0_0_5px_rgba(0,0,0,0.5)]">OUT_PORT</span>
       </div>
 
       {/* Inline Styles for the dataFlow animation */}
