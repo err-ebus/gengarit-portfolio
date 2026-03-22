@@ -63,8 +63,10 @@ export const ParticleEffect = () => {
       }
     }
 
-    // 120 fragments for a rich "data-stream" look
-    for (let i = 0; i < 120; i++) {
+    // Dynamic particle count based on screen width
+    const particleCount = window.innerWidth < 768 ? 40 : 120;
+
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
 

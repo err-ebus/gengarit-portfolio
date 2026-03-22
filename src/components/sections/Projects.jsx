@@ -60,7 +60,7 @@ export const Projects = () => {
                 <motion.div
                   key={project.id}
                   variants={cardVariants}
-                  className="group relative overflow-hidden rounded-xl glass-card flex flex-col min-h-[450px]"
+                  className="group relative overflow-hidden rounded-xl glass-card flex flex-col min-h-[400px] md:min-h-[450px]"
                 >
                   {/* Background Content */}
                   <div className="absolute inset-0 z-0">
@@ -73,45 +73,44 @@ export const Projects = () => {
                       />
                     )}
                     {/* Technical Overlay */}
-                    <div className="absolute top-4 right-4 z-20 opacity-20 font-mono text-[10px] text-zinc-500 group-hover:opacity-60 transition-opacity">
+                    <div className="absolute top-4 right-4 z-20 opacity-20 font-mono text-[10px] text-zinc-500 group-hover:opacity-60 transition-opacity hidden sm:block">        
                       SYS_BUILD_{project.id.toString().padStart(3, '0')}
                     </div>
                   </div>
 
                   {/* Card Content */}
                   <div className="relative z-20 mt-auto flex flex-col h-full">
-                    <div className="p-8 mb-auto">
+                    <div className="p-6 md:p-8 mb-auto">
                        <span className="inline-block px-2 py-1 rounded bg-white/5 text-white text-[10px] font-bold tracking-widest uppercase mb-4 border border-white/10 group-hover:text-red-500 group-hover:border-red-500/40 group-hover:bg-red-600/20 transition-all duration-300">
                         {project.subtitle}
                       </span>
                     </div>
 
-                    <div className="bg-zinc-950/90 backdrop-blur-md p-6 border-t border-white/5">
-                      <h3 className="text-2xl font-black text-white mb-3 tracking-tight group-hover:text-red-500 transition-colors uppercase italic">
+                    <div className="bg-zinc-950/90 backdrop-blur-md p-5 md:p-6 border-t border-white/5">
+                      <h3 className="text-xl md:text-2xl font-black text-white mb-2 md:mb-3 tracking-tight group-hover:text-red-500 transition-colors uppercase italic">
                         {project.title}
                       </h3>
-                      <p className="text-zinc-300 text-sm leading-relaxed mb-6 line-clamp-2 group-hover:line-clamp-none transition-all duration-500">
+                      <p className="text-zinc-300 text-xs md:text-sm leading-relaxed mb-4 md:mb-6 line-clamp-2 group-hover:line-clamp-none transition-all duration-500">
                         {project.description}
                       </p>
 
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tags.slice(0, 4).map((tag) => (
-                          <span key={tag} className="text-[10px] font-mono px-2 py-1 rounded bg-zinc-900 text-zinc-400 border border-zinc-800">
+                          <span key={tag} className="text-[9px] md:text-[10px] font-mono px-2 py-1 rounded bg-zinc-900 text-zinc-400 border border-zinc-800">
                             {tag}
                           </span>
                         ))}
-                        {project.tags.length > 4 && <span className="text-[10px] font-mono px-2 py-1 text-zinc-500">+{project.tags.length - 4} More</span>}
                       </div>
 
-                      <div className="pt-4 border-t border-zinc-800/50 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="pt-4 border-t border-zinc-800/50 flex items-center justify-between opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="flex gap-4">
                           {project.features.slice(0, 2).map((f, i) => (
-                            <span key={i} className="text-[10px] text-zinc-400 uppercase tracking-tighter flex items-center gap-1">
+                            <span key={i} className="text-[9px] md:text-[10px] text-zinc-400 uppercase tracking-tighter flex items-center gap-1">
                               <span className="w-1.5 h-1.5 bg-red-600 rounded-full" /> {f}
                             </span>
                           ))}
                         </div>
-                        <a href={project.link} className="text-red-500 text-sm font-bold flex items-center gap-2 hover:translate-x-1 transition-transform">
+                        <a href={project.link} className="text-red-500 text-xs md:text-sm font-bold flex items-center gap-2 hover:translate-x-1 transition-transform">       
                           INSPECT <span className="text-lg">→</span>
                         </a>
                       </div>
@@ -120,6 +119,7 @@ export const Projects = () => {
                 </motion.div>
               );
             })}
+
           </motion.div>
         </div>
       </RevealOnScroll>
