@@ -29,17 +29,27 @@ function App() {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
 
-    // Disable Right-Click for System Immersion
-    const handleContextMenu = (e) => {
-      e.preventDefault();
+    // Disable Right-Click and DevTools Shortcuts for System Immersion
+    const handleContextMenu = (e) => e.preventDefault();
+    
+    const handleKeyDown = (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && e.key === 'U')
+      ) {
+        e.preventDefault();
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('contextmenu', handleContextMenu);
+    window.addEventListener('keydown', handleKeyDown);
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('contextmenu', handleContextMenu);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
