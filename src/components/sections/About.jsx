@@ -1,181 +1,138 @@
-import { RevealOnScroll } from "../RevealOnScroll";
-import { GlassmorphismCard } from "../GlassmorphismCard";
+import { RevealOnScroll } from "../ui/RevealOnScroll";
+import { GlassmorphismCard } from "../ui/GlassmorphismCard";
 import { motion } from "framer-motion";
 
 export const About = () => {
-  const frontendSkills = [
-    "TypeScript", "React", "Vue", "JavaScript", "Tailwind CSS", "HTML/CSS"
-  ];
-
-  const backendSkills = [
-    "Django", "Python", "SQLite", "PostgreSQL", "Cloudinary", "REST APIs"
+  const skills = [
+    { name: "React.js", level: 95, color: "bg-red-600" },
+    { name: "Node.js", level: 85, color: "bg-zinc-400" },
+    { name: "TypeScript", level: 90, color: "bg-red-600" },
+    { name: "Python", level: 88, color: "bg-zinc-400" },
+    { name: "Java", level: 82, color: "bg-red-600" },
+    { name: "C#", level: 80, color: "bg-zinc-400" },
   ];
 
   const experience = [
     {
       role: "Software Engineer Intern",
-      company: "Department of Human Settlements and Urban Development (DHSUD)",
+      company: "DHSUD",
       period: "2026",
-      description: "Engineered and deployed a comprehensive registry system (HOA CDD) for the DHSUD Negros Island Region. Implemented offline server architectures and managed cloud media storage pipelines."
+      description: "Engineered and deployed a comprehensive registry system (HOA CDD). Implemented offline server architectures and managed cloud media storage pipelines."
     }
   ];
 
-  // Framer Motion Variants for staggered grid loading
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 15 } }
-  };
-
   return (
-    <section id="about" className="relative py-32 px-4 overflow-hidden z-10">
-      {/* Background gradient to match the Cyan/Indigo theme */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500/10 rounded-full blur-[120px]" />
-      </div>
+    <section id="about" className="relative py-32 px-4 overflow-hidden z-10 bg-zinc-950">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-20">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-[2px] w-12 bg-red-600" />
+            <span className="text-xs uppercase tracking-[0.4em] text-red-500 font-bold">
+              Engineering Profile
+            </span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase italic">
+            Under The <span className="text-zinc-500">Hood</span>
+          </h2>
+        </div>
 
-      <RevealOnScroll>
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="mb-20 space-y-4">
-            <div className="inline-block">
-              <span className="text-xs md:text-sm uppercase tracking-[0.3em] text-cyan-400 font-semibold bg-cyan-500/10 px-4 py-2 rounded-full border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-                System Diagnostics
-              </span>
-            </div>
-            <h2 className="text-5xl md:text-6xl font-bold text-slate-100 tracking-tight">
-              The Engine Room
-            </h2>
+        <div className="grid lg:grid-cols-12 gap-6">
+          {/* Bio Bento Box */}
+          <div className="lg:col-span-8">
+            <GlassmorphismCard className="p-8 md:p-12 h-full">
+              <div className="flex flex-col h-full">
+                <div className="mb-8">
+                   <h3 className="text-2xl font-bold text-white mb-4 uppercase italic">The Full-Stack Architect</h3>
+                   <p className="text-zinc-400 text-lg leading-relaxed font-light">
+                    I am a Senior Computer Science student and Full-Stack Developer specializing in high-performance architectures. My approach blends the reliability of backend engineering with the precision of modern frontend interfaces.
+                  </p>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-8 mt-auto">
+                  <div>
+                    <h4 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4">Core Philosophy</h4>
+                    <p className="text-zinc-500 text-sm leading-relaxed">
+                      Building systems that don't just work, but excel under pressure. I prioritize clean logic, secure data pipelines, and resilient architectures.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4">Current Status</h4>
+                    <p className="text-zinc-500 text-sm leading-relaxed">
+                      Finalizing System Integration at STI West Negros University. Currently open for high-stakes engineering roles.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </GlassmorphismCard>
           </div>
 
-          {/* Staggered Grid Container */}
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            {/* Main Content Grid */}
-            <div className="grid lg:grid-cols-3 gap-6">
-              {/* Introduction */}
-              <motion.div variants={itemVariants} className="lg:col-span-2">
-                <GlassmorphismCard className="h-full p-8 md:p-12 border border-slate-800 bg-slate-900/60 backdrop-blur-sm transition-all duration-500 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group relative overflow-hidden">
-                  <div className="space-y-6 relative z-10">
-                    <p className="text-lg text-slate-300 leading-relaxed font-light">
-                      I am a Full-Stack Software Engineer focused on building resilient, scalable systems. I don't just build interfaces; I architect the logic and databases that power them.
-                    </p>
-                    <p className="text-slate-400 leading-relaxed">
-                      From developing massive educational platforms with complex multi-role state management to engineering secure, offline-capable government registries, my approach bridges the gap between clean UX and heavy-duty backend architecture.
-                    </p>
-                  </div>
-                </GlassmorphismCard>
-              </motion.div>
+          {/* Quick Stats Bento Box */}
+          <div className="lg:col-span-4 grid grid-rows-2 gap-6">
+            <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group">
+              <span className="text-6xl font-black text-white group-hover:text-red-600 transition-colors italic">4.0</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-bold mt-2">Precision GPA</span>
+            </GlassmorphismCard>
+            <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group border-t-4 border-t-red-600">
+              <span className="text-4xl font-black text-white italic group-hover:scale-110 transition-transform">VTEC</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-red-500 font-bold mt-2">Efficiency Mode</span>
+            </GlassmorphismCard>
+          </div>
 
-              {/* Quick Stats */}
-              <motion.div variants={itemVariants} className="h-full">
-                <GlassmorphismCard className="p-8 text-center border border-slate-800 bg-slate-900/60 backdrop-blur-sm flex flex-col justify-center h-full hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 group relative overflow-hidden">
-                  {/* Subtle hover sweep effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out z-0" />
-                  <div className="space-y-2 relative z-10">
-                    <p className="text-5xl font-bold text-cyan-400 group-hover:scale-105 transition-transform duration-300">Full</p>
-                    <p className="text-slate-400 uppercase tracking-widest text-sm font-semibold mt-2 group-hover:text-cyan-200 transition-colors duration-300">Stack Developer</p>
-                  </div>
-                </GlassmorphismCard>
-              </motion.div>
-            </div>
-
-            {/* Skills Grid */}
-            <div className="mt-6 grid md:grid-cols-2 gap-6">
-              {/* Frontend Skills */}
-              <motion.div variants={itemVariants}>
-                <GlassmorphismCard className="h-full p-8 md:p-10 border border-slate-800 bg-slate-900/60 backdrop-blur-sm hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 group">
-                  <h3 className="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-3 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 group-hover:animate-ping"></span> Client-Side
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {frontendSkills.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-4 py-2 rounded-md bg-slate-950/80 text-cyan-300 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] text-sm font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </GlassmorphismCard>
-              </motion.div>
-
-              {/* Backend Skills */}
-              <motion.div variants={itemVariants}>
-                <GlassmorphismCard className="h-full p-8 md:p-10 border border-slate-800 bg-slate-900/60 backdrop-blur-sm hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 group">
-                  <h3 className="text-2xl font-bold text-slate-100 mb-6 flex items-center gap-3 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-indigo-400 group-hover:animate-ping"></span> Server-Side
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {backendSkills.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-4 py-2 rounded-md bg-slate-950/80 text-indigo-300 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)] text-sm font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </GlassmorphismCard>
-              </motion.div>
-            </div>
-
-            {/* Education & Experience */}
-            <div className="mt-6 grid md:grid-cols-2 gap-6">
-              {/* Education */}
-              <motion.div variants={itemVariants}>
-                <GlassmorphismCard className="h-full p-8 md:p-10 border border-slate-800 bg-slate-900/60 backdrop-blur-sm hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 group">
-                  <div className="space-y-6">
-                    <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2 font-mono uppercase tracking-wider">
-                      <span className="text-cyan-500 font-bold">{'>_'}</span> EDU_LOG
-                    </h3>
-                    <div className="relative pl-4 border-l-2 border-slate-800 group-hover:border-cyan-500/50 transition-colors duration-500">
-                      <div className="absolute w-2 h-2 bg-cyan-400 rounded-full -left-[5px] top-2 transition-colors duration-300 group-hover:bg-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.5)]"></div>
-                      <h4 className="font-semibold text-cyan-50 text-lg mb-1">Bachelor of Science in Computer Science</h4>
-                      <p className="text-sm text-cyan-400 mb-2 font-medium">STI West Negros University</p>
-                      <p className="text-xs text-slate-500 font-mono tracking-widest">2022 - 2026</p>
+          {/* Skills / Rev Counter Section */}
+          <div className="lg:col-span-5">
+            <GlassmorphismCard className="p-8 h-full">
+              <h3 className="text-xl font-bold text-white mb-8 uppercase italic flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
+                Performance Gauges
+              </h3>
+              <div className="space-y-6">
+                {skills.map((skill) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between items-end mb-2">
+                      <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{skill.name}</span>
+                      <span className="text-xs font-mono text-red-500">{skill.level}%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className={`h-full ${skill.color} shadow-[0_0_10px_rgba(220,38,38,0.5)]`}
+                      />
                     </div>
                   </div>
-                </GlassmorphismCard>
-              </motion.div>
+                ))}
+              </div>
+            </GlassmorphismCard>
+          </div>
 
-              {/* Experience */}
-              <motion.div variants={itemVariants}>
-                <GlassmorphismCard className="h-full p-8 md:p-10 border border-slate-800 bg-slate-900/60 backdrop-blur-sm hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)] transition-all duration-500 group">
-                  <div className="space-y-6">
-                    <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2 font-mono uppercase tracking-wider">
-                      <span className="text-red-500 font-bold">{'>_'}</span> SYS_DEPLOYMENTS
-                    </h3>
-                    {experience.map((exp, idx) => (
-                      <div key={idx} className="relative pl-4 border-l-2 border-slate-800 group-hover:border-red-500/30 transition-colors duration-500">
-                        {/* Dot turns red on hover to echo the logo */}
-                        <div className="absolute w-2 h-2 bg-slate-600 rounded-full -left-[5px] top-2 transition-all duration-300 group-hover:bg-red-500 group-hover:shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
-                        <h4 className="font-semibold text-slate-100 mb-1">{exp.role}</h4>
-                        <p className="text-sm text-red-400 mb-1 font-medium">{exp.company}</p>
-                        <p className="text-xs text-slate-500 mb-3 font-mono tracking-widest">{exp.period}</p>
-                        <p className="text-sm text-slate-400 leading-relaxed">{exp.description}</p>
-                      </div>
-                    ))}
+          {/* Education & Experience */}
+          <div className="lg:col-span-7 grid md:grid-cols-2 gap-6">
+             <GlassmorphismCard className="p-8">
+                <h3 className="text-xl font-bold text-white mb-6 uppercase italic">Education_Log</h3>
+                <div className="relative pl-4 border-l-2 border-red-600/30">
+                  <div className="absolute w-3 h-3 bg-red-600 rounded-full -left-[7.5px] top-1 shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
+                  <h4 className="text-white font-bold italic">BS Computer Science</h4>
+                  <p className="text-red-500 text-xs font-bold mb-2">STI West Negros University</p>
+                  <p className="text-zinc-500 text-xs font-mono">2022 - 2026</p>
+                </div>
+             </GlassmorphismCard>
+
+             <GlassmorphismCard className="p-8">
+                <h3 className="text-xl font-bold text-white mb-6 uppercase italic">Deployments</h3>
+                {experience.map((exp, i) => (
+                  <div key={i} className="relative pl-4 border-l-2 border-zinc-800">
+                    <div className="absolute w-2 h-2 bg-zinc-600 rounded-full -left-[5px] top-1.5" />
+                    <h4 className="text-white font-bold italic text-sm">{exp.role}</h4>
+                    <p className="text-zinc-500 text-xs mb-2">{exp.company} • {exp.period}</p>
+                    <p className="text-zinc-500 text-[10px] leading-relaxed">{exp.description}</p>
                   </div>
-                </GlassmorphismCard>
-              </motion.div>
-            </div>
-          </motion.div>
+                ))}
+             </GlassmorphismCard>
+          </div>
         </div>
-      </RevealOnScroll>
+      </div>
     </section>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const ParticleEffect = () => {
+export const ParticleEffect = () => {
   const canvasRef = useRef(null);
   const { scrollY } = useScroll();
   
@@ -25,30 +25,46 @@ const ParticleEffect = () => {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1.5; // Visible size
-        this.speedY = -(Math.random() * 0.4 + 0.1); // Drifts slowly upwards
-        this.opacity = Math.random() * 0.6 + 0.4; // Bright base opacity
+        this.type = Math.random() > 0.6 ? (Math.random() > 0.5 ? '0' : '1') : 'block';
+        this.size = Math.random() * 8 + 6; 
+        this.speedY = -(Math.random() * 1.2 + 0.3);
+        this.opacity = Math.random() * 0.4 + 0.1;
+        this.color = Math.random() > 0.1 ? '#dc2626' : '#52525b'; // Red or Zinc
       }
       update() {
         this.y += this.speedY;
-        // Reset to bottom if it floats off top
+        
+        // Random horizontal jitter to represent "error"
+        if (Math.random() > 0.98) {
+          this.x += (Math.random() - 0.5) * 15;
+        }
+
         if (this.y < 0) {
           this.y = canvas.height;
           this.x = Math.random() * canvas.width;
         }
       }
       draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(239, 68, 68, ${this.opacity})`;
-        ctx.shadowBlur = 12; // Creates the red neon glow
-        ctx.shadowColor = "rgba(239, 68, 68, 0.9)";
-        ctx.fill();
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        
+        if (this.type === 'block') {
+          // Draw a small technical block/fragment
+          const width = this.size * (Math.random() * 2 + 1);
+          const height = Math.random() * 2 + 1;
+          ctx.fillRect(this.x, this.y, width, height);
+        } else {
+          // Draw binary digit
+          ctx.font = `bold ${this.size}px monospace`;
+          ctx.fillText(this.type, this.x, this.y);
+        }
+        
+        ctx.globalAlpha = 1;
       }
     }
 
-    // 70 particles for a good density
-    for (let i = 0; i < 70; i++) {
+    // 120 fragments for a rich "data-stream" look
+    for (let i = 0; i < 120; i++) {
       particles.push(new Particle());
     }
 
@@ -71,10 +87,8 @@ const ParticleEffect = () => {
   return (
     <motion.canvas 
       ref={canvasRef} 
-      className="fixed top-0 left-0 w-full pointer-events-none z-0"
+      className="fixed top-0 left-0 w-full pointer-events-none z-50"
       style={{ y: parallaxY }}
     />
   );
 };
-
-export default ParticleEffect;

@@ -14,7 +14,7 @@ export const ScrollIndicator = () => {
   const yPos = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="fixed right-8 top-1/4 bottom-1/4 w-[2px] bg-slate-800/50 z-40 hidden md:block rounded-full">
+    <div className="fixed right-8 top-1/4 bottom-1/4 w-[2px] bg-zinc-900/50 z-40 hidden md:block rounded-full">
       
       {/* Optional: A subtle red line that fills the track as you scroll */}
       <motion.div 

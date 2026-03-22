@@ -35,16 +35,16 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
     };
 
     return (
-        <nav className="fixed top-0 w-full z-40 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800 shadow-lg transition-all duration-300">
+        <nav className="fixed top-0 w-full z-40 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-900 shadow-lg transition-all duration-300">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo - Automated Glitch */}
-                    <a href="#home" className="flex items-center font-mono text-xl font-bold text-slate-100 gap-3 group hover:opacity-90 transition-opacity">
+                    <a href="#home" className="flex items-center font-mono text-xl font-bold text-zinc-100 gap-3 group hover:opacity-90 transition-opacity uppercase italic">
                         
                         {/* Custom Error Node SVG Logo */}
                         <div className="relative flex items-center justify-center w-8 h-8">
                             {/* Ambient Red Glow */}
-                            <div className="absolute inset-0 bg-red-500/20 blur-md rounded-full group-hover:bg-red-500/40 transition-colors duration-300" />
+                            <div className="absolute inset-0 bg-red-600/20 blur-md rounded-full group-hover:bg-red-600/40 transition-colors duration-300" />
                             
                             <motion.svg 
                                 variants={svgGlitch}
@@ -52,7 +52,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                                 viewBox="0 0 32 32" 
                                 fill="none" 
                                 xmlns="http://www.w3.org/2000/svg" 
-                                className="relative z-10 w-full h-full text-red-500 drop-shadow-[0_0_5px_rgba(239,68,68,0.8)]"
+                                className="relative z-10 w-full h-full text-red-600 drop-shadow-[0_0_5px_rgba(220,38,38,0.8)]"
                             >
                                 {/* Top Half of Glitch Diamond */}
                                 <path 
@@ -67,21 +67,21 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                                 {/* The "Error" Slash */}
                                 <path 
                                     d="M6 16H26" 
-                                    stroke="#0f172a" 
+                                    stroke="#09090b" 
                                     strokeWidth="3" 
                                 />
                             </motion.svg>
                         </div>
 
                         {/* Brand Name */}
-                        <span className="tracking-tight">
-                            err-ebus<span className="text-red-500">.sys</span>
+                        <span className="tracking-tighter">
+                            err<span className="text-red-600">-ebus</span>
                         </span>
                     </a>
 
                     {/* Mobile Menu Toggle */}
                     <div 
-                        className="w-7 h-5 relative cursor-pointer z-40 md:hidden text-slate-300 hover:text-red-400 transition-colors" 
+                        className="w-7 h-5 relative cursor-pointer z-40 md:hidden text-zinc-300 hover:text-red-500 transition-colors" 
                         onClick={() => setMenuOpen((prev) => !prev)}
                     >
                         &#9776;
@@ -89,16 +89,16 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
                     {/* Desktop Navigation Links */}
                     <div className="hidden md:flex items-center space-x-8 font-mono text-sm">
-                        <a href="#home" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                        <a href="#home" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Home</span>
                         </a>
-                        <a href="#about" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
-                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Architecture</span>
+                        <a href="#about" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
+                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">About</span>
                         </a>
-                        <a href="#projects" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                        <a href="#projects" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Systems</span>
                         </a>
-                        <a href="#contact" className="group text-slate-400 hover:text-red-400 transition-colors duration-300 relative">
+                        <a href="#contact" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Contact</span>
                         </a>
                     </div>

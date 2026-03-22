@@ -1,12 +1,12 @@
 import React from "react";
 
-const ChatbotButton = ({ onClick }) => (
+export const ChatbotButton = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="fixed bottom-6 right-6 z-50 bg-cyan-500 text-slate-950 rounded-xl shadow-lg p-4 hover:scale-110 hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] transition-all duration-300 flex items-center justify-center group border border-cyan-400"
+    className="fixed bottom-6 right-6 z-50 bg-red-600 text-white rounded-xl shadow-lg p-4 hover:scale-110 hover:shadow-[0_0_25px_rgba(220,38,38,0.4)] transition-all duration-300 flex items-center justify-center group border border-red-500"
     aria-label="Initialize Terminal"
   >
-    {/* Sleek Terminal Prompt Icon instead of the robot */}
+    {/* Sleek Terminal Prompt Icon */}
     <svg 
       width="28" 
       height="28" 
@@ -23,5 +23,3 @@ const ChatbotButton = ({ onClick }) => (
     </svg>
   </button>
 );
-
-export default ChatbotButton;

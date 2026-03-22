@@ -26,10 +26,10 @@ export const FollowCursor = () => {
       y: mousePosition.y - 16,
       width: 32,
       height: 32,
-      backgroundColor: "rgba(6, 182, 212, 0)", // Transparent inside
-      borderColor: "rgba(6, 182, 212, 0.5)", // Cyan border
+      backgroundColor: "rgba(220, 38, 38, 0)", // Transparent inside
+      borderColor: "rgba(220, 38, 38, 0.4)", // Red-600 border
       borderRadius: "50%", // Circle shape
-      boxShadow: "0 0 10px rgba(6, 182, 212, 0.2)",
+      boxShadow: "0 0 10px rgba(220, 38, 38, 0.15)",
     },
     hover: {
       x: mousePosition.x - 10, // Centers the 20x20px block
