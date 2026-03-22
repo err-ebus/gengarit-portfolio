@@ -2,9 +2,11 @@ import { useState } from "react";
 import { RevealOnScroll } from "../ui/RevealOnScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROJECTS } from "../../constants";
+import { useUISounds } from "../../hooks/useUISounds";
 
 export const Projects = () => {
   const [expandedId, setExpandedId] = useState(null);
+  const { playHover, playClick } = useUISounds();
 
   return (
     <section id="projects" className="relative py-32 px-4 overflow-hidden z-10 bg-zinc-950">
@@ -35,7 +37,11 @@ export const Projects = () => {
                 <div key={project.id} className="relative">
                   {/* File Node Header */}
                   <motion.div
-                    onClick={() => setExpandedId(isExpanded ? null : project.id)}
+                    onMouseEnter={playHover}
+                    onClick={() => {
+                      playClick();
+                      setExpandedId(isExpanded ? null : project.id);
+                    }}
                     className={`group relative z-20 p-4 md:p-6 border ${isExpanded ? 'border-red-600/50 bg-zinc-900/40' : 'border-zinc-900 bg-zinc-950/50'} cursor-pointer flex items-center justify-between transition-all duration-500 hover:border-red-600/30`}
                   >
                     <div className="flex items-center gap-4 md:gap-8 overflow-hidden">

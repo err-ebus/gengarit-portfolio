@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useUISounds } from "../../hooks/useUISounds";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
+    const { playHover, playClick } = useUISounds();
+
     useEffect(() => {
         // Disable page scroll when mobile menu is open; restore when closed
         if (menuOpen) {
@@ -39,7 +42,12 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             <div className="max-w-6xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo - Automated Glitch */}
-                    <a href="#home" className="flex items-center font-mono text-xl md:text-2xl font-black text-zinc-100 gap-5 group hover:opacity-100 transition-opacity uppercase italic">
+                    <a 
+                        href="#home" 
+                        onMouseEnter={playHover}
+                        onClick={playClick}
+                        className="flex items-center font-mono text-xl md:text-2xl font-black text-zinc-100 gap-5 group hover:opacity-100 transition-opacity uppercase italic"
+                    >
                         
                         {/* Custom Logo Image - Enlarge & Pop Out */}
                         <div className="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 -my-2">
@@ -71,16 +79,36 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
                     {/* Desktop Navigation Links */}
                     <div className="hidden md:flex items-center space-x-8 font-mono text-sm">
-                        <a href="#home" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
+                        <a 
+                            href="#home" 
+                            onMouseEnter={playHover}
+                            onClick={playClick}
+                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
+                        >
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Home</span>
                         </a>
-                        <a href="#about" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
+                        <a 
+                            href="#about" 
+                            onMouseEnter={playHover}
+                            onClick={playClick}
+                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
+                        >
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">About</span>
                         </a>
-                        <a href="#projects" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
+                        <a 
+                            href="#projects" 
+                            onMouseEnter={playHover}
+                            onClick={playClick}
+                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
+                        >
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Systems</span>
                         </a>
-                        <a href="#contact" className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic">
+                        <a 
+                            href="#contact" 
+                            onMouseEnter={playHover}
+                            onClick={playClick}
+                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
+                        >
                             <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Contact</span>
                         </a>
                     </div>
