@@ -1,16 +1,18 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 export const ScrollIndicator = () => {
   const { scrollYProgress } = useScroll();
   const [displayValue, setDisplayValue] = useState(0);
 
+  // Snappier spring for responsive tracking
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 200,
-    damping: 40,
+    stiffness: 150,
+    damping: 30,
     restDelta: 0.001
   });
 
+  // Map progress to pixel position within the 50vh track
   const yPos = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
@@ -19,23 +21,24 @@ export const ScrollIndicator = () => {
     });
   }, [smoothProgress]);
 
-  // Generate vertical "squarewave" segments
-  const segments = Array.from({ length: 40 }, (_, i) => ({
+  // Stable random segments (memoized to prevent re-renders during scroll)
+  const segments = useMemo(() => Array.from({ length: 30 }, (_, i) => ({
     id: i,
-    height: Math.random() * 15 + 2, // Random heights for the pulse
-    offset: Math.random() > 0.5 ? 2 : -2, // Slight horizontal jitter
-  }));
+    height: Math.floor(Math.random() * 12) + 4,
+    offset: Math.random() > 0.5 ? 3 : -3,
+  })), []);
 
   return (
-    <div className="fixed right-6 top-1/4 bottom-1/4 z-40 hidden lg:flex flex-col items-center">
+    <div className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center">
       {/* Top Header */}
-      <div className="flex flex-col items-center mb-6 opacity-40">
-        <span className="text-[8px] font-mono text-red-500 tracking-[0.3em] uppercase mb-1">BIT_STREAM</span>
-        <div className="w-4 h-px bg-zinc-800" />
+      <div className="mb-4 opacity-30 flex flex-col items-center">
+        <span className="text-[7px] font-mono text-red-500 tracking-[0.4em] uppercase mb-1">DATA_IN</span>
+        <div className="w-3 h-px bg-zinc-700" />
       </div>
 
-      {/* The Squarewave Track */}
-      <div className="relative flex-1 w-8 flex flex-col justify-between items-center py-2">
+      {/* The Unified Track Container */}
+      <div className="relative h-[40vh] w-6 flex flex-col justify-between items-center py-1">
+        {/* Background Waveform */}
         {segments.map((seg) => (
           <div 
             key={seg.id} 
@@ -45,38 +48,38 @@ export const ScrollIndicator = () => {
               transform: `translateX(${seg.offset}px)`
             }}
           >
-            {/* The Active Filling Layer */}
+            {/* The Active Filling Layer - Full height within its own segment */}
             <motion.div 
-              className="absolute inset-0 bg-red-600/40 shadow-[0_0_8px_rgba(220,38,38,0.2)]"
+              className="absolute inset-0 bg-red-600/40"
               style={{ 
-                scaleY: smoothProgress, 
-                originY: 0 
+                scaleY: smoothProgress,
+                originY: 0
               }}
             />
           </div>
         ))}
 
-        {/* The Tracking Indicator Node */}
+        {/* The Precisely Positioned Indicator Node */}
         <motion.div 
-          className="absolute right-[-10px] w-3 h-6 bg-zinc-950 border border-red-600 flex items-center justify-center group z-50 cursor-crosshair"
+          className="absolute left-1/2 -translate-x-1/2 w-4 h-6 bg-zinc-950 border border-red-600 z-50 flex items-center justify-center group"
           style={{ top: yPos, y: "-50%" }}
         >
-          {/* Pulsing Core */}
-          <div className="w-1 h-3 bg-red-600 animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
+          {/* Pulsing Interior */}
+          <div className="w-[2px] h-3 bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.8)] animate-pulse" />
           
-          {/* Data Tooltip */}
-          <div className="absolute right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-             <span className="text-[8px] font-mono text-red-500 bg-zinc-950 px-2 py-1 border border-red-600/30 whitespace-nowrap tracking-tighter shadow-2xl">
-                DATA_SEG: {displayValue.toString().padStart(4, '0')}
+          {/* Coordinate Data */}
+          <div className="absolute right-8 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none translate-x-2 group-hover:translate-x-0">
+             <span className="text-[8px] font-mono text-red-500 bg-zinc-950/90 backdrop-blur-sm px-2 py-1 border border-red-600/30 whitespace-nowrap tracking-tighter">
+                LOC: {displayValue.toString().padStart(4, '0')}
              </span>
           </div>
         </motion.div>
       </div>
 
       {/* Bottom Footer */}
-      <div className="flex flex-col items-center mt-6 opacity-40">
-        <div className="w-4 h-px bg-zinc-800 mb-1" />
-        <span className="text-[8px] font-mono text-zinc-600 tracking-[0.3em] uppercase">EOF_SIGNAL</span>
+      <div className="mt-4 opacity-30 flex flex-col items-center">
+        <div className="w-3 h-px bg-zinc-700 mb-1" />
+        <span className="text-[7px] font-mono text-zinc-600 tracking-[0.4em] uppercase">DATA_OUT</span>
       </div>
     </div>
   );
