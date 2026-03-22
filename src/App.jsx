@@ -28,8 +28,19 @@ function App() {
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
+
+    // Disable Right-Click for System Immersion
+    const handleContextMenu = (e) => {
+      e.preventDefault();
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('contextmenu', handleContextMenu);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('contextmenu', handleContextMenu);
+    };
   }, []);
 
   const handleSendMessage = async (text) => {
