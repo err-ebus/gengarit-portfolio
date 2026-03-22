@@ -36,24 +36,24 @@ export const Projects = () => {
                   {/* File Node Header */}
                   <motion.div
                     onClick={() => setExpandedId(isExpanded ? null : project.id)}
-                    className={`group relative z-20 p-6 border ${isExpanded ? 'border-red-600/50 bg-zinc-900/40' : 'border-zinc-900 bg-zinc-950/50'} cursor-pointer flex items-center justify-between transition-all duration-500 hover:border-red-600/30`}
+                    className={`group relative z-20 p-4 md:p-6 border ${isExpanded ? 'border-red-600/50 bg-zinc-900/40' : 'border-zinc-900 bg-zinc-950/50'} cursor-pointer flex items-center justify-between transition-all duration-500 hover:border-red-600/30`}
                   >
-                    <div className="flex items-center gap-8">
-                      <span className={`font-mono text-[10px] transition-colors duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-700 group-hover:text-zinc-500'}`}>
+                    <div className="flex items-center gap-4 md:gap-8 overflow-hidden">
+                      <span className={`font-mono text-[9px] md:text-[10px] flex-shrink-0 transition-colors duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-700 group-hover:text-zinc-500'}`}>
                         [{project.id.toString().padStart(3, '0')}]
                       </span>
-                      <h3 className={`text-xl md:text-3xl font-black uppercase italic tracking-tighter transition-all duration-500 ${isExpanded ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-2'}`}>
+                      <h3 className={`text-base md:text-3xl font-black uppercase italic tracking-tighter truncate transition-all duration-500 ${isExpanded ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-2'}`}>
                         {project.title}
                       </h3>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                      <span className={`text-[10px] font-black uppercase tracking-[0.2em] font-mono transition-all duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-800 opacity-0 group-hover:opacity-100'}`}>
+                    <div className="flex items-center gap-3 md:gap-4 flex-shrink-0 ml-4">
+                      <span className={`hidden sm:inline-block text-[10px] font-black uppercase tracking-[0.2em] font-mono transition-all duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-800 opacity-0 group-hover:opacity-100'}`}>
                         {isExpanded ? 'CLOSE_DATA' : 'EXTRACT_FILE'}
                       </span>
                       <motion.div 
                         animate={{ rotate: isExpanded ? 180 : 0 }}
-                        className={`w-8 h-8 flex items-center justify-center border transition-colors ${isExpanded ? 'border-red-600 text-red-500' : 'border-zinc-800 text-zinc-700'}`}
+                        className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center border text-xs transition-colors ${isExpanded ? 'border-red-600 text-red-500' : 'border-zinc-800 text-zinc-700'}`}
                       >
                         ↓
                       </motion.div>
