@@ -28,14 +28,26 @@ export const ScrollIndicator = () => {
       </div>
 
       {/* The Data Track Container */}
-      <div className="relative flex-1 w-full flex justify-center">
-        {/* Animated Dashed Line (Data Flow Illusion) */}
+      <div className="relative flex-1 w-full flex justify-center overflow-hidden">
+        {/* Layer 1: Background Dashed Line (Static/Flowing) */}
         <div 
-          className="w-[1.5px] h-full opacity-40"
+          className="absolute inset-0 w-[1.5px] left-1/2 -translate-x-1/2 opacity-20"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, #3f3f46 50%, transparent 50%)`,
+            backgroundSize: '100% 10px',
+            animation: 'dataFlow 1.5s linear infinite'
+          }}
+        />
+
+        {/* Layer 2: Active "Passed" Line (Glows Red) */}
+        <motion.div 
+          className="absolute top-0 w-[1.5px] left-1/2 -translate-x-1/2 shadow-[0_0_8px_rgba(220,38,38,0.5)]"
           style={{
             backgroundImage: `linear-gradient(to bottom, #dc2626 50%, transparent 50%)`,
             backgroundSize: '100% 10px',
-            animation: 'dataFlow 1s linear infinite'
+            animation: 'dataFlow 1s linear infinite',
+            height: yPos, // Height matches the indicator position
+            opacity: 1
           }}
         />
 
@@ -45,7 +57,7 @@ export const ScrollIndicator = () => {
           style={{ top: yPos, y: "-50%" }}
         >
           {/* Neon Core */}
-          <div className="w-1 h-1 bg-red-600 shadow-[0_0_10px_red]" />
+          <div className="w-1.5 h-1.5 bg-red-600 shadow-[0_0_10px_red]" />
           
           {/* HUD Tooltip */}
           <div className="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
