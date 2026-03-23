@@ -7,13 +7,12 @@ export const LoadingScreen = ({ onComplete }) => {
   const [isStarted, setIsStarted] = useState(false);
   const fullText = "ENGAGING_CORE_SYSTEMS...";
 
-  // Realistic "Engine Ignition" Sequence
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const now = audioCtx.currentTime;
 
-      // Layer 1: The "Starter" (Sharp Mechanical Click)
+      // Starter Click
       const starter = audioCtx.createOscillator();
       const starterGain = audioCtx.createGain();
       starter.type = 'square';
@@ -24,42 +23,34 @@ export const LoadingScreen = ({ onComplete }) => {
       starter.connect(starterGain);
       starterGain.connect(audioCtx.destination);
 
-      // Layer 2: The "Combustion" (Low Rumble + Upward Pitch Sweep)
+      // Engine Roar
       const engine = audioCtx.createOscillator();
       const engineGain = audioCtx.createGain();
-      engine.type = 'sawtooth'; // Sawtooth for that engine "grit"
-      
-      // Start low and sweep up fast
+      engine.type = 'sawtooth';
       engine.frequency.setValueAtTime(30, now + 0.05);
       engine.frequency.exponentialRampToValueAtTime(120, now + 0.5);
-      engine.frequency.linearRampToValueAtTime(80, now + 2); // Settle into an idle hum
-      
+      engine.frequency.linearRampToValueAtTime(80, now + 2);
       engineGain.gain.setValueAtTime(0, now + 0.05);
-      engineGain.gain.linearRampToValueAtTime(0.4, now + 0.2); // Roar to life
-      engineGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5); // Fade out as loading finishes
-      
+      engineGain.gain.linearRampToValueAtTime(0.4, now + 0.2);
+      engineGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
       engine.connect(engineGain);
       engineGain.connect(audioCtx.destination);
 
-      // Layer 3: Exhaust Texture (Filtered Noise)
+      // Exhaust Noise
       const bufferSize = audioCtx.sampleRate * 2;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-      
       const exhaust = audioCtx.createBufferSource();
       exhaust.buffer = buffer;
       const exhaustFilter = audioCtx.createBiquadFilter();
       const exhaustGain = audioCtx.createGain();
-      
       exhaustFilter.type = 'lowpass';
       exhaustFilter.frequency.setValueAtTime(400, now);
       exhaustFilter.frequency.exponentialRampToValueAtTime(100, now + 1.5);
-      
       exhaustGain.gain.setValueAtTime(0, now + 0.05);
       exhaustGain.gain.linearRampToValueAtTime(0.1, now + 0.2);
       exhaustGain.gain.linearRampToValueAtTime(0, now + 2);
-      
       exhaust.connect(exhaustFilter);
       exhaustFilter.connect(exhaustGain);
       exhaustGain.connect(audioCtx.destination);
@@ -67,7 +58,6 @@ export const LoadingScreen = ({ onComplete }) => {
       starter.start(now);
       engine.start(now + 0.05);
       exhaust.start(now + 0.05);
-
       starter.stop(now + 0.1);
       engine.stop(now + 2.5);
       exhaust.stop(now + 2);
@@ -100,7 +90,7 @@ export const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center px-4 font-mono overflow-hidden">
-      {/* Background Decor */}
+      {/* HUD Grid Decor */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="h-full w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
       </div>
@@ -108,65 +98,74 @@ export const LoadingScreen = ({ onComplete }) => {
       <AnimatePresence mode="wait">
         {!isStarted ? (
           <motion.div
-            key="init-button"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
+            key="init-node"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.2, filter: "blur(20px)" }}
             className="relative flex flex-col items-center"
           >
-            <button
-              onClick={() => setIsStarted(true)}
-              className="group relative px-12 py-6 bg-transparent border border-red-600/30 overflow-hidden transition-all duration-500 hover:border-red-600 shadow-2xl"
-            >
-              <div className="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors" />
-              <div className="absolute -left-full top-0 w-full h-full bg-gradient-to-r from-transparent via-red-600/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
-              
-              <div className="relative flex items-center gap-4">
-                <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                <span className="text-xs font-black text-red-500 tracking-[0.6em] uppercase italic">
-                  Start_System_Integration
-                </span>
-              </div>
-            </button>
-            
-            <div className="mt-8 flex gap-8 opacity-20 text-[8px] text-zinc-500 uppercase tracking-widest font-black">
-               <span>AUTH_REV: 2.6.0</span>
-               <span>//</span>
-               <span>OS_KERNEL: STABLE</span>
+            {/* The Circular Diagnostic Initiation Node */}
+            <div className="relative w-64 h-64 flex items-center justify-center">
+               <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border border-dashed border-red-600/20 rounded-full"
+               />
+               <motion.div 
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-4 border border-zinc-800 rounded-full"
+               />
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.05)_0%,transparent_70%)]" />
+
+               <button
+                onClick={() => setIsStarted(true)}
+                className="group relative w-32 h-32 bg-zinc-900 border border-red-600/40 rounded-full flex items-center justify-center transition-all duration-500 hover:border-red-600 hover:shadow-[0_0_40px_rgba(220,38,38,0.4)] overflow-hidden"
+               >
+                  <div className="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors" />
+                  <div className="flex flex-col items-center gap-1 z-10 transition-transform group-active:scale-95">
+                    <span className="text-red-600 text-xl font-bold animate-pulse">⚡</span>
+                    <span className="text-[8px] font-black text-white tracking-[0.2em] uppercase">Initialize</span>
+                  </div>
+                  
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-2 border-t-2 border-r-2 border-transparent border-t-red-600 rounded-full opacity-40"
+                  />
+               </button>
+
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 text-[7px] text-zinc-600 tracking-[0.5em] font-black uppercase">
+                  Auth_Protocol_Active
+               </div>
+               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 text-[7px] text-red-950 tracking-[0.5em] font-black uppercase animate-pulse">
+                  System_Standby
+               </div>
+            </div>
+
+            <div className="mt-16 text-[9px] text-zinc-500 uppercase tracking-widest font-black flex gap-4 items-center">
+               <span className="w-8 h-px bg-zinc-900" />
+               ERR-EBUS.SYSTEM_V2.6
+               <span className="w-8 h-px bg-zinc-900" />
             </div>
           </motion.div>
         ) : (
           <motion.div 
-            key="loading-node"
+            key="data-loading"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-md flex flex-col items-center"
           >
-            <div className="mb-12 relative w-24 h-24 flex items-center justify-center">
-               <div className="absolute inset-0 bg-red-600/15 blur-3xl rounded-full" />
-               
-               <div className="w-12 h-12 bg-red-600/10 rounded-full border border-red-600/20 flex items-center justify-center">
-                  <span className="text-red-600 text-lg animate-pulse">⚡</span>
-               </div>
-
-               <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 border border-zinc-900 border-t-red-600 rounded-full"
-               />
-               <motion.div 
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-3 border border-zinc-900 border-b-red-600/50 rounded-full"
-               />
-            </div>
-
-            <div className="w-full space-y-4">
-              <div className="flex justify-between items-end text-[10px] font-black tracking-widest">
-                  <span className="text-zinc-500 uppercase">{text}</span>
-                  <span className="text-red-600">{Math.floor(progress)}%</span>
+            {/* Pure Data Loading Interface */}
+            <div className="w-full space-y-6">
+              <div className="flex justify-between items-center text-[10px] font-black tracking-[0.2em]">
+                  <span className="text-zinc-500 uppercase italic">{text}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-zinc-800 text-[8px]">CORE_</span>
+                    <span className="text-red-600">{Math.floor(progress)}%</span>
+                  </div>
               </div>
-              <div className="h-[2px] w-full bg-zinc-900 relative overflow-hidden">
+              <div className="h-px w-full bg-zinc-900 relative">
                   <motion.div 
                       className="h-full bg-red-600 shadow-[0_0_20px_rgba(220,38,38,0.6)]"
                       initial={{ width: "0%" }}
@@ -176,18 +175,16 @@ export const LoadingScreen = ({ onComplete }) => {
               </div>
             </div>
 
-            <div className="mt-12 text-[8px] text-zinc-800 space-y-2 text-center uppercase tracking-[0.3em]">
-              <p>Initializing_Data_Pipelines</p>
-              <p className="text-red-900/40">Securing_Connection_Ports</p>
+            <div className="mt-16 grid grid-cols-3 gap-8 opacity-10 text-[7px] text-zinc-500 uppercase tracking-widest font-black">
+              <span>Memory: OK</span>
+              <span className="text-center">Kernel: LOAD</span>
+              <span className="text-right">I/O: SECURE</span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       <style>{`
-        @keyframes shimmer {
-          100% { transform: translateX(200%); }
-        }
         @keyframes sweep {
           from { transform: translateX(-100%); }
           to { transform: translateX(500%); }
