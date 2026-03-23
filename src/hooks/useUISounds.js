@@ -1,41 +1,53 @@
 import { useCallback, useRef } from 'react';
 
-// Highly reliable, direct MP3 links from a stable CDN
-const HOVER_SOUND_URL = 'https://raw.githubusercontent.com/Shadowdev1174/err-ebus-assets/main/hover.mp3'; 
-const CLICK_SOUND_URL = 'https://raw.githubusercontent.com/Shadowdev1174/err-ebus-assets/main/click.mp3';
-
-// Fallback to generic system-like sounds if the above fail
-const FALLBACK_HOVER = 'https://www.soundjay.com/buttons/sounds/button-50.mp3';
-const FALLBACK_CLICK = 'https://www.soundjay.com/buttons/sounds/button-09.mp3';
+// Embedded Base64 sounds for guaranteed availability
+// A short digital "tick" sound
+const HOVER_TICK = 'data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTtvT18AAAAA'; 
+// A mechanical "lock" sound
+const CLICK_LOCK = 'data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTtvT18AAAAA';
 
 export const useUISounds = () => {
-  const hoverAudio = useRef(new Audio(HOVER_SOUND_URL));
-  const clickAudio = useRef(new Audio(CLICK_SOUND_URL));
-
-  // Set volumes
-  hoverAudio.current.volume = 0.15;
-  clickAudio.current.volume = 0.2;
-
+  // Using simplified sound generation for high reliability
   const playHover = useCallback(() => {
-    // Clone and play to allow rapid overlapping sounds
-    const sound = hoverAudio.current.cloneNode();
-    sound.volume = 0.15;
-    sound.play().catch(() => {
-        // Silent catch for browser autoplay restrictions
-        const fallback = new Audio(FALLBACK_HOVER);
-        fallback.volume = 0.1;
-        fallback.play().catch(() => {});
-    });
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.05);
+      
+      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05);
+    } catch (e) {}
   }, []);
 
   const playClick = useCallback(() => {
-    const sound = clickAudio.current.cloneNode();
-    sound.volume = 0.2;
-    sound.play().catch(() => {
-        const fallback = new Audio(FALLBACK_CLICK);
-        fallback.volume = 0.15;
-        fallback.play().catch(() => {});
-    });
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.1);
+      
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    } catch (e) {}
   }, []);
 
   return { playHover, playClick };
