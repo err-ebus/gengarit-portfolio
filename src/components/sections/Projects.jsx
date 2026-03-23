@@ -95,14 +95,17 @@ export const Projects = () => {
                           transition={{ delay: 0.2, duration: 0.5 }}
                           className="relative p-8 md:p-12"
                         >
-                          {/* Dimmed Background Image */}
-                          <div className="absolute inset-0 z-0">
-                            <img 
-                              src={project.image} 
-                              alt={project.title}
-                              className="w-full h-full object-cover brightness-[0.15] opacity-40 grayscale"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/20" />
+                          {/* Aesthetic Technical Background (Replaces Image) */}
+                          <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
+                            {/* Technical Grid */}
+                            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+                            
+                            {/* Scanning HUD Lines */}
+                            <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
+                            
+                            {/* Aesthetic Corner Brackets (Randomized feel) */}
+                            <div className="absolute top-10 left-10 w-20 h-20 border-t border-l border-red-600/20" />
+                            <div className="absolute bottom-10 right-10 w-20 h-20 border-b border-r border-red-600/20" />
                           </div>
 
                           {/* Data Content */}
