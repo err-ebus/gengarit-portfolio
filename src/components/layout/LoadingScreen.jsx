@@ -7,39 +7,70 @@ export const LoadingScreen = ({ onComplete }) => {
   const [isStarted, setIsStarted] = useState(false);
   const fullText = "ENGAGING_CORE_SYSTEMS...";
 
+  // Realistic "Engine Ignition" Sequence
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const now = audioCtx.currentTime;
 
-      // Sharp Mechanical "Thud-Click"
-      const bufferSize = audioCtx.sampleRate * 0.05; 
+      // Layer 1: The "Starter" (Sharp Mechanical Click)
+      const starter = audioCtx.createOscillator();
+      const starterGain = audioCtx.createGain();
+      starter.type = 'square';
+      starter.frequency.setValueAtTime(80, now);
+      starter.frequency.exponentialRampToValueAtTime(10, now + 0.1);
+      starterGain.gain.setValueAtTime(0.3, now);
+      starterGain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+      starter.connect(starterGain);
+      starterGain.connect(audioCtx.destination);
+
+      // Layer 2: The "Combustion" (Low Rumble + Upward Pitch Sweep)
+      const engine = audioCtx.createOscillator();
+      const engineGain = audioCtx.createGain();
+      engine.type = 'sawtooth'; // Sawtooth for that engine "grit"
+      
+      // Start low and sweep up fast
+      engine.frequency.setValueAtTime(30, now + 0.05);
+      engine.frequency.exponentialRampToValueAtTime(120, now + 0.5);
+      engine.frequency.linearRampToValueAtTime(80, now + 2); // Settle into an idle hum
+      
+      engineGain.gain.setValueAtTime(0, now + 0.05);
+      engineGain.gain.linearRampToValueAtTime(0.4, now + 0.2); // Roar to life
+      engineGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5); // Fade out as loading finishes
+      
+      engine.connect(engineGain);
+      engineGain.connect(audioCtx.destination);
+
+      // Layer 3: Exhaust Texture (Filtered Noise)
+      const bufferSize = audioCtx.sampleRate * 2;
       const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
       
-      const noise = audioCtx.createBufferSource();
-      noise.buffer = buffer;
-      const noiseGain = audioCtx.createGain();
-      noiseGain.gain.setValueAtTime(0.1, now);
-      noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.04);
-      noise.connect(noiseGain);
-      noiseGain.connect(audioCtx.destination);
-
-      const osc = audioCtx.createOscillator();
-      const oscGain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(150, now);
-      osc.frequency.exponentialRampToValueAtTime(40, now + 0.1);
-      oscGain.gain.setValueAtTime(0.3, now);
-      oscGain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+      const exhaust = audioCtx.createBufferSource();
+      exhaust.buffer = buffer;
+      const exhaustFilter = audioCtx.createBiquadFilter();
+      const exhaustGain = audioCtx.createGain();
       
-      osc.connect(oscGain);
-      oscGain.connect(audioCtx.destination);
+      exhaustFilter.type = 'lowpass';
+      exhaustFilter.frequency.setValueAtTime(400, now);
+      exhaustFilter.frequency.exponentialRampToValueAtTime(100, now + 1.5);
+      
+      exhaustGain.gain.setValueAtTime(0, now + 0.05);
+      exhaustGain.gain.linearRampToValueAtTime(0.1, now + 0.2);
+      exhaustGain.gain.linearRampToValueAtTime(0, now + 2);
+      
+      exhaust.connect(exhaustFilter);
+      exhaustFilter.connect(exhaustGain);
+      exhaustGain.connect(audioCtx.destination);
 
-      noise.start();
-      osc.start();
-      osc.stop(now + 0.15);
+      starter.start(now);
+      engine.start(now + 0.05);
+      exhaust.start(now + 0.05);
+
+      starter.stop(now + 0.1);
+      engine.stop(now + 2.5);
+      exhaust.stop(now + 2);
     } catch (e) {}
   };
 
@@ -83,7 +114,6 @@ export const LoadingScreen = ({ onComplete }) => {
             exit={{ opacity: 0, scale: 1.05 }}
             className="relative flex flex-col items-center"
           >
-            {/* Phase 1: Initiation Button */}
             <button
               onClick={() => setIsStarted(true)}
               className="group relative px-12 py-6 bg-transparent border border-red-600/30 overflow-hidden transition-all duration-500 hover:border-red-600 shadow-2xl"
@@ -112,16 +142,13 @@ export const LoadingScreen = ({ onComplete }) => {
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-md flex flex-col items-center"
           >
-            {/* Phase 2: Technical Circular Node Reveal */}
             <div className="mb-12 relative w-24 h-24 flex items-center justify-center">
                <div className="absolute inset-0 bg-red-600/15 blur-3xl rounded-full" />
                
-               {/* Inner Core */}
                <div className="w-12 h-12 bg-red-600/10 rounded-full border border-red-600/20 flex items-center justify-center">
                   <span className="text-red-600 text-lg animate-pulse">⚡</span>
                </div>
 
-               {/* Rotating Technical Rings */}
                <motion.div 
                   animate={{ rotate: 360 }}
                   transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
