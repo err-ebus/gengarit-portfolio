@@ -7,40 +7,72 @@ export const LoadingScreen = ({ onComplete }) => {
   const [isStarted, setIsStarted] = useState(false);
   const fullText = "ENGAGING_CORE_SYSTEMS...";
 
-  // Professional Mechanical "Thud-Click" - Short & Tactile
+  // Cinematic Sci-Fi "Engine Start" Sequence
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      
-      // Part 1: Sharp Transient (The "Click")
-      const bufferSize = audioCtx.sampleRate * 0.05; 
-      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-      
-      const noise = audioCtx.createBufferSource();
-      noise.buffer = buffer;
-      const noiseGain = audioCtx.createGain();
-      noiseGain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      noiseGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
-      noise.connect(noiseGain);
-      noiseGain.connect(audioCtx.destination);
+      const now = audioCtx.currentTime;
 
-      // Part 2: Low-end Punch (The "Thump")
-      const osc = audioCtx.createOscillator();
-      const oscGain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.1);
-      oscGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-      oscGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-      
-      osc.connect(oscGain);
-      oscGain.connect(audioCtx.destination);
+      // Layer 1: The "Engine Thrum" (FM Synthesis)
+      const carrier = audioCtx.createOscillator();
+      const modulator = audioCtx.createOscillator();
+      const modGain = audioCtx.createGain();
+      const mainGain = audioCtx.createGain();
 
-      noise.start();
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.15);
+      carrier.type = 'sine';
+      modulator.type = 'sawtooth';
+
+      // Modulator affects carrier frequency for metallic grit
+      modulator.frequency.setValueAtTime(50, now);
+      modulator.frequency.exponentialRampToValueAtTime(150, now + 2);
+      modGain.gain.setValueAtTime(40, now);
+      modGain.gain.exponentialRampToValueAtTime(10, now + 2);
+
+      carrier.frequency.setValueAtTime(40, now);
+      carrier.frequency.exponentialRampToValueAtTime(80, now + 1.5);
+
+      mainGain.gain.setValueAtTime(0, now);
+      mainGain.gain.linearRampToValueAtTime(0.3, now + 0.1);
+      mainGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
+
+      modulator.connect(modGain);
+      modGain.connect(carrier.frequency);
+      carrier.connect(mainGain);
+      mainGain.connect(audioCtx.destination);
+
+      // Layer 2: Sub-Bass Kick (The "Engagement")
+      const sub = audioCtx.createOscillator();
+      const subGain = audioCtx.createGain();
+      sub.type = 'sine';
+      sub.frequency.setValueAtTime(100, now);
+      sub.frequency.exponentialRampToValueAtTime(30, now + 0.2);
+      subGain.gain.setValueAtTime(0.4, now);
+      subGain.gain.linearRampToValueAtTime(0, now + 0.3);
+      sub.connect(subGain);
+      subGain.connect(audioCtx.destination);
+
+      // Layer 3: High-Freq "Digital Grain" (Data Read)
+      const grain = audioCtx.createOscillator();
+      const grainGain = audioCtx.createGain();
+      grain.type = 'square';
+      grain.frequency.setValueAtTime(1000, now);
+      grain.frequency.setValueAtTime(2000, now + 0.1);
+      grain.frequency.setValueAtTime(1500, now + 0.2);
+      grainGain.gain.setValueAtTime(0, now);
+      grainGain.gain.linearRampToValueAtTime(0.05, now + 0.05);
+      grainGain.gain.linearRampToValueAtTime(0, now + 0.4);
+      grain.connect(grainGain);
+      grainGain.connect(audioCtx.destination);
+
+      carrier.start();
+      modulator.start();
+      sub.start();
+      grain.start();
+
+      carrier.stop(now + 2.5);
+      modulator.stop(now + 2.5);
+      sub.stop(now + 0.3);
+      grain.stop(now + 0.4);
     } catch (e) {}
   };
 
@@ -76,10 +108,9 @@ export const LoadingScreen = ({ onComplete }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(15px)" }}
             className="flex flex-col items-center relative"
           >
-            {/* Advanced Initiation Interface */}
             <div className="relative w-64 h-64 flex items-center justify-center">
                <motion.div 
                 animate={{ rotate: 360 }}
@@ -95,7 +126,7 @@ export const LoadingScreen = ({ onComplete }) => {
 
                <button
                 onClick={() => setIsStarted(true)}
-                className="group relative w-32 h-32 bg-zinc-900 border border-red-600/40 rounded-full flex items-center justify-center transition-all duration-500 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] overflow-hidden"
+                className="group relative w-32 h-32 bg-zinc-900 border border-red-600/40 rounded-full flex items-center justify-center transition-all duration-500 hover:border-red-600 hover:shadow-[0_0_40px_rgba(220,38,38,0.4)] overflow-hidden"
                >
                   <div className="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors" />
                   <div className="flex flex-col items-center gap-1 z-10 transition-transform group-active:scale-95">
@@ -114,13 +145,13 @@ export const LoadingScreen = ({ onComplete }) => {
                   Auth_Protocol_Active
                </div>
                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 text-[7px] text-red-950 tracking-[0.5em] font-black uppercase animate-pulse">
-                  Standby_Mode
+                  System_Standby
                </div>
             </div>
 
             <div className="mt-16 text-[9px] text-zinc-500 uppercase tracking-widest font-black flex gap-4 items-center">
                <span className="w-8 h-px bg-zinc-900" />
-               ERR-EBUS.SYSTEM_V2.6
+               ERR-EBUS.OS_V2.6
                <span className="w-8 h-px bg-zinc-900" />
             </div>
           </motion.div>
@@ -156,8 +187,8 @@ export const LoadingScreen = ({ onComplete }) => {
             </div>
 
             <div className="mt-12 text-[8px] text-zinc-800 space-y-2 text-center uppercase tracking-[0.3em]">
-              <p>Initializing_Data_Pipelines</p>
-              <p className="text-red-900/40">Securing_Connection_Ports</p>
+              <p>Synchronizing_Neural_Grid</p>
+              <p className="text-red-900/40">Calibrating_Logic_Cores</p>
             </div>
           </motion.div>
         )}
