@@ -7,12 +7,9 @@ export const LoadingScreen = ({ onComplete }) => {
   const [isStarted, setIsStarted] = useState(false);
   const fullText = "ENGAGING_CORE_SYSTEMS...";
 
-  // Mature "Power-On Hum" engagement sound
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      
-      // Layer 1: Sub-bass resonance pulse
       const osc1 = audioCtx.createOscillator();
       const gain1 = audioCtx.createGain();
       osc1.type = 'sine';
@@ -24,7 +21,6 @@ export const LoadingScreen = ({ onComplete }) => {
       osc1.connect(gain1);
       gain1.connect(audioCtx.destination);
 
-      // Layer 2: Filtered technical texture (White Noise)
       const bufferSize = 2 * audioCtx.sampleRate;
       const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const output = noiseBuffer.getChannelData(0);
@@ -53,9 +49,7 @@ export const LoadingScreen = ({ onComplete }) => {
 
   useEffect(() => {
     if (!isStarted) return;
-
     playBootSound();
-
     let index = 0;
     const interval = setInterval(() => {
       setText(fullText.substring(0, index));
@@ -65,11 +59,9 @@ export const LoadingScreen = ({ onComplete }) => {
         setTimeout(onComplete, 1000);
       }
     }, 60);
-
     const progressInterval = setInterval(() => {
       setProgress(prev => (prev >= 100 ? 100 : prev + 1.5));
     }, 40);
-
     return () => {
       clearInterval(interval);
       clearInterval(progressInterval);
@@ -78,7 +70,6 @@ export const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center px-4 font-mono overflow-hidden">
-      {/* Background Decor */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="h-full w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
       </div>
@@ -86,32 +77,58 @@ export const LoadingScreen = ({ onComplete }) => {
       <AnimatePresence>
         {!isStarted ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            className="relative flex flex-col items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+            className="flex flex-col items-center relative"
           >
-            {/* Professional Engagemet Button */}
-            <button
-              onClick={() => setIsStarted(true)}
-              className="group relative px-12 py-6 bg-transparent border border-red-600/30 overflow-hidden transition-all duration-500 hover:border-red-600"
-            >
-              {/* Animated Background Slide */}
-              <div className="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors" />
-              <div className="absolute -left-full top-0 w-full h-full bg-gradient-to-r from-transparent via-red-600/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
-              
-              <div className="relative flex items-center gap-4">
-                <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                <span className="text-xs font-black text-red-500 tracking-[0.6em] uppercase italic">
-                  Start_System_Integration
-                </span>
-              </div>
-            </button>
-            
-            <div className="mt-8 flex gap-8 opacity-20 text-[8px] text-zinc-500 uppercase tracking-widest font-black">
-               <span>AUTH_REV: 2.6.0</span>
-               <span>//</span>
-               <span>OS_KERNEL: STABLE</span>
+            {/* Advanced Initiation Interface */}
+            <div className="relative w-64 h-64 flex items-center justify-center">
+               {/* Background Technical Rings */}
+               <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border border-dashed border-red-600/20 rounded-full"
+               />
+               <motion.div 
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-4 border border-zinc-800 rounded-full"
+               />
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.05)_0%,transparent_70%)]" />
+
+               {/* Interactive Core */}
+               <button
+                onClick={() => setIsStarted(true)}
+                className="group relative w-32 h-32 bg-zinc-900 border border-red-600/40 rounded-full flex items-center justify-center transition-all duration-500 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] overflow-hidden"
+               >
+                  <div className="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors" />
+                  <div className="flex flex-col items-center gap-1 z-10 transition-transform group-active:scale-95">
+                    <span className="text-red-600 text-xl font-bold animate-pulse">⚡</span>
+                    <span className="text-[8px] font-black text-white tracking-[0.2em] uppercase">Initialize</span>
+                  </div>
+                  
+                  {/* Rotating Outer Ticks */}
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-2 border-t-2 border-r-2 border-transparent border-t-red-600 rounded-full opacity-40"
+                  />
+               </button>
+
+               {/* Technical Metadata Floating Labels */}
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 text-[7px] text-zinc-600 tracking-[0.5em] font-black uppercase">
+                  Auth_Protocol_Active
+               </div>
+               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 text-[7px] text-red-950 tracking-[0.5em] font-black uppercase animate-pulse">
+                  Standby_Mode
+               </div>
+            </div>
+
+            <div className="mt-16 text-[9px] text-zinc-500 uppercase tracking-widest font-black flex gap-4 items-center">
+               <span className="w-8 h-px bg-zinc-900" />
+               ERR-EBUS.SYSTEM_V2.6
+               <span className="w-8 h-px bg-zinc-900" />
             </div>
           </motion.div>
         ) : (
@@ -152,12 +169,6 @@ export const LoadingScreen = ({ onComplete }) => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        @keyframes shimmer {
-          100% { transform: translateX(200%); }
-        }
-      `}</style>
     </div>
   );
 };

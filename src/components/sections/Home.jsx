@@ -1,7 +1,10 @@
 import { RevealOnScroll } from "../ui/RevealOnScroll";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export const Home = () => {
+  const { scrollY } = useScroll();
+  const footerOpacity = useTransform(scrollY, [0, 300], [0.4, 0]);
+
   return (
     <section
       id="home"
@@ -62,8 +65,11 @@ export const Home = () => {
         </div>
       </RevealOnScroll>
       
-      {/* Bottom status bar decor */}
-      <div className="absolute bottom-0 left-0 w-full p-6 flex justify-between items-end opacity-40 pointer-events-none font-mono text-[10px] text-zinc-500">
+      {/* Bottom status bar decor - Fades on scroll */}
+      <motion.div 
+        style={{ opacity: footerOpacity }}
+        className="absolute bottom-0 left-0 w-full p-6 flex justify-between items-end pointer-events-none font-mono text-[10px] text-zinc-500"
+      >
         <div className="flex flex-col">
           <span>LATENCY: 24MS</span>
           <span>STATUS: OPTIMIZED</span>
@@ -72,7 +78,7 @@ export const Home = () => {
           <span>REV_LIMIT: 9000_RPM</span>
           <span>BUILD: V2.6.0_MARCH</span>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
