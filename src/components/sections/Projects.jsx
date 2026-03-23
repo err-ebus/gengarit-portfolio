@@ -44,11 +44,11 @@ export const Projects = () => {
                     }}
                     className={`group relative z-20 p-4 md:p-6 border ${isExpanded ? 'border-red-600/50 bg-zinc-900/40' : 'border-zinc-900 bg-zinc-950/50'} cursor-pointer flex items-center justify-between transition-all duration-500 hover:border-red-600/30`}
                   >
-                    <div className="flex items-center gap-4 md:gap-8 overflow-hidden">
+                    <div className="flex items-center gap-4 md:gap-8 pr-4">
                       <span className={`font-mono text-[9px] md:text-[10px] flex-shrink-0 transition-colors duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-700 group-hover:text-zinc-500'}`}>
                         [{project.id.toString().padStart(3, '0')}]
                       </span>
-                      <h3 className={`text-base md:text-3xl font-black uppercase italic tracking-tighter transition-all duration-500 pr-2 ${isExpanded ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-2'}`}>
+                      <h3 className={`text-base md:text-3xl font-black uppercase italic tracking-tighter transition-all duration-500 pr-4 ${isExpanded ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-2'}`}>
                         {project.title}
                       </h3>
                     </div>
