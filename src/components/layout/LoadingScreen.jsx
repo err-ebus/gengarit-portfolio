@@ -7,43 +7,40 @@ export const LoadingScreen = ({ onComplete }) => {
   const [isStarted, setIsStarted] = useState(false);
   const fullText = "ENGAGING_CORE_SYSTEMS...";
 
+  // Professional Mechanical "Thud-Click" - Short & Tactile
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc1 = audioCtx.createOscillator();
-      const gain1 = audioCtx.createGain();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(40, audioCtx.currentTime);
-      osc1.frequency.exponentialRampToValueAtTime(55, audioCtx.currentTime + 1.5);
-      gain1.gain.setValueAtTime(0, audioCtx.currentTime);
-      gain1.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.1);
-      gain1.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 2);
-      osc1.connect(gain1);
-      gain1.connect(audioCtx.destination);
-
-      const bufferSize = 2 * audioCtx.sampleRate;
-      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const output = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        output[i] = Math.random() * 2 - 1;
-      }
+      
+      // Part 1: Sharp Transient (The "Click")
+      const bufferSize = audioCtx.sampleRate * 0.05; 
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+      
       const noise = audioCtx.createBufferSource();
-      noise.buffer = noiseBuffer;
+      noise.buffer = buffer;
       const noiseGain = audioCtx.createGain();
-      const noiseFilter = audioCtx.createBiquadFilter();
-      noiseFilter.type = 'lowpass';
-      noiseFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
-      noiseFilter.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 1.5);
-      noiseGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-      noiseGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
-      noise.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
+      noiseGain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+      noise.connect(noiseGain);
       noiseGain.connect(audioCtx.destination);
 
-      osc1.start();
+      // Part 2: Low-end Punch (The "Thump")
+      const osc = audioCtx.createOscillator();
+      const oscGain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.1);
+      oscGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      oscGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+      
+      osc.connect(oscGain);
+      oscGain.connect(audioCtx.destination);
+
       noise.start();
-      osc1.stop(audioCtx.currentTime + 2);
-      noise.stop(audioCtx.currentTime + 1.5);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
     } catch (e) {}
   };
 
@@ -84,7 +81,6 @@ export const LoadingScreen = ({ onComplete }) => {
           >
             {/* Advanced Initiation Interface */}
             <div className="relative w-64 h-64 flex items-center justify-center">
-               {/* Background Technical Rings */}
                <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -97,7 +93,6 @@ export const LoadingScreen = ({ onComplete }) => {
                />
                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.05)_0%,transparent_70%)]" />
 
-               {/* Interactive Core */}
                <button
                 onClick={() => setIsStarted(true)}
                 className="group relative w-32 h-32 bg-zinc-900 border border-red-600/40 rounded-full flex items-center justify-center transition-all duration-500 hover:border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] overflow-hidden"
@@ -108,7 +103,6 @@ export const LoadingScreen = ({ onComplete }) => {
                     <span className="text-[8px] font-black text-white tracking-[0.2em] uppercase">Initialize</span>
                   </div>
                   
-                  {/* Rotating Outer Ticks */}
                   <motion.div 
                     animate={{ rotate: 360 }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
@@ -116,7 +110,6 @@ export const LoadingScreen = ({ onComplete }) => {
                   />
                </button>
 
-               {/* Technical Metadata Floating Labels */}
                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 text-[7px] text-zinc-600 tracking-[0.5em] font-black uppercase">
                   Auth_Protocol_Active
                </div>
