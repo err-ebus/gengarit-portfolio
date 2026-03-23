@@ -1,7 +1,9 @@
 import { RevealOnScroll } from "../ui/RevealOnScroll";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useUISounds } from "../../hooks/useUISounds";
 
 export const Home = () => {
+  const { playHover, playClick } = useUISounds();
   const { scrollY } = useScroll();
   const footerOpacity = useTransform(scrollY, [0, 300], [0.4, 0]);
 
@@ -49,6 +51,8 @@ export const Home = () => {
             <div className="flex flex-col md:flex-row justify-center gap-4">
               <a
                 href="#projects"
+                onMouseEnter={playHover}
+                onClick={playClick}
                 className="bg-red-600 hover:bg-red-700 text-white py-4 px-10 rounded-md font-black transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)] uppercase italic tracking-widest text-sm"
               >
                 View Workshop
@@ -56,6 +60,8 @@ export const Home = () => {
 
               <a
                 href="#contact"
+                onMouseEnter={playHover}
+                onClick={playClick}
                 className="border border-zinc-800 hover:border-red-600/50 text-white py-4 px-10 rounded-md font-bold transition-all duration-300 bg-zinc-950/50 backdrop-blur-sm uppercase tracking-widest text-sm"
               >
                 Initiate Contact
