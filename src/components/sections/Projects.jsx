@@ -48,7 +48,7 @@ export const Projects = () => {
                       <span className={`font-mono text-[9px] md:text-[10px] flex-shrink-0 transition-colors duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-700 group-hover:text-zinc-500'}`}>
                         [{project.id.toString().padStart(3, '0')}]
                       </span>
-                      <h3 className={`text-base md:text-3xl font-black uppercase italic tracking-tighter truncate transition-all duration-500 ${isExpanded ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-2'}`}>
+                      <h3 className={`text-base md:text-3xl font-black uppercase italic tracking-tighter transition-all duration-500 pr-2 ${isExpanded ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-2'}`}>
                         {project.title}
                       </h3>
                     </div>
