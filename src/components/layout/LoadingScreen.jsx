@@ -5,56 +5,61 @@ export const LoadingScreen = ({ onComplete }) => {
   const [text, setText] = useState("");
   const [progress, setProgress] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
-  const fullText = "ENGAGING_CORE_SYSTEMS...";
+  const fullText = "STAGING_CORE_ENVIRONMENT...";
 
-  // Professional "Electric Engine" Power-Up Sequence
+  // Heavy Industrial System Boot Sequence
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const now = audioCtx.currentTime;
 
-      // Layer 1: The "Start Chime" (Clean and Sharp)
-      const chime = audioCtx.createOscillator();
-      const chimeGain = audioCtx.createGain();
-      chime.type = 'sine';
-      chime.frequency.setValueAtTime(800, now);
-      chime.frequency.exponentialRampToValueAtTime(400, now + 0.1);
-      chimeGain.gain.setValueAtTime(0.1, now);
-      chimeGain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-      chime.connect(chimeGain);
-      chimeGain.connect(audioCtx.destination);
+      // 1. DEEP SERVER HUM (Low-frequency spin up)
+      const hum = audioCtx.createOscillator();
+      const humGain = audioCtx.createGain();
+      hum.type = 'sine';
+      hum.frequency.setValueAtTime(30, now);
+      hum.frequency.exponentialRampToValueAtTime(60, now + 2); // Pitch rises slightly as it spins up
+      
+      humGain.gain.setValueAtTime(0, now);
+      humGain.gain.linearRampToValueAtTime(0.2, now + 0.5);
+      humGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
+      
+      hum.connect(humGain);
+      humGain.connect(audioCtx.destination);
 
-      // Layer 2: The "Power Rise" (Smooth upward hum)
-      const rise = audioCtx.createOscillator();
-      const riseGain = audioCtx.createGain();
-      rise.type = 'sine';
-      rise.frequency.setValueAtTime(100, now + 0.05);
-      rise.frequency.exponentialRampToValueAtTime(220, now + 1.5);
-      riseGain.gain.setValueAtTime(0, now + 0.05);
-      riseGain.gain.linearRampToValueAtTime(0.15, now + 0.5);
-      riseGain.gain.exponentialRampToValueAtTime(0.01, now + 2);
-      rise.connect(riseGain);
-      riseGain.connect(audioCtx.destination);
+      // 2. MECHANICAL RELAY CLICK (Sharp Engagement)
+      const click = audioCtx.createOscillator();
+      const clickGain = audioCtx.createGain();
+      click.type = 'square'; // Square wave for that mechanical "snap"
+      click.frequency.setValueAtTime(150, now + 0.1); // Quick click at the start of engagement
+      
+      clickGain.gain.setValueAtTime(0, now + 0.1);
+      clickGain.gain.linearRampToValueAtTime(0.1, now + 0.11);
+      clickGain.gain.linearRampToValueAtTime(0, now + 0.15);
+      
+      click.connect(clickGain);
+      clickGain.connect(audioCtx.destination);
 
-      // Layer 3: The "Resonance" (Deep Harmonic)
-      const res = audioCtx.createOscillator();
-      const resGain = audioCtx.createGain();
-      res.type = 'triangle';
-      res.frequency.setValueAtTime(50, now + 0.1);
-      res.frequency.linearRampToValueAtTime(55, now + 2);
-      resGain.gain.setValueAtTime(0, now + 0.1);
-      resGain.gain.linearRampToValueAtTime(0.1, now + 0.4);
-      resGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
-      res.connect(resGain);
-      resGain.connect(audioCtx.destination);
+      // 3. SECONDARY RELAY (Lock Engagement)
+      const lock = audioCtx.createOscillator();
+      const lockGain = audioCtx.createGain();
+      lock.type = 'sine';
+      lock.frequency.setValueAtTime(80, now + 0.12);
+      
+      lockGain.gain.setValueAtTime(0, now + 0.12);
+      lockGain.gain.linearRampToValueAtTime(0.2, now + 0.13);
+      lockGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+      
+      lock.connect(lockGain);
+      lockGain.connect(audioCtx.destination);
 
-      chime.start(now);
-      rise.start(now + 0.05);
-      res.start(now + 0.1);
+      hum.start(now);
+      click.start(now + 0.1);
+      lock.start(now + 0.12);
 
-      chime.stop(now + 0.1);
-      rise.stop(now + 2);
-      res.stop(now + 2.5);
+      hum.stop(now + 2.5);
+      click.stop(now + 0.15);
+      lock.stop(now + 0.3);
     } catch (e) {}
   };
 
@@ -84,7 +89,7 @@ export const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center px-4 font-mono overflow-hidden">
-      {/* Background Decor */}
+      {/* HUD Background Decor */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="h-full w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
       </div>
