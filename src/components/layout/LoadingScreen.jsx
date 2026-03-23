@@ -5,40 +5,49 @@ export const LoadingScreen = ({ onComplete }) => {
   const [text, setText] = useState("");
   const [progress, setProgress] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
-  const fullText = "INITIALIZING_ENGINE_PARAMETERS...";
+  const fullText = "ENGAGING_CORE_SYSTEMS...";
 
-  // High-Tech "Chime" Boot Sequence
+  // Mature "Power-On Hum" engagement sound
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       
-      // Layer 1: Low steady hum
+      // Layer 1: Sub-bass resonance pulse
       const osc1 = audioCtx.createOscillator();
       const gain1 = audioCtx.createGain();
       osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(60, audioCtx.currentTime);
+      osc1.frequency.setValueAtTime(40, audioCtx.currentTime);
+      osc1.frequency.exponentialRampToValueAtTime(55, audioCtx.currentTime + 1.5);
       gain1.gain.setValueAtTime(0, audioCtx.currentTime);
-      gain1.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.5);
+      gain1.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.1);
       gain1.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 2);
       osc1.connect(gain1);
       gain1.connect(audioCtx.destination);
 
-      // Layer 2: Rising "Data" Chime
-      const osc2 = audioCtx.createOscillator();
-      const gain2 = audioCtx.createGain();
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(200, audioCtx.currentTime);
-      osc2.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 1.5);
-      gain2.gain.setValueAtTime(0, audioCtx.currentTime);
-      gain2.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.1);
-      gain2.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
-      osc2.connect(gain2);
-      gain2.connect(audioCtx.destination);
+      // Layer 2: Filtered technical texture (White Noise)
+      const bufferSize = 2 * audioCtx.sampleRate;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = noiseBuffer;
+      const noiseGain = audioCtx.createGain();
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = 'lowpass';
+      noiseFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+      noiseFilter.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 1.5);
+      noiseGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      noiseGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(audioCtx.destination);
 
       osc1.start();
-      osc2.start();
+      noise.start();
       osc1.stop(audioCtx.currentTime + 2);
-      osc2.stop(audioCtx.currentTime + 1.5);
+      noise.stop(audioCtx.currentTime + 1.5);
     } catch (e) {}
   };
 
@@ -55,11 +64,11 @@ export const LoadingScreen = ({ onComplete }) => {
         clearInterval(interval);
         setTimeout(onComplete, 1000);
       }
-    }, 50);
+    }, 60);
 
     const progressInterval = setInterval(() => {
-      setProgress(prev => (prev >= 100 ? 100 : prev + 1));
-    }, 25);
+      setProgress(prev => (prev >= 100 ? 100 : prev + 1.5));
+    }, 40);
 
     return () => {
       clearInterval(interval);
@@ -69,73 +78,84 @@ export const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center px-4 font-mono overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="h-full w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
+      </div>
+
       <AnimatePresence>
         {!isStarted ? (
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsStarted(true)}
-            className="group relative flex flex-col items-center gap-6"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            className="relative flex flex-col items-center"
           >
-            <div className="w-20 h-20 border border-red-600/30 rounded-full flex items-center justify-center group-hover:border-red-600 transition-all duration-500">
-               <div className="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center group-hover:bg-red-600/20">
-                  <span className="text-red-600 text-2xl">⚡</span>
-               </div>
+            {/* Professional Engagemet Button */}
+            <button
+              onClick={() => setIsStarted(true)}
+              className="group relative px-12 py-6 bg-transparent border border-red-600/30 overflow-hidden transition-all duration-500 hover:border-red-600"
+            >
+              {/* Animated Background Slide */}
+              <div className="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors" />
+              <div className="absolute -left-full top-0 w-full h-full bg-gradient-to-r from-transparent via-red-600/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+              
+              <div className="relative flex items-center gap-4">
+                <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
+                <span className="text-xs font-black text-red-500 tracking-[0.6em] uppercase italic">
+                  Start_System_Integration
+                </span>
+              </div>
+            </button>
+            
+            <div className="mt-8 flex gap-8 opacity-20 text-[8px] text-zinc-500 uppercase tracking-widest font-black">
+               <span>AUTH_REV: 2.6.0</span>
+               <span>//</span>
+               <span>OS_KERNEL: STABLE</span>
             </div>
-            <span className="text-[10px] text-red-500 font-black tracking-[0.5em] animate-pulse">
-              ENABLE_SYSTEM_AUDIO
-            </span>
-          </motion.button>
+          </motion.div>
         ) : (
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-md flex flex-col items-center"
           >
-            <div className="mb-10 relative">
-               <div className="absolute inset-0 bg-red-600/20 blur-2xl rounded-full" />
+            <div className="mb-12 relative">
+               <div className="absolute inset-0 bg-red-600/15 blur-3xl rounded-full" />
                <motion.div 
-                  animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-                  transition={{ 
-                      rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                      scale: { duration: 1, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="w-16 h-16 border-4 border-t-red-600 border-r-transparent border-b-zinc-900 border-l-transparent rounded-full relative z-10"
-               />
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  className="w-20 h-20 border border-zinc-900 border-t-red-600 rounded-full relative z-10 flex items-center justify-center"
+               >
+                  <div className="w-16 h-16 border border-zinc-900 border-b-red-600/50 rounded-full animate-[spin_2s_linear_infinite_reverse]" />
+               </motion.div>
             </div>
 
-            <div className="w-full">
-              <div className="flex justify-between items-end mb-2">
-                  <span className="text-[10px] text-zinc-500 uppercase tracking-widest">{text}</span>
-                  <span className="text-[10px] text-red-500 font-bold">{progress}%</span>
+            <div className="w-full space-y-4">
+              <div className="flex justify-between items-end text-[10px] font-black tracking-widest">
+                  <span className="text-zinc-500 uppercase">{text}</span>
+                  <span className="text-red-600">{Math.floor(progress)}%</span>
               </div>
-              <div className="h-1 w-full bg-zinc-900 rounded-full overflow-hidden border border-zinc-800 relative">
+              <div className="h-px w-full bg-zinc-900 relative">
                   <motion.div 
-                      className="h-full bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.8)]"
+                      className="h-full bg-red-600 shadow-[0_0_20px_rgba(220,38,38,0.6)]"
                       initial={{ width: "0%" }}
                       animate={{ width: `${progress}%` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent w-20 animate-[sweep_1.5s_infinite]" />
               </div>
             </div>
 
-            <div className="mt-10 text-[8px] text-zinc-700 space-y-1 text-center relative z-10 uppercase tracking-widest">
-              <p className="flex items-center justify-center gap-2">
-                <span className="w-1 h-1 bg-red-600 rounded-full animate-pulse" />
-                VTEC_SYSTEM: READY
-              </p>
-              <p>ECU_MAPPING: OPTIMIZED</p>
-              <p>CORE_LOGIC: STABLE</p>
+            <div className="mt-12 text-[8px] text-zinc-800 space-y-2 text-center uppercase tracking-[0.3em]">
+              <p>Initializing_Data_Pipelines</p>
+              <p className="text-red-900/40">Securing_Connection_Ports</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       <style>{`
-        @keyframes sweep {
-          from { transform: translateX(-100%); }
-          to { transform: translateX(500%); }
+        @keyframes shimmer {
+          100% { transform: translateX(200%); }
         }
       `}</style>
     </div>
