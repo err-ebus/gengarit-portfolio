@@ -7,60 +7,54 @@ export const LoadingScreen = ({ onComplete }) => {
   const [isStarted, setIsStarted] = useState(false);
   const fullText = "ENGAGING_CORE_SYSTEMS...";
 
+  // Professional "Electric Engine" Power-Up Sequence
   const playBootSound = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const now = audioCtx.currentTime;
 
-      // Starter Click
-      const starter = audioCtx.createOscillator();
-      const starterGain = audioCtx.createGain();
-      starter.type = 'square';
-      starter.frequency.setValueAtTime(80, now);
-      starter.frequency.exponentialRampToValueAtTime(10, now + 0.1);
-      starterGain.gain.setValueAtTime(0.3, now);
-      starterGain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-      starter.connect(starterGain);
-      starterGain.connect(audioCtx.destination);
+      // Layer 1: The "Start Chime" (Clean and Sharp)
+      const chime = audioCtx.createOscillator();
+      const chimeGain = audioCtx.createGain();
+      chime.type = 'sine';
+      chime.frequency.setValueAtTime(800, now);
+      chime.frequency.exponentialRampToValueAtTime(400, now + 0.1);
+      chimeGain.gain.setValueAtTime(0.1, now);
+      chimeGain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+      chime.connect(chimeGain);
+      chimeGain.connect(audioCtx.destination);
 
-      // Engine Roar
-      const engine = audioCtx.createOscillator();
-      const engineGain = audioCtx.createGain();
-      engine.type = 'sawtooth';
-      engine.frequency.setValueAtTime(30, now + 0.05);
-      engine.frequency.exponentialRampToValueAtTime(120, now + 0.5);
-      engine.frequency.linearRampToValueAtTime(80, now + 2);
-      engineGain.gain.setValueAtTime(0, now + 0.05);
-      engineGain.gain.linearRampToValueAtTime(0.4, now + 0.2);
-      engineGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
-      engine.connect(engineGain);
-      engineGain.connect(audioCtx.destination);
+      // Layer 2: The "Power Rise" (Smooth upward hum)
+      const rise = audioCtx.createOscillator();
+      const riseGain = audioCtx.createGain();
+      rise.type = 'sine';
+      rise.frequency.setValueAtTime(100, now + 0.05);
+      rise.frequency.exponentialRampToValueAtTime(220, now + 1.5);
+      riseGain.gain.setValueAtTime(0, now + 0.05);
+      riseGain.gain.linearRampToValueAtTime(0.15, now + 0.5);
+      riseGain.gain.exponentialRampToValueAtTime(0.01, now + 2);
+      rise.connect(riseGain);
+      riseGain.connect(audioCtx.destination);
 
-      // Exhaust Noise
-      const bufferSize = audioCtx.sampleRate * 2;
-      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-      const exhaust = audioCtx.createBufferSource();
-      exhaust.buffer = buffer;
-      const exhaustFilter = audioCtx.createBiquadFilter();
-      const exhaustGain = audioCtx.createGain();
-      exhaustFilter.type = 'lowpass';
-      exhaustFilter.frequency.setValueAtTime(400, now);
-      exhaustFilter.frequency.exponentialRampToValueAtTime(100, now + 1.5);
-      exhaustGain.gain.setValueAtTime(0, now + 0.05);
-      exhaustGain.gain.linearRampToValueAtTime(0.1, now + 0.2);
-      exhaustGain.gain.linearRampToValueAtTime(0, now + 2);
-      exhaust.connect(exhaustFilter);
-      exhaustFilter.connect(exhaustGain);
-      exhaustGain.connect(audioCtx.destination);
+      // Layer 3: The "Resonance" (Deep Harmonic)
+      const res = audioCtx.createOscillator();
+      const resGain = audioCtx.createGain();
+      res.type = 'triangle';
+      res.frequency.setValueAtTime(50, now + 0.1);
+      res.frequency.linearRampToValueAtTime(55, now + 2);
+      resGain.gain.setValueAtTime(0, now + 0.1);
+      resGain.gain.linearRampToValueAtTime(0.1, now + 0.4);
+      resGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
+      res.connect(resGain);
+      resGain.connect(audioCtx.destination);
 
-      starter.start(now);
-      engine.start(now + 0.05);
-      exhaust.start(now + 0.05);
-      starter.stop(now + 0.1);
-      engine.stop(now + 2.5);
-      exhaust.stop(now + 2);
+      chime.start(now);
+      rise.start(now + 0.05);
+      res.start(now + 0.1);
+
+      chime.stop(now + 0.1);
+      rise.stop(now + 2);
+      res.stop(now + 2.5);
     } catch (e) {}
   };
 
@@ -90,7 +84,7 @@ export const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center px-4 font-mono overflow-hidden">
-      {/* HUD Grid Decor */}
+      {/* Background Decor */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="h-full w-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
       </div>
@@ -104,7 +98,6 @@ export const LoadingScreen = ({ onComplete }) => {
             exit={{ opacity: 0, scale: 1.2, filter: "blur(20px)" }}
             className="relative flex flex-col items-center"
           >
-            {/* The Circular Diagnostic Initiation Node */}
             <div className="relative w-64 h-64 flex items-center justify-center">
                <motion.div 
                 animate={{ rotate: 360 }}
@@ -156,7 +149,6 @@ export const LoadingScreen = ({ onComplete }) => {
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-md flex flex-col items-center"
           >
-            {/* Pure Data Loading Interface */}
             <div className="w-full space-y-6">
               <div className="flex justify-between items-center text-[10px] font-black tracking-[0.2em]">
                   <span className="text-zinc-500 uppercase italic">{text}</span>
