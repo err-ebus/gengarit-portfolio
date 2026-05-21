@@ -60,20 +60,20 @@ export const About = () => {
 
             {/* Right Column: System Specs */}
             <div className="lg:col-span-4 grid grid-rows-2 gap-8">
-              <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group">
-                <span className="text-6xl md:text-7xl font-black text-white group-hover:text-red-600 transition-colors italic tracking-tighter">
+              <GlassmorphismCard className="p-6 md:p-8 flex flex-col justify-center items-center text-center group">
+                <span className="text-xl md:text-2xl font-black text-white group-hover:text-red-600 transition-colors italic tracking-tight leading-tight">
                   {ABOUT_DATA.gpa}
                 </span>
-                <span className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-bold mt-2 font-mono">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold mt-4 font-mono">
                   {ABOUT_DATA.gpaLabel}
                 </span>
               </GlassmorphismCard>
-              <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group relative">
+              <GlassmorphismCard className="p-6 md:p-8 flex flex-col justify-center items-center text-center group relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-red-600" />
-                <span className="text-4xl md:text-5xl font-black text-white italic group-hover:scale-110 transition-transform tracking-tight">
+                <span className="text-xl md:text-2xl font-black text-white italic group-hover:scale-105 transition-transform tracking-tight leading-tight">
                   {ABOUT_DATA.commitsCount}
                 </span>
-                <span className="text-xs uppercase tracking-[0.3em] text-red-500 font-bold mt-2 font-mono">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-red-500 font-bold mt-4 font-mono">
                   {ABOUT_DATA.efficiencyMode}
                 </span>
               </GlassmorphismCard>
