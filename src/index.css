@@ -88,7 +88,6 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #dc2626;
   font-size: 1.5rem;
   font-weight: 900;
   font-style: italic;
@@ -96,26 +95,23 @@ nav {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.2));
 }
 
 .navbar-logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
-  color: #ff3333;
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.4));
 }
 
-.navbar-logo img,
-.navbar-logo svg {
+.navbar-logo-img {
   width: 40px;
   height: 40px;
-  filter: brightness(0%) saturate(100%) invert(14%) sepia(100%) saturate(1200%) hue-rotate(0deg) brightness(100%);
-  transition: filter 0.3s ease;
+  object-contain: contain;
+  transition: all 0.3s ease;
 }
 
-.navbar-logo:hover img,
-.navbar-logo:hover svg {
-  filter: brightness(0%) saturate(100%) invert(20%) sepia(100%) saturate(1300%) hue-rotate(0deg) brightness(120%);
+.navbar-logo:hover .navbar-logo-img {
+  transform: rotate(5deg);
 }
 
 .navbar-links {
