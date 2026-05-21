@@ -165,6 +165,20 @@ nav {
   .navbar-links {
     display: none;
   }
+
+  .navbar-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 80px; /* Matches navbar height */
+    width: 100%;
+    background: rgba(9, 9, 11, 0.98); /* zinc-950 */
+    padding: 2.5rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+    backdrop-filter: blur(15px);
+  }
 }
 
 /* === BACKGROUND & HUD === */

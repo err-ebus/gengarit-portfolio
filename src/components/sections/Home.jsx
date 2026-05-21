@@ -49,7 +49,7 @@ export const Home = () => {
 
             <div className="glitch-wrapper mb-6">
               <h1 
-                className="text-6xl md:text-9xl font-black text-white tracking-tighter uppercase italic leading-none glitch"
+                className="text-5xl md:text-9xl font-black text-white tracking-tighter uppercase italic leading-none glitch"
                 data-text="ERR-EBUS"
               >
                 ERR<span className="text-zinc-600">-EBUS</span>

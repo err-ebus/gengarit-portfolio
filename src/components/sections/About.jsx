@@ -5,7 +5,7 @@ import { ABOUT_DATA } from "../../constants";
 
 export const About = () => {
   return (
-    <section id="about" className="relative py-32 px-4 overflow-hidden z-10 bg-transparent">
+    <section id="about" className="relative py-20 md:py-32 px-4 overflow-hidden z-10 bg-transparent">
       {/* Structural Background Lines */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
         <div className="absolute top-0 left-1/2 w-[1px] h-full bg-zinc-900" />
@@ -23,7 +23,7 @@ export const About = () => {
                 {ABOUT_DATA.title}
               </span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase italic">
+            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase italic">
               Under The <span className="text-zinc-500">Hood</span>
             </h2>
           </div>
@@ -31,11 +31,11 @@ export const About = () => {
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
             {/* Left Column: Bio */}
             <div className="lg:col-span-8">
-              <GlassmorphismCard className="p-8 md:p-12 h-full">
+              <GlassmorphismCard className="p-6 md:p-12 h-full">
                 <div className="flex flex-col h-full">
                   <div className="mb-10">
-                     <h3 className="text-3xl font-bold text-white mb-6 uppercase italic tracking-tight">{ABOUT_DATA.role}</h3>
-                     <p className="text-zinc-400 text-lg leading-relaxed font-light">
+                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 uppercase italic tracking-tight">{ABOUT_DATA.role}</h3>
+                     <p className="text-zinc-400 text-base md:text-lg leading-relaxed font-light">
                       {ABOUT_DATA.bio}
                     </p>
                   </div>
@@ -61,7 +61,7 @@ export const About = () => {
             {/* Right Column: GPA & Mode */}
             <div className="lg:col-span-4 grid grid-rows-2 gap-8">
               <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group">
-                <span className="text-7xl font-black text-white group-hover:text-red-600 transition-colors italic tracking-tighter">
+                <span className="text-6xl md:text-7xl font-black text-white group-hover:text-red-600 transition-colors italic tracking-tighter">
                   {ABOUT_DATA.gpa}
                 </span>
                 <span className="text-xs uppercase tracking-[0.3em] text-zinc-500 font-bold mt-2 font-mono">

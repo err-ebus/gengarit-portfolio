@@ -1,6 +1,6 @@
 import { RevealOnScroll } from "../ui/RevealOnScroll";
 import { GlassmorphismCard } from "../ui/GlassmorphismCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { useUISounds } from "../../hooks/useUISounds";
 import { SOCIAL_LINKS } from "../../constants";
@@ -15,14 +15,14 @@ export const Contact = () => {
     message: "",
   });
 
-  const SERVICE_ID = "service_vshgnd5";
-  const TEMPLATE_ID = "template_j0q98w2";
-  const PUBLIC_KEY = "k1R45K5vX0v9h3x7w";
+  const SERVICE_ID = "service_ga6df7j";
+  const TEMPLATE_ID = "iCDXyO4yyYF7diIJO"; // You mentioned this is the Template ID
+  const PUBLIC_KEY = "iCDXyO4yyYF7diIJO"; // You previously mentioned this is the Public Key
 
-  // Initialize EmailJS
-  useState(() => {
+  // Initialize EmailJS correctly
+  useEffect(() => {
     emailjs.init(PUBLIC_KEY);
-  }, []);
+  }, [PUBLIC_KEY]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +32,6 @@ export const Contact = () => {
     emailjs
       .sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY)
       .then((result) => {
-        // EmailJS returns status: 200 and text: "OK" on success
         if (result.status === 200 || result.text === "OK") {
           setStatus({ type: 'success', message: 'TRANSMISSION_SUCCESSFUL: Message received.' });
           setFormData({ name: "", email: "", message: "" });
@@ -42,7 +41,6 @@ export const Contact = () => {
       })
       .catch((error) => {
         console.error("EmailJS failure:", error);
-        // Display precise error from EmailJS if available
         const errorMsg = error.text || error.message || "Uplink failure.";
         setStatus({ 
           type: 'error', 
@@ -72,7 +70,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-4 bg-transparent relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-32 px-4 bg-transparent relative overflow-hidden">
        {/* Background accent */}
        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -84,7 +82,7 @@ export const Contact = () => {
               <span className="text-red-500 font-bold uppercase tracking-widest text-xs font-mono">Transmission</span>
               <span className="h-[2px] w-8 bg-red-600" />
             </div>
-            <h2 className="text-5xl md:text-7xl font-black text-white uppercase italic tracking-tighter">
+            <h2 className="text-4xl md:text-7xl font-black text-white uppercase italic tracking-tighter">
               Initiate <span className="text-zinc-600">Contact</span>
             </h2>
             <p className="text-zinc-400 mt-6 font-light">
