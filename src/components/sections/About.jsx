@@ -58,24 +58,50 @@ export const About = () => {
               </GlassmorphismCard>
             </div>
 
-            {/* Right Column: System Specs */}
+            {/* Right Column: Tech Parameters */}
             <div className="lg:col-span-4 grid grid-rows-2 gap-8">
-              <GlassmorphismCard className="p-6 md:p-8 flex flex-col justify-center items-center text-center group">
-                <span className="text-xl md:text-2xl font-black text-white group-hover:text-red-600 transition-colors italic tracking-tight leading-tight">
-                  {ABOUT_DATA.gpa}
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold mt-4 font-mono">
-                  {ABOUT_DATA.gpaLabel}
-                </span>
+              {/* Languages Card */}
+              <GlassmorphismCard className="p-6 md:p-8 flex flex-col group">
+                <div className="flex items-center gap-2 mb-6">
+                   <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
+                   <span className="text-[10px] font-black font-mono text-red-500 tracking-[0.3em] uppercase">
+                    LOGIC_LANGUAGES
+                   </span>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-y-4 gap-x-2">
+                  {ABOUT_DATA.languages.map((lang) => (
+                    <div key={lang} className="flex items-center gap-2 group/item">
+                       <span className="text-red-600 font-bold font-mono text-xs group-hover/item:translate-x-1 transition-transform">{'>>'}</span>
+                       <span className="text-zinc-300 font-mono text-[11px] uppercase tracking-wider group-hover/item:text-white transition-colors">
+                        {lang}
+                       </span>
+                    </div>
+                  ))}
+                </div>
               </GlassmorphismCard>
-              <GlassmorphismCard className="p-6 md:p-8 flex flex-col justify-center items-center text-center group relative">
-                <div className="absolute top-0 left-0 w-full h-1 bg-red-600" />
-                <span className="text-xl md:text-2xl font-black text-white italic group-hover:scale-105 transition-transform tracking-tight leading-tight">
-                  {ABOUT_DATA.commitsCount}
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-red-500 font-bold mt-4 font-mono">
-                  {ABOUT_DATA.efficiencyMode}
-                </span>
+
+              {/* Frameworks Card */}
+              <GlassmorphismCard className="p-6 md:p-8 flex flex-col group relative">
+                <div className="absolute top-0 left-0 w-full h-1 bg-red-600/50" />
+                
+                <div className="flex items-center gap-2 mb-6">
+                   <div className="w-1.5 h-1.5 bg-zinc-600 rounded-full" />
+                   <span className="text-[10px] font-black font-mono text-zinc-500 tracking-[0.3em] uppercase">
+                    ENGINE_FRAMEWORKS
+                   </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-y-4 gap-x-2">
+                  {ABOUT_DATA.frameworks.map((fw) => (
+                    <div key={fw} className="flex items-center gap-2 group/item">
+                       <span className="text-zinc-600 font-bold font-mono text-xs group-hover/item:text-red-600 transition-colors">{'>'}</span>
+                       <span className="text-zinc-400 font-mono text-[11px] uppercase tracking-wider group-hover/item:text-white transition-colors">
+                        {fw}
+                       </span>
+                    </div>
+                  ))}
+                </div>
               </GlassmorphismCard>
             </div>
           </div>

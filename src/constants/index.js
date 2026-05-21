@@ -81,10 +81,8 @@ export const ABOUT_DATA = {
   bio: "I am a Senior Computer Science student and Full-Stack Developer specializing in high-performance architectures. My approach blends the reliability of backend engineering with the precision of modern frontend interfaces.",
   philosophy: "Building systems that don't just work, but excel under pressure. I prioritize clean, secure data pipelines, and resilient architectures.",
   status: "BSCS Graduate. Currently accepting project inquiries and open for high-stakes engineering roles while actively expanding my technical stack through R&D.",
-  gpa: "PYTHON, C++, C#, JAVA, JS, PHP",
-  gpaLabel: "LOGIC_LANGUAGES",
-  efficiencyMode: "ENGINE_FRAMEWORKS",
-  commitsCount: "DJANGO, LARAVEL, TAILWIND, NODE, VUE",
+  languages: ["Python", "C++", "C#", "Java", "JavaScript", "PHP"],
+  frameworks: ["Django", "Laravel", "Tailwind", "Node.js", "Vue", "React"],
   skills: [
     { name: "REACT.JS", level: 98 },
     { name: "NODE.JS", level: 88 },
