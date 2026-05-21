@@ -25,21 +25,6 @@ export const Footer = () => {
           </p>
         </div>
 
-        {/* Center: Quick Links */}
-        <div className="flex gap-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onMouseEnter={playHover}
-              onClick={playClick}
-              className="text-zinc-500 hover:text-red-500 text-[10px] font-black font-mono tracking-widest transition-colors uppercase"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-
         {/* Right Side: Status Indicator */}
         <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800">
           <div className="relative flex h-2 w-2">

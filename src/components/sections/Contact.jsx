@@ -19,6 +19,11 @@ export const Contact = () => {
   const TEMPLATE_ID = "template_j0q98w2";
   const PUBLIC_KEY = "k1R45K5vX0v9h3x7w";
 
+  // Initialize EmailJS
+  useState(() => {
+    emailjs.init(PUBLIC_KEY);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,11 +32,22 @@ export const Contact = () => {
     emailjs
       .sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY)
       .then((result) => {
-        setStatus({ type: 'success', message: 'TRANSMISSION_SUCCESSFUL: Message received.' });
-        setFormData({ name: "", email: "", message: "" });
+        // EmailJS returns status: 200 and text: "OK" on success
+        if (result.status === 200 || result.text === "OK") {
+          setStatus({ type: 'success', message: 'TRANSMISSION_SUCCESSFUL: Message received.' });
+          setFormData({ name: "", email: "", message: "" });
+        } else {
+          throw new Error(`System Error Code: ${result.status}`);
+        }
       })
       .catch((error) => {
-        setStatus({ type: 'error', message: 'TRANSMISSION_FAILED: System error occurred.' });
+        console.error("EmailJS failure:", error);
+        // Display precise error from EmailJS if available
+        const errorMsg = error.text || error.message || "Uplink failure.";
+        setStatus({ 
+          type: 'error', 
+          message: `TRANSMISSION_FAILED: ${errorMsg}` 
+        });
       })
       .finally(() => {
         setLoading(false);
@@ -94,7 +110,7 @@ export const Contact = () => {
                   <input
                     type="text"
                     id="name"
-                    name="name"
+                    name="from_name"
                     required
                     value={formData.name}
                     className="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg py-4 px-4 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-zinc-700"
@@ -109,7 +125,7 @@ export const Contact = () => {
                   <input
                     type="email"
                     id="email"
-                    name="email"
+                    name="from_email"
                     required
                     value={formData.email}
                     className="w-full bg-zinc-900/50 border border-zinc-700 rounded-lg py-4 px-4 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-zinc-700"

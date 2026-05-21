@@ -6,9 +6,7 @@ export const ParticleEffect = ({ scrollContainer }) => {
     container: scrollContainer
   });
 
-  // REFINED SPRING SETTINGS
-  // Stiffness increased to 60 for more 'immediate' tracking
-  // Damping at 30 to keep it from bouncing but still buttery smooth
+  // ULTRA SMOOTH SPRING
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 60, 
     damping: 30,
@@ -41,8 +39,8 @@ export const ParticleEffect = ({ scrollContainer }) => {
         className="parallax-layer"
         style={{ y: midLayerY }}
       >
-        {/* Rotating Technical "Gears" */}
-        <div className="absolute top-[15vh] right-[10%] opacity-40 tech-glow">
+        {/* Rotating Technical "Gears" - SCALED FOR MOBILE */}
+        <div className="absolute top-[15vh] right-[5%] md:right-[10%] opacity-40 tech-glow scale-[0.5] md:scale-100">
             <motion.svg width="240" height="240" viewBox="0 0 100 100" className="text-red-600/20">
                 <motion.circle 
                     cx="50" cy="50" r="45" 
@@ -62,25 +60,25 @@ export const ParticleEffect = ({ scrollContainer }) => {
             </div>
         </div>
 
-        {/* Technical Labels with Connectors */}
-        <div className="absolute top-[130vh] right-24 flex items-center gap-4 opacity-50 tech-glow">
+        {/* Technical Labels with Connectors - SCALED FOR MOBILE */}
+        <div className="absolute top-[130vh] right-4 md:right-24 flex items-center gap-2 md:gap-4 opacity-50 tech-glow scale-[0.7] md:scale-100 origin-right">
             <div className="text-right">
                 <span className="text-[10px] font-black font-mono text-red-500 block tracking-widest">ARCH_LOG_v2.0</span>
                 <span className="text-[8px] font-mono text-zinc-600 uppercase">Memory_Mapped_IO</span>
             </div>
-            <div className="w-32 h-px bg-gradient-to-l from-red-600 to-transparent" />
+            <div className="w-16 md:w-32 h-px bg-gradient-to-l from-red-600 to-transparent" />
         </div>
 
-        <div className="absolute top-[280vh] left-24 flex items-center gap-4 opacity-50 tech-glow">
-            <div className="w-32 h-px bg-gradient-to-r from-red-600 to-transparent" />
+        <div className="absolute top-[280vh] left-4 md:left-24 flex items-center gap-2 md:gap-4 opacity-50 tech-glow scale-[0.7] md:scale-100 origin-left">
+            <div className="w-16 md:w-32 h-px bg-gradient-to-r from-red-600 to-transparent" />
             <div>
                 <span className="text-[10px] font-black font-mono text-red-500 block tracking-widest">SYS_NODE_404</span>
                 <span className="text-[8px] font-mono text-zinc-600 uppercase">Data_Stream_Active</span>
             </div>
         </div>
 
-        {/* NEW: CONTACT SECTION ELEMENTS (Middle Layer) */}
-        <div className="absolute top-[420vh] right-32 opacity-40 tech-glow">
+        {/* CONTACT SECTION ELEMENTS - SCALED FOR MOBILE */}
+        <div className="absolute top-[420vh] right-8 md:right-32 opacity-40 tech-glow scale-[0.6] md:scale-100">
              <motion.svg width="180" height="180" viewBox="0 0 100 100" className="text-red-600/20">
                 <motion.path 
                     d="M50 10 L90 50 L50 90 L10 50 Z" 
@@ -90,7 +88,7 @@ export const ParticleEffect = ({ scrollContainer }) => {
                 />
                 <circle cx="50" cy="50" r="2" fill="currentColor" />
              </motion.svg>
-             <div className="absolute top-1/2 left-full ml-4 whitespace-nowrap">
+             <div className="absolute top-1/2 left-full ml-4 whitespace-nowrap hidden md:block">
                 <span className="text-[9px] font-mono text-zinc-600 block tracking-widest uppercase">Encrypted_Uplink</span>
                 <span className="text-[7px] font-mono text-red-900 uppercase italic">P2P_Protocol_Active</span>
              </div>
@@ -102,48 +100,48 @@ export const ParticleEffect = ({ scrollContainer }) => {
         className="parallax-layer z-10"
         style={{ y: fastLayerY }}
       >
-        {/* Bold Section Headers */}
-        <div className="absolute top-[10vh] left-[10%] tech-glow">
+        {/* Bold Section Headers - SCALED FOR MOBILE */}
+        <div className="absolute top-[10vh] left-[5%] md:left-[10%] tech-glow scale-[0.6] md:scale-100 origin-left">
             <div className="flex flex-col gap-1">
                 <div className="w-24 h-1 bg-red-600" />
                 <span className="text-2xl font-black font-mono text-white/10 tracking-[0.5em] italic">01_CORE</span>
             </div>
         </div>
 
-        <div className="absolute top-[140vh] right-[10%] tech-glow">
+        <div className="absolute top-[140vh] right-[5%] md:right-[10%] tech-glow scale-[0.6] md:scale-100 origin-right">
             <div className="flex flex-col items-end gap-1">
                 <div className="w-24 h-1 bg-red-600" />
                 <span className="text-2xl font-black font-mono text-white/10 tracking-[0.5em] italic text-right">02_ARCH</span>
             </div>
         </div>
 
-        <div className="absolute top-[300vh] left-[10%] tech-glow">
+        <div className="absolute top-[300vh] left-[5%] md:left-[10%] tech-glow scale-[0.6] md:scale-100 origin-left">
             <div className="flex flex-col gap-1">
                 <div className="w-24 h-1 bg-red-600" />
                 <span className="text-2xl font-black font-mono text-white/10 tracking-[0.5em] italic">03_MODS</span>
             </div>
         </div>
 
-        <div className="absolute top-[480vh] right-[10%] tech-glow">
+        <div className="absolute top-[480vh] right-[5%] md:right-[10%] tech-glow scale-[0.6] md:scale-100 origin-right">
             <div className="flex flex-col items-end gap-1">
                 <div className="w-24 h-1 bg-red-600" />
                 <span className="text-2xl font-black font-mono text-white/10 tracking-[0.5em] italic text-right">04_LINK</span>
             </div>
         </div>
 
-        {/* Scattered HUD Targeting Reticles */}
-        <HUDCrosshair className="absolute top-[60vh] right-[25%] opacity-30" />
-        <HUDCrosshair className="absolute top-[220vh] left-[20%] opacity-30 scale-150" />
-        <HUDCrosshair className="absolute top-[400vh] right-[15%] opacity-30 rotate-45" />
-        <HUDCrosshair className="absolute top-[520vh] left-[25%] opacity-20" />
+        {/* Scattered HUD Targeting Reticles - SCALED FOR MOBILE */}
+        <HUDCrosshair className="absolute top-[60vh] right-[20%] opacity-30 scale-[0.7] md:scale-100" />
+        <HUDCrosshair className="absolute top-[220vh] left-[15%] opacity-30 scale-[1] md:scale-150" />
+        <HUDCrosshair className="absolute top-[400vh] right-[10%] opacity-30 rotate-45 scale-[0.7] md:scale-100" />
+        <HUDCrosshair className="absolute top-[520vh] left-[20%] opacity-20 scale-[0.6] md:scale-100" />
 
-        {/* Hex Data Rain */}
+        {/* Hex Data Rain - REDUCED DENSITY FOR MOBILE */}
         {[...Array(6)].map((_, i) => (
           <div 
             key={i}
-            className="absolute text-[9px] font-mono text-red-600/10 whitespace-nowrap overflow-hidden flex flex-col gap-4"
+            className={`absolute text-[9px] font-mono text-red-600/10 whitespace-nowrap overflow-hidden flex flex-col gap-4 ${i % 2 === 0 ? '' : 'hidden md:flex'}`}
             style={{ 
-              left: `${15 + i * 15}%`, 
+              left: `${10 + i * 18}%`, 
               top: `${i * 100}vh`,
               height: '100vh',
               writingMode: 'vertical-rl'
@@ -162,13 +160,13 @@ export const ParticleEffect = ({ scrollContainer }) => {
       <motion.div 
         animate={{ opacity: [0.15, 0.3, 0.15] }}
         transition={{ duration: 5, repeat: Infinity }}
-        className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-red-600/10 blur-[150px] rounded-full pointer-events-none"
+        className="absolute top-1/4 left-1/3 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-red-600/10 blur-[100px] md:blur-[150px] rounded-full pointer-events-none"
       />
       
       <motion.div 
         animate={{ opacity: [0.05, 0.15, 0.05] }}
         transition={{ duration: 8, repeat: Infinity, delay: 1 }}
-        className="absolute top-[450vh] right-1/4 w-[700px] h-[700px] bg-red-900/5 blur-[180px] rounded-full pointer-events-none"
+        className="absolute top-[450vh] right-1/4 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-red-900/5 blur-[120px] md:blur-[180px] rounded-full pointer-events-none"
       />
       
     </div>
