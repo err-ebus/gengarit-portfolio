@@ -16,8 +16,8 @@ export const Contact = () => {
   });
 
   const SERVICE_ID = "service_ga6df7j";
-  const TEMPLATE_ID = "iCDXyO4yyYF7diIJO"; // You mentioned this is the Template ID
-  const PUBLIC_KEY = "iCDXyO4yyYF7diIJO"; // You previously mentioned this is the Public Key
+  const TEMPLATE_ID = "template_d97zceq";
+  const PUBLIC_KEY = "iCDXyO4yyYF7diIJO";
 
   // Initialize EmailJS correctly
   useEffect(() => {
