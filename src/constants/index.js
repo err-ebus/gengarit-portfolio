@@ -81,9 +81,10 @@ export const ABOUT_DATA = {
   bio: "I am a Senior Computer Science student and Full-Stack Developer specializing in high-performance architectures. My approach blends the reliability of backend engineering with the precision of modern frontend interfaces.",
   philosophy: "Building systems that don't just work, but excel under pressure. I prioritize clean, secure data pipelines, and resilient architectures.",
   status: "Finalizing System Integration at STI West Negros University. Currently open for high-stakes engineering roles.",
-  gpa: "4.0",
-  gpaLabel: "PRECISION GPA",
-  efficiencyMode: "VTEC EFFICIENCY MODE",
+  gpa: "99.9%",
+  gpaLabel: "UPTIME_RATIO",
+  efficiencyMode: "SYSTEM_COMMITS",
+  commitsCount: "1.2k+",
   skills: [
     { name: "REACT.JS", level: 98 },
     { name: "NODE.JS", level: 88 },

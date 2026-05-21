@@ -58,7 +58,7 @@ export const About = () => {
               </GlassmorphismCard>
             </div>
 
-            {/* Right Column: GPA & Mode */}
+            {/* Right Column: System Specs */}
             <div className="lg:col-span-4 grid grid-rows-2 gap-8">
               <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group">
                 <span className="text-6xl md:text-7xl font-black text-white group-hover:text-red-600 transition-colors italic tracking-tighter">
@@ -70,9 +70,11 @@ export const About = () => {
               </GlassmorphismCard>
               <GlassmorphismCard className="p-8 flex flex-col justify-center items-center text-center group relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-red-600" />
-                <span className="text-4xl font-black text-white italic group-hover:scale-110 transition-transform tracking-tight">VTEC</span>
+                <span className="text-4xl md:text-5xl font-black text-white italic group-hover:scale-110 transition-transform tracking-tight">
+                  {ABOUT_DATA.commitsCount}
+                </span>
                 <span className="text-xs uppercase tracking-[0.3em] text-red-500 font-bold mt-2 font-mono">
-                  EFFICIENCY MODE
+                  {ABOUT_DATA.efficiencyMode}
                 </span>
               </GlassmorphismCard>
             </div>
