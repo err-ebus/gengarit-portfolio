@@ -82,12 +82,10 @@ export const About = () => {
               </GlassmorphismCard>
 
               {/* Frameworks Card */}
-              <GlassmorphismCard className="p-6 md:p-8 flex flex-col group relative">
-                <div className="absolute top-0 left-0 w-full h-1 bg-red-600/50" />
-                
+              <GlassmorphismCard className="p-6 md:p-8 flex flex-col group">
                 <div className="flex items-center gap-2 mb-6">
-                   <div className="w-1.5 h-1.5 bg-zinc-600 rounded-full" />
-                   <span className="text-[10px] font-black font-mono text-zinc-500 tracking-[0.3em] uppercase">
+                   <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
+                   <span className="text-[10px] font-black font-mono text-red-500 tracking-[0.3em] uppercase">
                     ENGINE_FRAMEWORKS
                    </span>
                 </div>
@@ -95,8 +93,8 @@ export const About = () => {
                 <div className="grid grid-cols-2 gap-y-4 gap-x-2">
                   {ABOUT_DATA.frameworks.map((fw) => (
                     <div key={fw} className="flex items-center gap-2 group/item">
-                       <span className="text-zinc-600 font-bold font-mono text-xs group-hover/item:text-red-600 transition-colors">{'>'}</span>
-                       <span className="text-zinc-400 font-mono text-[11px] uppercase tracking-wider group-hover/item:text-white transition-colors">
+                       <span className="text-red-600 font-bold font-mono text-xs group-hover/item:translate-x-1 transition-transform">{'>>'}</span>
+                       <span className="text-zinc-300 font-mono text-[11px] uppercase tracking-wider group-hover/item:text-white transition-colors">
                         {fw}
                        </span>
                     </div>
