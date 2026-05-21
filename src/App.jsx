@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChatbotButton } from './components/features/ChatbotButton';
 import { ChatbotModal } from './components/features/ChatbotModal';
 import { LoadingScreen } from './components/layout/LoadingScreen';
 import { Navbar } from './components/layout/Navbar';
-import { MobileMenu } from './components/layout/MobileMenu';
+import { Footer } from './components/layout/Footer';
 import { FollowCursor } from './components/ui/FollowCursor';
 import { ParticleEffect } from './components/features/ParticleEffect';
 import { ScrollIndicator } from './components/layout/ScrollIndicator';
@@ -14,7 +14,7 @@ import { Contact } from './components/sections/Contact';
 import { FAQ_RESPONSES } from './constants';
 import "./index.css";
 
-const DEFAULT_RESPONSE = "INVALID_QUERY. Try asking about: skills, projects, education, or contact info.";
+const DEFAULT_RESPONSE = "QUERY_UNRECOGNIZED. My data banks are focused on: skills, projects, education, and contact protocols. Please rephrase or try another identifier.";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,6 +23,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mainRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -57,11 +58,12 @@ function App() {
     setMessages(prev => [...prev, { role: 'user', content: text }]);
     setLoading(true);
     
-    await new Promise(resolve => setTimeout(resolve, 600));
+    // Simulate system processing time
+    await new Promise(resolve => setTimeout(resolve, 800));
     
     const lowerText = text.toLowerCase();
     const matchedFaq = FAQ_RESPONSES.find(faq => 
-      faq.keywords.some(keyword => lowerText.includes(keyword))
+      faq.keywords.some(keyword => lowerText.includes(keyword.toLowerCase()))
     );
     
     const botResponse = matchedFaq ? matchedFaq.response : DEFAULT_RESPONSE;
@@ -71,9 +73,9 @@ function App() {
   };
 
   return (
-    <div className="bg-zinc-950 min-h-screen">
+    <div className="relative min-h-screen selection:bg-red-600/30 selection:text-red-500 bg-[#09090b]">
+      <ParticleEffect scrollContainer={mainRef} />
       <FollowCursor />
-      <ParticleEffect />
       
       {/* Ambient Mouse-Tracking Glow */}
       <div 
@@ -85,16 +87,16 @@ function App() {
 
       {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
       
-      <div className={`relative z-10 w-full transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"} text-zinc-100 font-sans`} >
+      <div className={`relative z-20 w-full transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"} text-zinc-100 font-sans bg-transparent`} >
         <ScrollIndicator />
         <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-        <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         
-        <main>
+        <main ref={mainRef} className="overflow-x-hidden bg-transparent">
           <Home />
           <About />
           <Projects />
           <Contact />
+          <Footer />
         </main>
 
         <ChatbotButton onClick={() => setChatbotOpen(true)} />
@@ -105,10 +107,6 @@ function App() {
           messages={messages}
           loading={loading}
         />
-        
-        <footer className="py-10 text-center text-zinc-600 text-[10px] font-mono border-t border-zinc-900 uppercase tracking-widest">
-           © 2026 err-ebus_ENGINEERING // ALL_SYSTEMS_OPERATIONAL
-        </footer>
       </div>
     </div>
   );

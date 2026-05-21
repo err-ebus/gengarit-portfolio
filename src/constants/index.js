@@ -23,6 +23,17 @@ export const PROJECTS = [
   },
   {
     id: 3,
+    title: "DHSUD ELUPDD",
+    subtitle: "Geospatial Dashboard & AI Analytics",
+    description: "Engineered and deployed an interactive geospatial dashboard for the DHSUD Negros Island Region. Built to monitor regional LGU compliance through dynamic choropleth mapping and integrated AI-driven analytics.",
+    image: "/pictures/ELUPDD_SS.png",
+    tags: ["Vue", "Django", "PostgreSQL", "Tailwind", "Leaflet", "AI"],
+    size: "medium",
+    features: ["Geospatial Mapping", "Compliance Monitoring", "AI Analytics"],
+    link: "#"
+  },
+  {
+    id: 4,
     title: "SENTINELS",
     subtitle: "Educational RPG & Admin System",
     description: "A massive year-and-a-half development cycle. A cybersecurity-focused educational platform featuring interactive gameplay, a complex multi-role system, and a secure backend dashboard.",
@@ -30,17 +41,6 @@ export const PROJECTS = [
     tags: ["React", "Django", "PostgreSQL", "Python"],
     size: "medium",
     features: ["Complex State Management", "Multi-role Auth", "Admin Dashboard"],
-    link: "#"
-  },
-  {
-    id: 4,
-    title: "Mabels POS",
-    subtitle: "Bar & Restaurant System",
-    description: "Custom Point of Sale system with integrated inventory tracking, order management, and real-time frontend updates.",
-    image: "/pictures/MABELS_SS.png",
-    tags: ["JavaScript", "Firebase", "Tailwind"],
-    size: "small",
-    features: ["Inventory Mgmt", "Order Processing", "Real-time Sync"],
     link: "#"
   }
 ];
@@ -67,3 +67,46 @@ export const FAQ_RESPONSES = [
     response: "Want to initiate contact? 📧 Scroll down to the Contact section or use the form to transmit your message directly to err-ebus!"
   }
 ];
+
+export const SOCIAL_LINKS = [
+  { name: "GITHUB", url: "https://github.com/err-ebus", icon: "github" },
+  { name: "INSTAGRAM", url: "https://www.instagram.com/p.rd_/", icon: "instagram" },
+  { name: "FACEBOOK", url: "https://www.facebook.com/john.bayer.965/", icon: "facebook" },
+  { name: "RESUME", url: "/resume_bayer.pdf", icon: "resume" }
+];
+
+export const ABOUT_DATA = {
+  title: "UNDER THE HOOD",
+  role: "THE FULL-STACK ARCHITECT",
+  bio: "I am a Senior Computer Science student and Full-Stack Developer specializing in high-performance architectures. My approach blends the reliability of backend engineering with the precision of modern frontend interfaces.",
+  philosophy: "Building systems that don't just work, but excel under pressure. I prioritize clean, secure data pipelines, and resilient architectures.",
+  status: "Finalizing System Integration at STI West Negros University. Currently open for high-stakes engineering roles.",
+  gpa: "4.0",
+  gpaLabel: "PRECISION GPA",
+  efficiencyMode: "VTEC EFFICIENCY MODE",
+  skills: [
+    { name: "REACT.JS", level: 98 },
+    { name: "NODE.JS", level: 88 },
+    { name: "TYPESCRIPT", level: 95 },
+    { name: "PYTHON", level: 85 },
+  ],
+  education: {
+    degree: "BS COMPUTER SCIENCE",
+    school: "STI West Negros University",
+    years: "2022 - 2026"
+  },
+  deployments: [
+    {
+      role: "GEOSPATIAL SYSTEMS ENGINEER",
+      company: "DHSUD",
+      period: "2024",
+      description: "Engineered and deployed an interactive geospatial dashboard (ELUPDD) for regional LGU compliance monitoring. Integrated AI-driven analytics and dynamic choropleth mapping."
+    },
+    {
+      role: "SOFTWARE ENGINEER INTERN",
+      company: "DHSUD",
+      period: "2024",
+      description: "Engineered and deployed a comprehensive registry system (HOA CDD). Implemented offline server architectures and managed cloud media storage pipelines."
+    }
+  ]
+};

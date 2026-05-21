@@ -2,7 +2,13 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export const ScrollIndicator = () => {
-  const { scrollYProgress } = useScroll();
+  const [container, setContainer] = useState(null);
+  
+  useEffect(() => {
+    setContainer(document.querySelector('main'));
+  }, []);
+
+  const { scrollYProgress } = useScroll({ container: container ? { current: container } : undefined });
   const [displayValue, setDisplayValue] = useState(0);
 
   const smoothProgress = useSpring(scrollYProgress, {

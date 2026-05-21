@@ -9,9 +9,12 @@ export const Projects = () => {
   const { playHover, playClick } = useUISounds();
 
   return (
-    <section id="projects" className="relative py-32 px-4 overflow-hidden z-10 bg-zinc-950">
+    <section id="projects" className="relative py-32 px-4 overflow-hidden z-10 bg-transparent">
       {/* HUD Background Element */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-600/30 to-transparent" />
+      
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 grid-pattern opacity-[0.03] pointer-events-none" />
       
       <RevealOnScroll>
         <div className="max-w-5xl mx-auto">

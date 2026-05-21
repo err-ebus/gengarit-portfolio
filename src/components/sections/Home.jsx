@@ -1,17 +1,31 @@
 import { RevealOnScroll } from "../ui/RevealOnScroll";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useUISounds } from "../../hooks/useUISounds";
+import { useState, useEffect } from "react";
 
 export const Home = () => {
   const { playHover, playClick } = useUISounds();
-  const { scrollY } = useScroll();
+  const [container, setContainer] = useState(null);
+  
+  useEffect(() => {
+    setContainer(document.querySelector('main'));
+  }, []);
+
+  const { scrollY } = useScroll({ container: container ? { current: container } : undefined });
   const footerOpacity = useTransform(scrollY, [0, 300], [0.4, 0]);
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative bg-transparent overflow-hidden"
+      className="h-screen flex items-start justify-center relative bg-transparent overflow-hidden pt-[20vh] md:pt-[25vh]"
     >
+      {/* Radar Pulse Effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-20">
+        <div className="radar-ring w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: '0s' }} />
+        <div className="radar-ring w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: '2s' }} />
+        <div className="radar-ring w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: '4s' }} />
+      </div>
+
       {/* Decorative Technical Lines */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-500 to-transparent" />

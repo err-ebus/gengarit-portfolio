@@ -1,40 +1,258 @@
-@import "tailwindcss";
+/* === SCROLLBAR & OVERSCROLL === */
 
-/* Base layer settings */
-@layer base {
-  body {
-    @apply bg-zinc-950 text-zinc-300 antialiased overflow-x-hidden relative min-h-screen font-sans;
-    
-    /* Subtle technical grid pattern */
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
+/* MUST hide scrollbar on ALL browsers */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
 
-  /* Custom selection color for a high-performance feel */
-  ::selection {
-    @apply bg-red-600/30 text-white;
+html::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  background-color: #09090b !important;
+  @apply text-zinc-300 antialiased font-sans;
+}
+
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+main {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  background-color: transparent !important;
+}
+
+/* Remove from all elements */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* === NAVBAR STYLING === */
+
+nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1.5rem;
   }
 }
 
-/* Ambient top glow */
-body::before {
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #dc2626;
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+  color: #ff3333;
+}
+
+.navbar-logo img,
+.navbar-logo svg {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0%) saturate(100%) invert(14%) sepia(100%) saturate(1200%) hue-rotate(0deg) brightness(100%);
+  transition: filter 0.3s ease;
+}
+
+.navbar-logo:hover img,
+.navbar-logo:hover svg {
+  filter: brightness(0%) saturate(100%) invert(20%) sepia(100%) saturate(1300%) hue-rotate(0deg) brightness(120%);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar-links a {
+  color: #a1a1a1;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: monospace;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #dc2626;
+}
+
+.navbar-links a.active::after {
   content: '';
   position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #dc2626;
+}
+
+/* Mobile menu button */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+}
+
+/* === BACKGROUND & HUD === */
+
+@import "tailwindcss";
+
+/* Enhanced Gradient Mesh with Noise Texture */
+body::before {
+  content: '';
+  position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 600px;
-  background: radial-gradient(circle, rgba(220, 38, 38, 0.05) 0%, transparent 70%);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+  z-index: -2;
+  animation: mesh-shift 25s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Noise Texture Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
   z-index: -1;
   pointer-events: none;
 }
 
-/* Smooth scrolling for your RevealOnScroll components */
-html {
-  scroll-behavior: smooth;
+@keyframes mesh-shift {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1) translate(2%, 2%); }
+}
+
+.background-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Above the body/mesh, below the main content */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000vh; /* Extremely tall to ensure no clipping */
+  pointer-events: none;
+}
+
+.tech-glow {
+  filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.5));
+}
+
+.tech-glow-white {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes float-drift {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.05; }
+  50% { transform: translateY(-30px) translateX(15px); opacity: 0.12; }
+}
+
+@keyframes scan-lines {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes radar-pulse {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { opacity: 0.15; }
+  100% { transform: scale(2); opacity: 0; }
 }
 
 @keyframes sweep {
@@ -42,14 +260,33 @@ html {
   100% { transform: translateX(100%) skewX(-15deg); }
 }
 
-/* Hide scrollbar for modern browsers */
-html, body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+/* Decorative Classes */
+.corner-bracket {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  pointer-events: none;
+  z-index: 10;
 }
 
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-  display: none;
+.corner-bracket.top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+.corner-bracket.top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+.corner-bracket.bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
+.corner-bracket.bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.radar-ring {
+  position: absolute;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: radar-pulse 6s infinite linear;
+}
+
+.grid-pattern {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
 }
 
 /* Typography Overrides */
@@ -57,7 +294,12 @@ h1, h2, h3, h4, button {
   @apply tracking-tight font-black uppercase italic;
 }
 
-/* Glitch Effect - Refined Periodic HUD Glitch */
+/* Input Focus Glow */
+input:focus, textarea:focus {
+  @apply border-red-600 ring-2 ring-red-600/20 shadow-[0_0_15px_rgba(220,38,38,0.2)];
+}
+
+/* Glitch Effect */
 .glitch-wrapper {
   display: flex;
   align-items: center;
@@ -68,7 +310,6 @@ h1, h2, h3, h4, button {
 .glitch {
   position: relative;
   color: white;
-  /* 6s cycle: ~5.6s rest, 0.4s intense active shake */
   animation: glitch-hud-vibration 6s infinite;
 }
 
@@ -130,4 +371,9 @@ h1, h2, h3, h4, button {
 .glass-card:hover {
   @apply border-red-600/50;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.15);
+}
+
+/* Custom selection color */
+::selection {
+  @apply bg-red-600/30 text-white;
 }

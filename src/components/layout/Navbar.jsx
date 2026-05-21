@@ -1,118 +1,96 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useUISounds } from "../../hooks/useUISounds";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
     const { playHover, playClick } = useUISounds();
+    const [activeSection, setActiveSection] = useState("home");
 
     useEffect(() => {
-        // Disable page scroll when mobile menu is open; restore when closed
-        if (menuOpen) {
-            document.body.style.overflowY = "hidden";
-            document.documentElement.style.overflowY = "hidden";
-        } else {
-            document.body.style.overflowY = "auto";
-            document.documentElement.style.overflowY = "auto";
-        }
-        
-        // Cleanup on unmount
-        return () => {
-            document.body.style.overflowY = "auto";
-            document.documentElement.style.overflowY = "auto";
-        };
-    }, [menuOpen]);
+        const scrollContainer = document.querySelector('main');
+        if (!scrollContainer) return;
 
-    // Glitch animation for the logo
-    const logoGlitch = {
-        rest: { x: 0, y: 0, opacity: 1 },
-        glitch: {
-            x: [0, -1, 1, -0.5, 0.5, 0],
-            opacity: [1, 0.9, 1, 0.8, 1, 1],
-            transition: { 
-                duration: 0.3, 
-                repeat: Infinity, 
-                repeatDelay: 5, 
-                ease: "easeInOut" 
-            }
+        const handleScroll = () => {
+            const sections = ["home", "about", "projects", "contact"];
+            const current = sections.find(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    // Check if section is in viewport relative to the scroll container
+                    return rect.top <= 150 && rect.bottom >= 150;
+                }
+                return false;
+            });
+            if (current) setActiveSection(current);
+        };
+
+        scrollContainer.addEventListener("scroll", handleScroll);
+        return () => scrollContainer.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const navLinks = [
+        { name: "Home", href: "#home", id: "home" },
+        { name: "About", href: "#about", id: "about" },
+        { name: "Systems", href: "#projects", id: "projects" },
+        { name: "Contact", href: "#contact", id: "contact" }
+    ];
+
+    const scrollToTop = (e) => {
+        e.preventDefault();
+        playClick();
+        const scrollContainer = document.querySelector('main');
+        if (scrollContainer) {
+            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
     return (
-        <nav className="fixed top-0 w-full z-40 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-900 shadow-lg transition-all duration-300">
-            <div className="max-w-6xl mx-auto px-4">
-                <div className="flex justify-between items-center h-16">
-                    {/* Logo - Automated Glitch */}
-                    <a 
-                        href="#home" 
-                        onMouseEnter={playHover}
-                        onClick={playClick}
-                        className="flex items-center font-mono text-xl md:text-2xl font-black text-zinc-100 gap-5 group hover:opacity-100 transition-opacity uppercase italic"
-                    >
-                        
-                        {/* Custom Logo Image - Enlarge & Pop Out */}
-                        <div className="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 -my-2">
-                            {/* Ambient Red Glow - High Intensity Pulse */}
-                            <div className="absolute inset-0 bg-red-600/40 blur-2xl rounded-full group-hover:bg-red-600/60 transition-all duration-500 scale-110" />
-                            
-                            <motion.img 
-                                variants={logoGlitch}
-                                animate="glitch"
-                                src="/pictures/ERR-EBUS_LOGO.png"
-                                alt="ERR-EBUS Logo"
-                                className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_25px_rgba(220,38,38,1)]"
-                            />
-                        </div>
-
-                        {/* Brand Name - Larger & More Prominent */}
-                        <span className="tracking-tighter hidden sm:inline-block">
-                            err<span className="text-red-600 drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]">-ebus</span>
-                        </span>
-                    </a>
-
-                    {/* Mobile Menu Toggle */}
-                    <div 
-                        className="w-7 h-5 relative cursor-pointer z-40 md:hidden text-zinc-300 hover:text-red-500 transition-colors" 
-                        onClick={() => setMenuOpen((prev) => !prev)}
-                    >
-                        &#9776;
+        <nav>
+            <div className="navbar-container">
+                <a 
+                    href="#home" 
+                    onMouseEnter={playHover}
+                    onClick={scrollToTop}
+                    className="navbar-logo"
+                >
+                    <div className="relative flex items-center justify-center">
+                        <img 
+                            src="/pictures/ERR-EBUS_LOGO.png"
+                            alt="ERR-EBUS Logo"
+                            onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                            }}
+                        />
+                        <span className="hidden">ERR</span>
                     </div>
+                    <span>ERR-EBUS</span>
+                </a>
 
-                    {/* Desktop Navigation Links */}
-                    <div className="hidden md:flex items-center space-x-8 font-mono text-sm">
-                        <a 
-                            href="#home" 
+                {/* Desktop Navigation */}
+                <div className={`navbar-links ${menuOpen ? "mobile-open" : ""}`}>
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
                             onMouseEnter={playHover}
-                            onClick={playClick}
-                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
+                            onClick={(e) => {
+                                playClick();
+                                if (menuOpen) setMenuOpen(false);
+                            }}
+                            className={activeSection === link.id ? "active" : ""}
                         >
-                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Home</span>
+                            {link.name}
                         </a>
-                        <a 
-                            href="#about" 
-                            onMouseEnter={playHover}
-                            onClick={playClick}
-                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
-                        >
-                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">About</span>
-                        </a>
-                        <a 
-                            href="#projects" 
-                            onMouseEnter={playHover}
-                            onClick={playClick}
-                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
-                        >
-                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Systems</span>
-                        </a>
-                        <a 
-                            href="#contact" 
-                            onMouseEnter={playHover}
-                            onClick={playClick}
-                            className="group text-zinc-500 hover:text-red-500 transition-colors duration-300 relative font-black uppercase italic"
-                        >
-                            <span className="block group-hover:-translate-y-0.5 transition-transform duration-300">Contact</span>
-                        </a>
-                    </div>
+                    ))}
                 </div>
+
+                {/* Mobile Menu Toggle */}
+                <button 
+                    className="mobile-menu-button"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    {menuOpen ? "✕" : "☰"}
+                </button>
             </div>
         </nav>
     );
