@@ -24,7 +24,7 @@ export const About = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase italic">
-              Under The <span className="text-zinc-500">Hood</span>
+              {ABOUT_DATA.title.split('_')[0]} <span className="text-zinc-500">{ABOUT_DATA.title.split('_')[1]}</span>
             </h2>
           </div>
 
