@@ -76,7 +76,7 @@ export const SOCIAL_LINKS = [
 ];
 
 export const ABOUT_DATA = {
-  title: "UNDER THE HOOD",
+  title: "SYSTEM_ARCHITECTURE",
   role: "THE FULL-STACK ARCHITECT",
   bio: "I am a Senior Computer Science student and Full-Stack Developer specializing in high-performance architectures. My approach blends the reliability of backend engineering with the precision of modern frontend interfaces.",
   philosophy: "Building systems that don't just work, but excel under pressure. I prioritize clean, secure data pipelines, and resilient architectures.",
