@@ -20,7 +20,7 @@ export const About = () => {
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[2px] w-12 bg-red-600" />
               <span className="text-xs uppercase tracking-[0.4em] text-red-500 font-bold font-mono">
-                {ABOUT_DATA.title}
+                IDENTITY_PROTOCOL
               </span>
             </div>
             <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase italic">
