@@ -29,33 +29,68 @@ export const About = () => {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
-            {/* Left Column: Bio */}
-            <div className="lg:col-span-8">
-              <GlassmorphismCard className="p-6 md:p-12 h-full">
-                <div className="flex flex-col h-full">
-                  <div className="mb-10">
-                     <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 uppercase italic tracking-tight">{ABOUT_DATA.role}</h3>
-                     <p className="text-zinc-400 text-base md:text-lg leading-relaxed font-light">
-                      {ABOUT_DATA.bio}
+            {/* Left Column: Bio & Core */}
+            <div className="lg:col-span-4">
+              <GlassmorphismCard className="p-8 md:p-10 h-full flex flex-col justify-between">
+                <div className="mb-10">
+                   <h3 className="text-xl font-bold text-white mb-6 uppercase italic tracking-tight">{ABOUT_DATA.role}</h3>
+                   <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-light">
+                    {ABOUT_DATA.bio}
+                  </p>
+                </div>
+                
+                <div className="space-y-8 pt-10 border-t border-zinc-800/50">
+                  <div>
+                    <h4 className="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-3 font-mono italic">CORE PHILOSOPHY</h4>
+                    <p className="text-zinc-500 text-xs leading-relaxed">
+                      {ABOUT_DATA.philosophy}
                     </p>
                   </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-10 mt-auto pt-10 border-t border-zinc-800/50">
-                    <div>
-                      <h4 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4 font-mono">CORE PHILOSOPHY</h4>
-                      <p className="text-zinc-500 text-sm leading-relaxed">
-                        {ABOUT_DATA.philosophy}
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4 font-mono">CURRENT STATUS</h4>
-                      <p className="text-zinc-500 text-sm leading-relaxed">
-                        {ABOUT_DATA.status}
-                      </p>
-                    </div>
+                  <div>
+                    <h4 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3 font-mono italic">CURRENT STATUS</h4>
+                    <p className="text-zinc-500 text-xs leading-relaxed">
+                      {ABOUT_DATA.status}
+                    </p>
                   </div>
                 </div>
               </GlassmorphismCard>
+            </div>
+
+            {/* Center Column: Visual ID (The Photo) */}
+            <div className="lg:col-span-4">
+               <GlassmorphismCard className="p-0 overflow-hidden group relative flex items-center justify-center h-full min-h-[400px]">
+                  {/* Technical HUD Overlay */}
+                  <div className="absolute inset-0 z-20 pointer-events-none">
+                     <div className="corner-bracket top-left m-4" />
+                     <div className="corner-bracket top-right m-4" />
+                     <div className="corner-bracket bottom-left m-4" />
+                     <div className="corner-bracket bottom-right m-4" />
+                     
+                     <div className="absolute top-8 left-8 flex flex-col gap-1">
+                        <span className="text-[8px] font-black font-mono text-red-500 tracking-[0.3em] uppercase">Visual_ID</span>
+                        <div className="flex items-center gap-2">
+                           <div className="w-1 h-1 bg-green-500 rounded-full animate-pulse" />
+                           <span className="text-[7px] font-mono text-zinc-500 uppercase tracking-widest">Biometric_Scan: OK</span>
+                        </div>
+                     </div>
+
+                     <motion.div 
+                        animate={{ top: ['0%', '100%', '0%'] }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                        className="absolute left-0 w-full h-[1px] bg-red-600/20 shadow-[0_0_15px_rgba(220,38,38,0.3)]"
+                     />
+                  </div>
+
+                  {/* Profile Image */}
+                  <img 
+                    src="/pictures/me.png" 
+                    alt="err-ebus profile"
+                    className="w-full h-full object-cover grayscale brightness-90 contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  />
+
+                  {/* Color Grade Overlay */}
+                  <div className="absolute inset-0 bg-red-600/5 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700" />
+               </GlassmorphismCard>
             </div>
 
             {/* Right Column: Tech Parameters */}
