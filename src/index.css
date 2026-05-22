@@ -191,10 +191,12 @@ nav {
     top: 80px; /* Matches navbar height */
     width: 100%;
     background: rgba(9, 9, 11, 0.98); /* zinc-950 */
-    padding: 2.5rem;
-    gap: 1.5rem;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
     border-bottom: 1px solid rgba(220, 38, 38, 0.2);
     backdrop-filter: blur(15px);
+    align-items: center; /* Center the links horizontally */
+    text-align: center;
   }
 }
 
