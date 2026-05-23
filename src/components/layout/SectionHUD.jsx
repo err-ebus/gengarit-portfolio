@@ -7,46 +7,51 @@ export const SectionHUD = ({ activeSection }) => {
   const totalSections = sections.length;
 
   return (
-    <div className="fixed left-4 md:left-8 bottom-8 z-40 hidden sm:flex flex-col gap-4 items-center">
-      {/* Vertical Track - Hidden on smaller heights */}
-      <div className="hidden md:block w-px h-24 bg-zinc-900 relative">
-        <motion.div 
-          initial={false}
-          animate={{ height: `${(currentIndex / totalSections) * 100}%` }}
-          className="absolute top-0 left-0 w-full bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.5)]"
-        />
+    <div className="fixed left-6 bottom-8 z-40 hidden sm:flex items-end gap-5">
+      {/* Numerical Indicator Card */}
+      <div className="font-mono flex flex-col items-center bg-zinc-950/80 backdrop-blur-md p-3 rounded-lg border border-zinc-900/50 shadow-2xl">
+        <div className="flex items-baseline gap-1.5">
+          <AnimatePresence mode="wait">
+            <motion.span 
+              key={currentIndex}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              className="text-red-500 font-black text-sm tracking-tighter"
+            >
+              0{currentIndex}
+            </motion.span>
+          </AnimatePresence>
+          <span className="text-zinc-700 text-[9px] font-black uppercase tracking-widest">/ 0{totalSections}</span>
+        </div>
+        
+        {/* Progress Bar (Compact & Horizontal) */}
+        <div className="w-12 h-[2px] bg-zinc-900 mt-2 relative overflow-hidden rounded-full">
+           <motion.div 
+             animate={{ width: `${(currentIndex / totalSections) * 100}%` }}
+             className="absolute h-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.5)]"
+           />
+        </div>
       </div>
 
-      {/* Numerical Indicator */}
-      <div className="font-mono flex flex-col items-center bg-zinc-950/80 backdrop-blur-md p-2 rounded-lg border border-zinc-900/50">
+      {/* Sector Name - Horizontal & Cleaner */}
+      <div className="mb-1 pointer-events-none">
         <AnimatePresence mode="wait">
-          <motion.span 
-            key={currentIndex}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="text-red-500 font-black text-xs tracking-widest"
-          >
-            0{currentIndex}
-          </motion.span>
-        </AnimatePresence>
-        <span className="text-zinc-700 text-[8px] font-black mt-1 uppercase tracking-[0.3em]">
-          / 0{totalSections}
-        </span>
-      </div>
-
-      {/* Active Section Name - Better positioning */}
-      <div className="absolute left-10 md:left-12 bottom-0 origin-bottom-left -rotate-90 whitespace-nowrap">
-        <AnimatePresence mode="wait">
-          <motion.span 
+          <motion.div 
             key={activeSection}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
-            className="text-[8px] font-black font-mono text-zinc-500 uppercase tracking-[0.4em] italic bg-zinc-950/40 px-2 py-1"
+            className="flex flex-col"
           >
-            SYS_SEC::{activeSection}
-          </motion.span>
+            <span className="text-[7px] font-black font-mono text-zinc-600 tracking-[0.4em] uppercase leading-none mb-1.5">Sector_Active</span>
+            <div className="flex items-center gap-2">
+                <div className="w-1.5 h-px bg-red-600/50" />
+                <span className="text-[10px] font-black font-mono text-zinc-400 uppercase tracking-[0.2em] italic">
+                    SYS::{activeSection}
+                </span>
+            </div>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>
