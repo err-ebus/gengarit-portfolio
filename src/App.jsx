@@ -19,7 +19,7 @@ const DEFAULT_RESPONSE = "QUERY_UNRECOGNIZED. My data banks are focused on: skil
 // --- CONFIGURATION: SYSTEM PROTECTION ---
 // Set to true to disable right-click, F12, and other dev shortcuts for immersion.
 // Set to false for development and testing.
-const ENABLE_SYSTEM_IMMERSION_PROTECTION = true;
+const ENABLE_SYSTEM_IMMERSION_PROTECTION = false;
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
