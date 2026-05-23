@@ -1,48 +1,64 @@
-import { useCallback } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
+
+// Create a single shared AudioContext to reduce overhead and fix performance violations
+let sharedAudioCtx = null;
 
 export const useUISounds = () => {
-  // Option 1: The "Digital Terminal" (Minimalist & Sharp)
-  // Sharp, high-pitched "blip" for hovers
+  const audioCtxRef = useRef(null);
+
+  useEffect(() => {
+    // Only create AudioContext if it doesn't exist yet (singleton pattern)
+    if (!sharedAudioCtx) {
+      sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    audioCtxRef.current = sharedAudioCtx;
+  }, []);
+
   const playHover = useCallback(() => {
+    if (!audioCtxRef.current) return;
     try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       
-      osc.type = 'sine'; // Changed to sine for a cleaner blip
-      osc.frequency.setValueAtTime(1400, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.01);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1400, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.01);
       
-      gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.01);
+      gain.gain.setValueAtTime(0.015, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.01);
       
       osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      gain.connect(ctx.destination);
       
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.01);
+      osc.stop(ctx.currentTime + 0.01);
     } catch (e) {}
   }, []);
 
-  // Sharp "Tactile Shutter" click
   const playClick = useCallback(() => {
+    if (!audioCtxRef.current) return;
     try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') ctx.resume();
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       
-      osc.type = 'triangle'; // Triangle for a snappier attack
-      osc.frequency.setValueAtTime(2000, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.005);
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(2000, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.005);
       
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.01);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.01);
       
       osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      gain.connect(ctx.destination);
       
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.01);
+      osc.stop(ctx.currentTime + 0.01);
     } catch (e) {}
   }, []);
 
