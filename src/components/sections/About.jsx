@@ -139,8 +139,8 @@ export const About = () => {
             </div>
           </div>
 
-          {/* Three-column Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Two-column Grid */}
+          <div className="grid md:grid-cols-2 gap-8">
             {/* ENGINEERING CAPABILITIES */}
             <GlassmorphismCard className="p-8 h-full">
               <div className="flex items-center gap-2 mb-8">
@@ -149,7 +149,7 @@ export const About = () => {
                    ENGINEERING_CAPABILITIES
                  </h3>
               </div>
-              <div className="grid grid-cols-1 gap-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
                 {ABOUT_DATA.capabilities.map((cap) => (
                   <div key={cap.label} className="group/cap transition-all duration-300 flex flex-col gap-1 border-l border-zinc-900 pl-4 hover:border-red-600/40">
                     <div className="flex items-center gap-2">
@@ -181,36 +181,6 @@ export const About = () => {
                     ))}
                   </div>
                 )}
-              </div>
-            </GlassmorphismCard>
-
-            {/* SYSTEM LOAD / PROFICIENCY */}
-            <GlassmorphismCard className="p-8">
-              <h3 className="text-xl font-bold text-white mb-8 uppercase italic tracking-tight">SYSTEM_LOAD</h3>
-              <div className="space-y-6">
-                {ABOUT_DATA.technical_proficiency.map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-end mb-2">
-                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] font-mono">{skill.name}</span>
-                      <span className="text-[8px] font-mono text-red-600 animate-pulse">ACTIVE</span>
-                    </div>
-                    <div className="flex gap-1.5">
-                      {[...Array(10)].map((_, i) => (
-                        <motion.div 
-                          key={i}
-                          initial={{ backgroundColor: "rgba(24, 24, 27, 1)" }} // zinc-900
-                          whileInView={{ 
-                            backgroundColor: i < skill.level ? "#dc2626" : "rgba(24, 24, 27, 1)",
-                            boxShadow: i < skill.level ? "0 0 10px rgba(220, 38, 38, 0.5)" : "none"
-                          }}
-                          viewport={{ once: true }}
-                          transition={{ delay: i * 0.1, duration: 0.2 }}
-                          className="h-2 flex-1 rounded-sm"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
               </div>
             </GlassmorphismCard>
           </div>
