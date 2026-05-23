@@ -104,7 +104,11 @@ export const ABOUT_DATA = {
     degree: "BS COMPUTER SCIENCE",
     school: "STI West Negros University",
     years: "2022 - 2026",
-    awards: ["Outstanding Freshman (2022-2023)"]
+    awards: [
+      "Outstanding Freshman (2022-2023)",
+      "Attended Machine Learning Workshop",
+      "Attended Google DevFest"
+    ]
   },
   deployments: [
     {
