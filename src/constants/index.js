@@ -35,12 +35,12 @@ export const PROJECTS = [
   {
     id: 4,
     title: "SENTINELS",
-    subtitle: "Educational RPG & Admin System",
-    description: "A massive year-and-a-half development cycle. A cybersecurity-focused educational platform featuring interactive gameplay, a complex multi-role system, and a secure backend dashboard.",
+    subtitle: "2nd Best Thesis // RPG System",
+    description: "A massive year-and-a-half development cycle. Awarded 2nd Best Thesis, this cybersecurity-focused educational platform features interactive gameplay, a complex multi-role system, and a secure backend dashboard.",
     image: "/pictures/SENTINELS_SS.png",
     tags: ["React", "Django", "PostgreSQL", "Python"],
     size: "medium",
-    features: ["Complex State Management", "Multi-role Auth", "Admin Dashboard"],
+    features: ["Awarded 2nd Best Thesis", "Complex State Management", "Multi-role Auth"],
     link: "#"
   }
 ];
@@ -83,16 +83,17 @@ export const ABOUT_DATA = {
   status: "BSCS Graduate. Currently accepting project inquiries and open for high-stakes engineering roles while actively expanding my technical stack through R&D.",
   languages: ["Python", "C++", "C#", "Java", "JavaScript", "PHP"],
   frameworks: ["Django", "Laravel", "Tailwind", "Node.js", "Vue", "React"],
-  skills: [
-    { name: "REACT.JS", level: 98 },
-    { name: "NODE.JS", level: 88 },
-    { name: "TYPESCRIPT", level: 95 },
-    { name: "PYTHON", level: 85 },
+  core_specs: [
+    { label: "SCALABILITY", value: "HIGH_THROUGHPUT" },
+    { label: "SECURITY", value: "ZERO_TRUST_MINDSET" },
+    { label: "RESILIENCE", value: "FAULT_TOLERANT" },
+    { label: "OPTIMIZATION", value: "VTEC_LOGIC" },
   ],
   education: {
     degree: "BS COMPUTER SCIENCE",
     school: "STI West Negros University",
-    years: "2022 - 2026"
+    years: "2022 - 2026",
+    awards: ["Outstanding Freshman (2022-2023)"]
   },
   deployments: [
     {

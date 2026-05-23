@@ -141,26 +141,27 @@ export const About = () => {
 
           {/* Three-column Grid */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* PERFORMANCE GAUGES */}
+            {/* CORE ARCHITECTURE SPECS */}
             <GlassmorphismCard className="p-8">
               <h3 className="text-xl font-bold text-white mb-8 uppercase italic flex items-center gap-2 tracking-tight">
                 <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                PERFORMANCE GAUGES
+                CORE_ARCHITECTURE_SPECS
               </h3>
               <div className="space-y-6">
-                {ABOUT_DATA.skills.map((skill) => (
-                  <div key={skill.name}>
+                {ABOUT_DATA.core_specs.map((spec) => (
+                  <div key={spec.label} className="group/spec transition-all duration-300">
                     <div className="flex justify-between items-end mb-2">
-                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] font-mono">{skill.name}</span>
-                      <span className="text-[10px] font-mono text-red-500">{skill.level}%</span>
+                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] font-mono group-hover/spec:text-red-500 transition-colors">{spec.label}</span>
+                      <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">{spec.value}</span>
                     </div>
-                    <div className="h-1 w-full bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+                    <div className="h-[2px] w-full bg-zinc-900 relative rounded-full overflow-hidden border border-zinc-800">
+                      <div className="absolute inset-0 bg-red-600/10" />
                       <motion.div 
                         initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
+                        whileInView={{ width: "100%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, ease: "easeOut" }}
-                        className="h-full bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.5)]"
+                        className="h-full bg-gradient-to-r from-red-600 to-red-900 shadow-[0_0_15px_rgba(220,38,38,0.3)]"
                       />
                     </div>
                   </div>
@@ -176,6 +177,17 @@ export const About = () => {
                 <h4 className="text-white font-bold italic text-lg leading-tight uppercase tracking-tight">{ABOUT_DATA.education.degree}</h4>
                 <p className="text-red-500 text-xs font-bold mt-1 font-mono">{ABOUT_DATA.education.school}</p>
                 <p className="text-zinc-500 text-xs font-mono mt-4 tracking-widest">{ABOUT_DATA.education.years}</p>
+                
+                {ABOUT_DATA.education.awards && (
+                  <div className="mt-6 space-y-2">
+                    {ABOUT_DATA.education.awards.map((award, i) => (
+                      <div key={i} className="flex items-center gap-2 text-[10px] font-mono text-zinc-400">
+                        <span className="text-red-600">★</span>
+                        <span className="uppercase tracking-wider">{award}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </GlassmorphismCard>
 
