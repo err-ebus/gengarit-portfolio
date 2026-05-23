@@ -62,24 +62,62 @@ export const Home = () => {
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-center gap-4">
-              <a
-                href="#projects"
+            <div className="flex flex-col md:flex-row justify-center gap-6 mt-4">
+              <button
                 onMouseEnter={playHover}
-                onClick={playClick}
-                className="bg-red-600 hover:bg-red-700 text-white py-4 px-10 rounded-md font-black transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)] uppercase italic tracking-widest text-sm"
+                onClick={(e) => {
+                  playClick();
+                  const target = document.getElementById('projects');
+                  if (target) {
+                    const mainContainer = document.querySelector('main');
+                    if (mainContainer) {
+                      mainContainer.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }
+                }}
+                className="group relative px-12 py-5 bg-transparent overflow-hidden"
               >
-                View Workshop
-              </a>
+                {/* Button Frame */}
+                <div className="absolute inset-0 border border-red-600/30 group-hover:border-red-600 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/5 transition-colors duration-500" />
+                
+                {/* Corner Brackets */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-red-600 group-hover:scale-110 transition-transform" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-red-600 group-hover:scale-110 transition-transform" />
 
-              <a
-                href="#contact"
+                <div className="relative z-10 flex items-center gap-3">
+                   <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
+                   <span className="text-red-500 font-black font-mono tracking-[0.4em] uppercase group-hover:text-white transition-colors text-sm md:text-base italic">
+                    EXTRACT_DATA
+                  </span>
+                </div>
+                
+                {/* HUD Decoration */}
+                <div className="absolute -bottom-px left-1/2 -translate-x-1/2 w-0 h-[1px] bg-red-600 group-hover:w-full transition-all duration-700" />
+              </button>
+
+              <button
                 onMouseEnter={playHover}
-                onClick={playClick}
-                className="border border-zinc-800 hover:border-red-600/50 text-white py-4 px-10 rounded-md font-bold transition-all duration-300 bg-zinc-950/50 backdrop-blur-sm uppercase tracking-widest text-sm"
+                onClick={(e) => {
+                  playClick();
+                  const target = document.getElementById('contact');
+                  if (target) {
+                    const mainContainer = document.querySelector('main');
+                    if (mainContainer) {
+                      mainContainer.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }
+                }}
+                className="group px-12 py-5 bg-zinc-950/20 backdrop-blur-md border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-zinc-100 transition-all duration-300 font-mono text-xs uppercase tracking-[0.2em] flex items-center justify-center italic"
               >
-                Initiate Contact
-              </a>
+                Initiate_Contact
+              </button>
             </div>
           </motion.div>
         </div>

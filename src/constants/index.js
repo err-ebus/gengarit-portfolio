@@ -93,6 +93,13 @@ export const ABOUT_DATA = {
     { label: "CLOUD_DEPLOYMENT", value: "CI/CD & System Ops" },
     { label: "STATE_LOGIC", value: "Global Context & Redux" },
   ],
+  technical_proficiency: [
+    { name: "REACT", level: 9 },
+    { name: "NODE.JS", level: 8 },
+    { name: "DJANGO", level: 9 },
+    { name: "POSTGRES", level: 8 },
+    { name: "LINUX", level: 7 },
+  ],
   education: {
     degree: "BS COMPUTER SCIENCE",
     school: "STI West Negros University",

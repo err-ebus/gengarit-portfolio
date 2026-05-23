@@ -184,18 +184,31 @@ export const About = () => {
               </div>
             </GlassmorphismCard>
 
-            {/* DEPLOYMENTS */}
+            {/* SYSTEM LOAD / PROFICIENCY */}
             <GlassmorphismCard className="p-8">
-              <h3 className="text-xl font-bold text-white mb-8 uppercase italic tracking-tight">DEPLOYMENTS</h3>
-              <div className="space-y-8">
-                {ABOUT_DATA.deployments.map((exp, i) => (
-                  <div key={i} className="relative pl-6 border-l border-zinc-800">
-                    <div className="absolute w-1.5 h-1.5 bg-zinc-600 rounded-full -left-[3.5px] top-1.5" />
-                    <h4 className="text-white font-bold italic text-sm uppercase tracking-tight">{exp.role}</h4>
-                    <p className="text-zinc-500 text-xs mt-1 font-mono uppercase tracking-wider">{exp.company} // {exp.period}</p>
-                    <p className="text-zinc-500 text-[11px] leading-relaxed mt-3 font-light">
-                      {exp.description}
-                    </p>
+              <h3 className="text-xl font-bold text-white mb-8 uppercase italic tracking-tight">SYSTEM_LOAD</h3>
+              <div className="space-y-6">
+                {ABOUT_DATA.technical_proficiency.map((skill) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between items-end mb-2">
+                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] font-mono">{skill.name}</span>
+                      <span className="text-[8px] font-mono text-red-600 animate-pulse">ACTIVE</span>
+                    </div>
+                    <div className="flex gap-1.5">
+                      {[...Array(10)].map((_, i) => (
+                        <motion.div 
+                          key={i}
+                          initial={{ backgroundColor: "rgba(24, 24, 27, 1)" }} // zinc-900
+                          whileInView={{ 
+                            backgroundColor: i < skill.level ? "#dc2626" : "rgba(24, 24, 27, 1)",
+                            boxShadow: i < skill.level ? "0 0 10px rgba(220, 38, 38, 0.5)" : "none"
+                          }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.1, duration: 0.2 }}
+                          className="h-2 flex-1 rounded-sm"
+                        />
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>

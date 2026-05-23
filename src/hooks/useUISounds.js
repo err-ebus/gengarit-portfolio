@@ -9,11 +9,11 @@ export const useUISounds = () => {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       
-      osc.type = 'square'; // Square wave for that terminal feel
-      osc.frequency.setValueAtTime(1800, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1400, audioCtx.currentTime + 0.01);
+      osc.type = 'sine'; // Changed to sine for a cleaner blip
+      osc.frequency.setValueAtTime(1400, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.01);
       
-      gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.01);
       
       osc.connect(gain);
@@ -24,27 +24,25 @@ export const useUISounds = () => {
     } catch (e) {}
   }, []);
 
-  // Sharp "data transmit" double-pulse for clicks
+  // Sharp "Tactile Shutter" click
   const playClick = useCallback(() => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
       
-      const playBlip = (time, freq) => {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(freq, time);
-        gain.gain.setValueAtTime(0.03, time);
-        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.03);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(time);
-        osc.stop(time + 0.03);
-      };
-
-      // Double pulse effect
-      playBlip(audioCtx.currentTime, 1200);
-      playBlip(audioCtx.currentTime + 0.05, 1600);
+      osc.type = 'triangle'; // Triangle for a snappier attack
+      osc.frequency.setValueAtTime(2000, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.005);
+      
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.01);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.01);
     } catch (e) {}
   }, []);
 
