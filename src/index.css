@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* === SCROLLBAR & OVERSCROLL === */
 
 /* MUST hide scrollbar on ALL browsers */
@@ -201,8 +203,6 @@ nav {
 }
 
 /* === BACKGROUND & HUD === */
-
-@import "tailwindcss";
 
 /* Enhanced Gradient Mesh with Noise Texture */
 body::before {
