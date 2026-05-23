@@ -62,7 +62,7 @@ export const Home = () => {
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-center gap-6 mt-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-6 mt-4">
               <button
                 onMouseEnter={playHover}
                 onClick={(e) => {
@@ -78,7 +78,7 @@ export const Home = () => {
                     }
                   }
                 }}
-                className="group relative px-12 py-5 bg-transparent overflow-hidden"
+                className="group relative px-10 py-5 bg-transparent overflow-hidden min-w-[220px] flex items-center justify-center"
               >
                 {/* Button Frame */}
                 <div className="absolute inset-0 border border-red-600/30 group-hover:border-red-600 transition-colors duration-500" />
@@ -90,7 +90,7 @@ export const Home = () => {
 
                 <div className="relative z-10 flex items-center gap-3">
                    <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
-                   <span className="text-red-500 font-black font-mono tracking-[0.4em] uppercase group-hover:text-white transition-colors text-sm md:text-base italic">
+                   <span className="text-red-500 font-black font-mono tracking-[0.4em] uppercase group-hover:text-white transition-colors text-xs md:text-sm italic">
                     EXTRACT_DATA
                   </span>
                 </div>
@@ -114,9 +114,11 @@ export const Home = () => {
                     }
                   }
                 }}
-                className="group px-12 py-5 bg-zinc-950/20 backdrop-blur-md border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-zinc-100 transition-all duration-300 font-mono text-xs uppercase tracking-[0.2em] flex items-center justify-center italic"
+                className="group relative px-10 py-5 bg-zinc-950/20 backdrop-blur-md border border-zinc-800 hover:border-zinc-600 transition-all duration-300 min-w-[220px] flex items-center justify-center"
               >
-                Initiate_Contact
+                <span className="relative z-10 text-zinc-500 font-black font-mono tracking-[0.3em] uppercase group-hover:text-zinc-100 transition-colors text-xs md:text-sm italic">
+                  Initiate_Contact
+                </span>
               </button>
             </div>
           </motion.div>
