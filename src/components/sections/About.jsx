@@ -141,29 +141,22 @@ export const About = () => {
 
           {/* Three-column Grid */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* CORE ARCHITECTURE SPECS */}
-            <GlassmorphismCard className="p-8">
-              <h3 className="text-xl font-bold text-white mb-8 uppercase italic flex items-center gap-2 tracking-tight">
-                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                CORE_ARCHITECTURE_SPECS
-              </h3>
-              <div className="space-y-6">
-                {ABOUT_DATA.core_specs.map((spec) => (
-                  <div key={spec.label} className="group/spec transition-all duration-300">
-                    <div className="flex justify-between items-end mb-2">
-                      <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] font-mono group-hover/spec:text-red-500 transition-colors">{spec.label}</span>
-                      <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">{spec.value}</span>
+            {/* ENGINEERING CAPABILITIES */}
+            <GlassmorphismCard className="p-8 h-full">
+              <div className="flex items-center gap-2 mb-8">
+                 <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
+                 <h3 className="text-xl font-bold text-white uppercase italic tracking-tight">
+                   ENGINEERING_CAPABILITIES
+                 </h3>
+              </div>
+              <div className="grid grid-cols-1 gap-y-4">
+                {ABOUT_DATA.capabilities.map((cap) => (
+                  <div key={cap.label} className="group/cap transition-all duration-300 flex flex-col gap-1 border-l border-zinc-900 pl-4 hover:border-red-600/40">
+                    <div className="flex items-center gap-2">
+                       <span className="text-red-600 font-bold font-mono text-[10px]">{'>>'}</span>
+                       <span className="text-[10px] font-black font-mono text-zinc-300 uppercase tracking-widest group-hover/cap:text-white transition-colors">{cap.label}</span>
                     </div>
-                    <div className="h-[2px] w-full bg-zinc-900 relative rounded-full overflow-hidden border border-zinc-800">
-                      <div className="absolute inset-0 bg-red-600/10" />
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.5, ease: "easeOut" }}
-                        className="h-full bg-gradient-to-r from-red-600 to-red-900 shadow-[0_0_15px_rgba(220,38,38,0.3)]"
-                      />
-                    </div>
+                    <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest pl-5">{cap.value}</span>
                   </div>
                 ))}
               </div>

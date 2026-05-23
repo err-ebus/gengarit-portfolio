@@ -83,11 +83,15 @@ export const ABOUT_DATA = {
   status: "BSCS Graduate. Currently accepting project inquiries and open for high-stakes engineering roles while actively expanding my technical stack through R&D.",
   languages: ["Python", "C++", "C#", "Java", "JavaScript", "PHP"],
   frameworks: ["Django", "Laravel", "Tailwind", "Node.js", "Vue", "React"],
-  core_specs: [
-    { label: "SCALABILITY", value: "HIGH_THROUGHPUT" },
-    { label: "SECURITY", value: "ZERO_TRUST_MINDSET" },
-    { label: "RESILIENCE", value: "FAULT_TOLERANT" },
-    { label: "OPTIMIZATION", value: "VTEC_LOGIC" },
+  capabilities: [
+    { label: "API_DESIGN", value: "RESTful & Async Architectures" },
+    { label: "SYSTEM_INTEGRATION", value: "Cross-Platform Sync" },
+    { label: "DATABASE_MODELING", value: "Relational & NoSQL Scaling" },
+    { label: "UI/UX_ENGINEERING", value: "Technical HUD Interfaces" },
+    { label: "SERVER_ADMIN", value: "Offline-First Environments" },
+    { label: "SECURITY_PROTOCOLS", value: "RBAC & JWT Auth" },
+    { label: "CLOUD_DEPLOYMENT", value: "CI/CD & System Ops" },
+    { label: "STATE_LOGIC", value: "Global Context & Redux" },
   ],
   education: {
     degree: "BS COMPUTER SCIENCE",
