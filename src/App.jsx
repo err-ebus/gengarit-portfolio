@@ -16,6 +16,11 @@ import "./index.css";
 
 const DEFAULT_RESPONSE = "QUERY_UNRECOGNIZED. My data banks are focused on: skills, projects, education, and contact protocols. Please rephrase or try another identifier.";
 
+// --- CONFIGURATION: SYSTEM PROTECTION ---
+// Set to true to disable right-click, F12, and other dev shortcuts for immersion.
+// Set to false for development and testing.
+const ENABLE_SYSTEM_IMMERSION_PROTECTION = true;
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,13 +49,19 @@ function App() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('contextmenu', handleContextMenu);
-    window.addEventListener('keydown', handleKeyDown);
+
+    // Conditional Protections for System Immersion
+    if (ENABLE_SYSTEM_IMMERSION_PROTECTION) {
+      window.addEventListener('contextmenu', handleContextMenu);
+      window.addEventListener('keydown', handleKeyDown);
+    }
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('contextmenu', handleContextMenu);
-      window.removeEventListener('keydown', handleKeyDown);
+      if (ENABLE_SYSTEM_IMMERSION_PROTECTION) {
+        window.removeEventListener('contextmenu', handleContextMenu);
+        window.removeEventListener('keydown', handleKeyDown);
+      }
     };
   }, []);
 
