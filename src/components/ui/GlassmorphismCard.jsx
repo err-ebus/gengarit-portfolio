@@ -17,7 +17,7 @@ export const GlassmorphismCard = ({ children, className = "", interactive = true
       <div className="absolute -inset-px bg-gradient-to-tr from-red-600/0 via-red-600/5 to-red-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
       
       {/* Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 data-glitch-active">
         {children}
       </div>
     </div>

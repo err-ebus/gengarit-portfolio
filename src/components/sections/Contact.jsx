@@ -9,11 +9,16 @@ export const Contact = () => {
   const { playHover, playClick } = useUISounds();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+  const [formData, setFormData] = useState(() => {
+    // Load saved payload from local storage if it exists
+    const saved = localStorage.getItem("contact_draft");
+    return saved ? JSON.parse(saved) : { name: "", email: "", message: "" };
   });
+
+  // Persist draft to local storage on change
+  useEffect(() => {
+    localStorage.setItem("contact_draft", JSON.stringify(formData));
+  }, [formData]);
 
   const SERVICE_ID = "service_ga6df7j";
   const TEMPLATE_ID = "template_d97zceq";

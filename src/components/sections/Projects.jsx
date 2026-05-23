@@ -48,7 +48,7 @@ export const Projects = () => {
                     }}
                     className={`group relative z-20 p-4 md:p-6 border ${isExpanded ? 'border-red-600/50 bg-zinc-900/40' : 'border-zinc-900 bg-zinc-950/50'} cursor-pointer flex items-center justify-between transition-all duration-500 hover:border-red-600/30`}
                   >
-                    <div className="flex items-center gap-4 md:gap-8 pr-4">
+                    <div className="flex items-center gap-4 md:gap-8 pr-4 data-glitch-active">
                       <span className={`font-mono text-[9px] md:text-[10px] flex-shrink-0 transition-colors duration-500 ${isExpanded ? 'text-red-500' : 'text-zinc-700 group-hover:text-zinc-500'}`}>
                         [{project.id.toString().padStart(3, '0')}]
                       </span>
@@ -141,6 +141,15 @@ export const Projects = () => {
                                   "{project.description}"
                                 </p>
                               </div>
+
+                              {project.impact && (
+                                <div className="bg-red-600/5 border-l-2 border-red-600 p-4 font-mono">
+                                   <span className="text-[10px] text-red-500 font-black tracking-widest block mb-1 uppercase">System_Impact</span>
+                                   <p className="text-[11px] text-zinc-300 leading-relaxed uppercase italic">
+                                     {project.impact}
+                                   </p>
+                                </div>
+                              )}
 
                               <div className="space-y-4">
                                 <span className="text-[10px] text-zinc-600 font-black uppercase tracking-widest block border-b border-zinc-900 pb-2">Core_Parameters</span>

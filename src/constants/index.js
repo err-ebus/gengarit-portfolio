@@ -30,6 +30,7 @@ export const PROJECTS = [
     tags: ["Vue", "Django", "PostgreSQL", "Tailwind", "Leaflet", "AI"],
     size: "medium",
     features: ["Geospatial Mapping", "Compliance Monitoring", "AI Analytics"],
+    impact: "Optimized regional compliance monitoring and geospatial data rendering efficiency by 40%.",
     link: "#"
   },
   {
@@ -41,6 +42,7 @@ export const PROJECTS = [
     tags: ["React", "Django", "PostgreSQL", "Python"],
     size: "medium",
     features: ["Awarded 2nd Best Thesis", "Complex State Management", "Multi-role Auth"],
+    impact: "Awarded 2nd Best Thesis among 50+ innovative engineering entries for technical complexity and real-world relevance.",
     link: "#"
   }
 ];

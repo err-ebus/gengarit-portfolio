@@ -391,6 +391,20 @@ input:focus, textarea:focus {
   98% { transform: translate(-4px, 1px); }
 }
 
+/* Data Glitch Interaction - Fast system flicker */
+@keyframes data-glitch-flash {
+  0% { transform: translate(0); opacity: 1; filter: none; }
+  20% { transform: translate(-2px, 1px); opacity: 0.8; filter: hue-rotate(90deg); }
+  40% { transform: translate(2px, -1px); opacity: 1; filter: contrast(150%); }
+  60% { transform: translate(-1px, 2px); opacity: 0.9; filter: hue-rotate(-90deg); }
+  80% { transform: translate(1px, -2px); opacity: 1; filter: none; }
+  100% { transform: translate(0); opacity: 1; filter: none; }
+}
+
+.group:hover .data-glitch-active {
+  animation: data-glitch-flash 0.2s ease-in-out;
+}
+
 /* Glassmorphism Bento Grid Card */
 .glass-card {
   @apply bg-zinc-950/40 backdrop-blur-md border border-zinc-800 transition-all duration-500;
