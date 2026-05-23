@@ -116,10 +116,11 @@ export const Projects = () => {
                           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             
                             {/* Visual Spec */}
-                            <div className="relative aspect-video overflow-hidden border border-zinc-800 group shadow-2xl">
+                            <div className="relative aspect-video overflow-hidden border border-zinc-800 group shadow-2xl bg-zinc-900">
                               <img 
                                 src={project.image} 
-                                alt={project.title}
+                                alt={`${project.title} technical extraction view`}
+                                loading="lazy"
                                 className="w-full h-full object-cover brightness-50 transition-transform duration-1000 group-hover:scale-110"
                               />
                               <div className="absolute inset-0 bg-red-600/10 mix-blend-overlay" />

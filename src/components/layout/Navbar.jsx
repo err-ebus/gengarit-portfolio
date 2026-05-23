@@ -28,6 +28,7 @@ export const Navbar = ({ menuOpen, setMenuOpen, activeSection }) => {
                     onMouseEnter={playHover}
                     onClick={scrollToTop}
                     className="navbar-logo"
+                    aria-label="ERR-EBUS Home - Scroll to top"
                 >
                     {/* Technical Logo Container */}
                     <div className="relative flex items-center justify-center w-10 h-10 md:w-11 md:h-11">
@@ -73,6 +74,8 @@ export const Navbar = ({ menuOpen, setMenuOpen, activeSection }) => {
                 <button 
                     className="mobile-menu-button"
                     onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+                    aria-expanded={menuOpen}
                 >
                     {menuOpen ? "✕" : "☰"}
                 </button>
