@@ -145,7 +145,7 @@ export const About = () => {
             <GlassmorphismCard className="p-8 h-full">
               <div className="flex items-center gap-2 mb-8">
                  <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
-                 <h3 className="text-xl font-bold text-white uppercase italic tracking-tight">
+                 <h3 className="text-lg md:text-xl font-bold text-white uppercase italic tracking-tight">
                    ENGINEERING_CAPABILITIES
                  </h3>
               </div>
