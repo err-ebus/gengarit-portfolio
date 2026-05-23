@@ -6,7 +6,7 @@ export const ChatbotButton = ({ onClick }) => {
   const { playHover, playClick } = useUISounds();
 
   return (
-    <div className="fixed bottom-8 right-8 z-50 flex items-center gap-4">
+    <div className="flex items-center gap-4">
       {/* HUD Tooltip Label */}
       <motion.div 
         initial={{ opacity: 0, x: 10 }}

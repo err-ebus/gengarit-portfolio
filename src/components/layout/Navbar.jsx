@@ -1,31 +1,8 @@
 import { useEffect, useState } from "react";
 import { useUISounds } from "../../hooks/useUISounds";
 
-export const Navbar = ({ menuOpen, setMenuOpen }) => {
+export const Navbar = ({ menuOpen, setMenuOpen, activeSection }) => {
     const { playHover, playClick } = useUISounds();
-    const [activeSection, setActiveSection] = useState("home");
-
-    useEffect(() => {
-        const scrollContainer = document.querySelector('main');
-        if (!scrollContainer) return;
-
-        const handleScroll = () => {
-            const sections = ["home", "about", "projects", "contact"];
-            const current = sections.find(section => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    // Check if section is in viewport relative to the scroll container
-                    return rect.top <= 150 && rect.bottom >= 150;
-                }
-                return false;
-            });
-            if (current) setActiveSection(current);
-        };
-
-        scrollContainer.addEventListener("scroll", handleScroll);
-        return () => scrollContainer.removeEventListener("scroll", handleScroll);
-    }, []);
 
     const navLinks = [
         { name: "Home", href: "#home", id: "home" },
