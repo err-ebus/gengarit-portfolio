@@ -8,7 +8,6 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { SectionHUD } from './components/layout/SectionHUD';
 import { FollowCursor } from './components/ui/FollowCursor';
-import { TransitionSweep } from './components/ui/TransitionSweep';
 import { ParticleEffect } from './components/features/ParticleEffect';
 import { ScrollIndicator } from './components/layout/ScrollIndicator';
 import { Home } from './components/sections/Home';
@@ -163,7 +162,6 @@ function App() {
 
   return (
     <div className="relative min-h-screen selection:bg-red-600/30 selection:text-red-500 bg-[#09090b]">
-      <TransitionSweep activeSection={activeSection} />
       <ParticleEffect scrollContainer={mainRef} />
       <FollowCursor />
       

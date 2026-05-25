@@ -23,6 +23,7 @@ export const Contact = () => {
   const SERVICE_ID = "service_ga6df7j";
   const TEMPLATE_ID = "template_d97zceq";
   const PUBLIC_KEY = "iCDXyO4yyYF7diIJO";
+  const COOLDOWN_PERIOD = 5 * 60 * 1000; // 5 minutes cooldown
 
   // Initialize EmailJS correctly
   useEffect(() => {
@@ -31,6 +32,20 @@ export const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Rate Limiter Check
+    const lastSent = localStorage.getItem("last_transmission_time");
+    const now = Date.now();
+
+    if (lastSent && now - parseInt(lastSent) < COOLDOWN_PERIOD) {
+      const remaining = Math.ceil((COOLDOWN_PERIOD - (now - parseInt(lastSent))) / 60000);
+      setStatus({ 
+        type: 'error', 
+        message: `SYSTEM_COOLDOWN: Please wait ${remaining} minute(s) before next transmission.` 
+      });
+      return;
+    }
+
     setLoading(true);
     setStatus(null);
 
@@ -40,6 +55,7 @@ export const Contact = () => {
         if (result.status === 200 || result.text === "OK") {
           setStatus({ type: 'success', message: 'TRANSMISSION_SUCCESSFUL: Message received.' });
           setFormData({ name: "", email: "", message: "" });
+          localStorage.setItem("last_transmission_time", Date.now().toString());
         } else {
           throw new Error(`System Error Code: ${result.status}`);
         }
