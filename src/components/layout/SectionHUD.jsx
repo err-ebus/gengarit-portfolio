@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const SectionHUD = ({ activeSection }) => {
-  const sections = ["home", "about", "projects", "contact"];
+  const sections = ["home", "about", "projects", "testimonials", "contact"];
   const currentIndex = sections.indexOf(activeSection) + 1;
   const totalSections = sections.length;
 

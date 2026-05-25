@@ -149,9 +149,9 @@ export const About = () => {
                    ENGINEERING_CAPABILITIES
                  </h3>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-6">
                 {ABOUT_DATA.capabilities.map((cap) => (
-                  <div key={cap.label} className="group/cap transition-all duration-300 flex flex-col gap-1 border-l border-zinc-900 pl-4 hover:border-red-600/40">
+                  <div key={cap.label} className="group/cap transition-all duration-300 flex flex-col justify-end gap-1 border-l border-zinc-900 pl-4 hover:border-red-600/40 min-h-[45px]">
                     <div className="flex items-center gap-2">
                        <i className={`${cap.icon} text-red-600 font-bold text-xs group-hover/cap:scale-110 transition-transform`} />
                        <span className="text-[10px] font-black font-mono text-zinc-300 uppercase tracking-widest group-hover/cap:text-white transition-colors">{cap.label}</span>
