@@ -34,7 +34,7 @@ export const Navbar = ({ menuOpen, setMenuOpen, activeSection }) => {
                     <div className="relative flex items-center justify-center w-10 h-10 md:w-11 md:h-11">
                         <div className="absolute inset-0 bg-red-600/10 blur-lg rounded-full animate-pulse" />
                         <img 
-                            src="/pictures/ERR-EBUS_LOGO.png"
+                            src="/pictures/ERR-EBUS_LOGO.webp"
                             alt="ERR-EBUS Logo"
                             className="navbar-logo-img relative z-10 drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]"
                             onError={(e) => {

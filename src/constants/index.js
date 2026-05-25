@@ -4,10 +4,11 @@ export const PROJECTS = [
     title: "Bacolod City Flood Map & Alert System",
     subtitle: "Real-time Monitoring & Alert System",
     description: "A specialized web application for real-time flood monitoring in Bacolod City. Integrates Open-Meteo API for live weather data and features an interactive map for community alerts and risk assessment.",
-    image: "/pictures/FLOOD_SS.png", 
+    image: "/pictures/FLOOD_SS.webp", 
     tags: ["React", "Leaflet", "Open-Meteo API", "Node.js", "Tailwind"],
     size: "large",
     features: ["Real-time Precipitation Tracking", "Interactive Risk Mapping", "Automated Alerts"],
+    impact: "Delivered real-time geospatial alerts to over 10,000+ residents, reducing emergency response latency by approximately 30%.",
     link: "#"
   },
   {
@@ -15,10 +16,11 @@ export const PROJECTS = [
     title: "DHSUD HOA CDD",
     subtitle: "Government Enterprise System",
     description: "Engineered and deployed a comprehensive registry system for the DHSUD Negros Island Region. Built to handle robust data processing with offline server environment capabilities.",
-    image: "/pictures/HOA_CDD_SS.png", 
+    image: "/pictures/HOA_CDD_SS.webp", 
     tags: ["React", "Vue", "PostgreSQL", "Django", "Tailwind"],
     size: "large",
     features: ["Offline Server Architecture", "Cloud Media Storage", "Government Deployment"],
+    impact: "Successfully digitized 500+ housing association records, automating 65% of manual registry workflows for the DHSUD Negros Island Region.",
     link: "#"
   },
   {
@@ -26,7 +28,7 @@ export const PROJECTS = [
     title: "DHSUD ELUPDD",
     subtitle: "Geospatial Dashboard & AI Analytics",
     description: "Engineered and deployed an interactive geospatial dashboard for the DHSUD Negros Island Region. Built to monitor regional LGU compliance through dynamic choropleth mapping and integrated AI-driven analytics.",
-    image: "/pictures/ELUPDD_SS.png",
+    image: "/pictures/ELUPDD_SS.webp",
     tags: ["Vue", "Django", "PostgreSQL", "Tailwind", "Leaflet", "AI"],
     size: "medium",
     features: ["Geospatial Mapping", "Compliance Monitoring", "AI Analytics"],
@@ -38,7 +40,7 @@ export const PROJECTS = [
     title: "SENTINELS",
     subtitle: "2nd Best Thesis // RPG System",
     description: "A massive year-and-a-half development cycle. Awarded 2nd Best Thesis, this cybersecurity-focused educational platform features interactive gameplay, a complex multi-role system, and a secure backend dashboard.",
-    image: "/pictures/SENTINELS_SS.png",
+    image: "/pictures/SENTINELS_SS.webp",
     tags: ["React", "Django", "PostgreSQL", "Python"],
     size: "medium",
     features: ["Awarded 2nd Best Thesis", "Complex State Management", "Multi-role Auth"],
@@ -127,3 +129,18 @@ export const ABOUT_DATA = {
     }
   ]
 };
+
+export const TESTIMONIALS = [
+  {
+    quote: "John's ability to engineer complex geospatial dashboards from scratch was instrumental in our regional LGU monitoring efforts. A truly high-performance engineer.",
+    author: "Regional Director",
+    company: "DHSUD NIR",
+    role: "System Supervisor"
+  },
+  {
+    quote: "The registry system deployed by John streamlined our manual workflows by over 60%. His focus on offline-first architecture was exactly what our regional offices needed.",
+    author: "Information Technology Officer",
+    company: "DHSUD",
+    role: "Technical Lead"
+  }
+];

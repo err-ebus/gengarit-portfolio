@@ -32,28 +32,29 @@ This document serves as the technical hand-off and roadmap for the **err-ebus** 
 - **Performance:** Lazy loading on all project assets; hidden scrollbars globally.
 - **Stability:** Custom `ErrorBoundary.jsx` (Red Terminal style) to catch critical failures.
 
+### **5. Intelligence & Optimization**
+- **LLM Integration:** Dynamic "err-ebus" persona powered by Gemini 1.5 Flash for system queries.
+- **Asset Pipeline:** Fully optimized WebP image stack for high-performance loading.
+- **Navigation UX:** Horizontal section-initialization sweeps (Framer Motion).
+- **Social Proof:** "System Verification" module (Testimonials) for technical validation.
+
 ---
 
 ## 📡 CURRENT SYSTEM STATE
 - **Branch:** `main`
 - **Active Protections:** `ENABLE_SYSTEM_IMMERSION_PROTECTION = true`
-- **Email Config:** Verified Service/Template/Public IDs in `Contact.jsx`.
+- **AI Engine:** Gemini AI Operational (requires `VITE_GEMINI_API_KEY`).
+- **Asset Status:** WebP Optimized.
 
 ---
 
 ## 🚀 FUTURE OBJECTIVES (TO-DO LIST)
 
-### **High Priority**
-1.  **Asset Compression:** Convert all PNG/JPG images in `/public/pictures` to **WebP** format to reduce initial load weight.
-2.  **Victory Metrics:** Refine descriptions in Project Archives to include specific "Victory Metrics" (e.g., *"Improved system uptime by X%"*).
-3.  **Chatbot Intelligence:** Integrate a lightweight LLM (Gemini Nano or OpenAI) for dynamic responses beyond keyword matching.
-
 ### **UI/UX Polish**
-1.  **Transition Sweeps:** Implement a horizontal "Section Initialization" flash (100ms sweep) when navigating between major sectors.
-2.  **Testimonials:** Add a "System Verification" section for client/supervisor quotes (DHSUD).
-3.  **SEO Metadata:** Add Meta Tags and Open Graph images to `index.html` for better social sharing visibility.
+1.  **Audio Customization:** Allow users to toggle specific system sounds (Pulse vs. Blip).
+2.  **Advanced Glitch Effects:** Implement randomized SVG filter glitches on hover for project headers.
 
 ---
 
 **[ALL_SYSTEMS_OPERATIONAL]**
-*Last updated: Wednesday, May 20, 2026*
+*Last updated: Monday, May 25, 2026*

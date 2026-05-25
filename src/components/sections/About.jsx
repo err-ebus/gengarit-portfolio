@@ -83,7 +83,7 @@ export const About = () => {
 
                   {/* Profile Image */}
                   <img 
-                    src="/pictures/me.png" 
+                    src="/pictures/me.webp" 
                     alt="err-ebus profile"
                     className="w-full h-full object-cover grayscale brightness-90 contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
