@@ -102,14 +102,14 @@ export const ABOUT_DATA = {
     { name: "React", icon: "devicon-react-original" }
   ],
   capabilities: [
-    { label: "API_DESIGN", value: "RESTful & Async Architectures" },
-    { label: "SYSTEM_INTEGRATION", value: "Cross-Platform Sync" },
-    { label: "DATABASE_MODELING", value: "Relational & NoSQL Scaling" },
-    { label: "UI/UX_ENGINEERING", value: "Technical HUD Interfaces" },
-    { label: "SERVER_ADMIN", value: "Offline-First Environments" },
-    { label: "SECURITY_PROTOCOLS", value: "RBAC & JWT Auth" },
-    { label: "CLOUD_DEPLOYMENT", value: "CI/CD & System Ops" },
-    { label: "STATE_LOGIC", value: "Global Context & Redux" },
+    { label: "API_DESIGN", value: "RESTful & Async Architectures", icon: "ri-terminal-window-line" },
+    { label: "SYSTEM_INTEGRATION", value: "Cross-Platform Sync", icon: "ri-links-line" },
+    { label: "DATABASE_MODELING", value: "Relational & NoSQL Scaling", icon: "ri-database-2-line" },
+    { label: "UI/UX_ENGINEERING", value: "Technical HUD Interfaces", icon: "ri-layout-3-line" },
+    { label: "SERVER_ADMIN", value: "Offline-First Environments", icon: "ri-server-line" },
+    { label: "SECURITY_PROTOCOLS", value: "RBAC & JWT Auth", icon: "ri-shield-keyhole-line" },
+    { label: "CLOUD_DEPLOYMENT", value: "CI/CD & System Ops", icon: "ri-instance-line" },
+    { label: "STATE_LOGIC", value: "Global Context & Redux", icon: "ri-node-tree" },
   ],
   technical_proficiency: [
     { name: "REACT", level: 9 },

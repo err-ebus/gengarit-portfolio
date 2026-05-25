@@ -153,7 +153,7 @@ export const About = () => {
                 {ABOUT_DATA.capabilities.map((cap) => (
                   <div key={cap.label} className="group/cap transition-all duration-300 flex flex-col gap-1 border-l border-zinc-900 pl-4 hover:border-red-600/40">
                     <div className="flex items-center gap-2">
-                       <span className="text-red-600 font-bold font-mono text-[10px]">{'>>'}</span>
+                       <i className={`${cap.icon} text-red-600 font-bold text-xs group-hover/cap:scale-110 transition-transform`} />
                        <span className="text-[10px] font-black font-mono text-zinc-300 uppercase tracking-widest group-hover/cap:text-white transition-colors">{cap.label}</span>
                     </div>
                     <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest pl-5">{cap.value}</span>
