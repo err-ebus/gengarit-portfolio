@@ -85,8 +85,22 @@ export const ABOUT_DATA = {
   bio: "I am a Senior Computer Science student and Full-Stack Developer specializing in high-performance architectures. My approach blends the reliability of backend engineering with the precision of modern frontend interfaces.",
   philosophy: "Building systems that don't just work, but excel under pressure. I prioritize clean, secure data pipelines, and resilient architectures.",
   status: "BSCS Graduate. Currently accepting project inquiries and open for high-stakes engineering roles while actively expanding my technical stack through R&D.",
-  languages: ["Python", "C++", "C#", "Java", "JavaScript", "PHP"],
-  frameworks: ["Django", "Laravel", "Tailwind", "Node.js", "Vue", "React"],
+  languages: [
+    { name: "Python", icon: "devicon-python-plain" },
+    { name: "C++", icon: "devicon-cplusplus-plain" },
+    { name: "C#", icon: "devicon-csharp-plain" },
+    { name: "Java", icon: "devicon-java-plain" },
+    { name: "JavaScript", icon: "devicon-javascript-plain" },
+    { name: "PHP", icon: "devicon-php-plain" }
+  ],
+  frameworks: [
+    { name: "Django", icon: "devicon-django-plain" },
+    { name: "Laravel", icon: "devicon-laravel-original" },
+    { name: "Tailwind", icon: "devicon-tailwindcss-original" },
+    { name: "Node.js", icon: "devicon-nodejs-plain" },
+    { name: "Vue", icon: "devicon-vuejs-plain" },
+    { name: "React", icon: "devicon-react-original" }
+  ],
   capabilities: [
     { label: "API_DESIGN", value: "RESTful & Async Architectures" },
     { label: "SYSTEM_INTEGRATION", value: "Cross-Platform Sync" },

@@ -106,10 +106,10 @@ export const About = () => {
                 
                 <div className="grid grid-cols-2 gap-y-4 gap-x-2">
                   {ABOUT_DATA.languages.map((lang) => (
-                    <div key={lang} className="flex items-center gap-2 group/item">
-                       <span className="text-red-600 font-bold font-mono text-xs group-hover/item:translate-x-1 transition-transform">{'>>'}</span>
+                    <div key={lang.name} className="flex items-center gap-3 group/item">
+                       <i className={`${lang.icon} text-lg text-zinc-500 group-hover/item:text-red-500 transition-colors duration-300`} />
                        <span className="text-zinc-300 font-mono text-[11px] uppercase tracking-wider group-hover/item:text-white transition-colors">
-                        {lang}
+                        {lang.name}
                        </span>
                     </div>
                   ))}
@@ -127,10 +127,10 @@ export const About = () => {
 
                 <div className="grid grid-cols-2 gap-y-4 gap-x-2">
                   {ABOUT_DATA.frameworks.map((fw) => (
-                    <div key={fw} className="flex items-center gap-2 group/item">
-                       <span className="text-red-600 font-bold font-mono text-xs group-hover/item:translate-x-1 transition-transform">{'>>'}</span>
+                    <div key={fw.name} className="flex items-center gap-3 group/item">
+                       <i className={`${fw.icon} text-lg text-zinc-500 group-hover/item:text-red-500 transition-colors duration-300`} />
                        <span className="text-zinc-300 font-mono text-[11px] uppercase tracking-wider group-hover/item:text-white transition-colors">
-                        {fw}
+                        {fw.name}
                        </span>
                     </div>
                   ))}
